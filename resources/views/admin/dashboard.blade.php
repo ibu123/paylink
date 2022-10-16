@@ -1,6 +1,7 @@
 @extends('layouts.horizontal')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/tables/datatable/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/forms/select/select2.min.css') }}">
 @endsection
 @section('content')
     <!-- BEGIN: Content-->
@@ -33,7 +34,7 @@
                                                     <div class="col-md-2 ">
                                                         <h4 class="brando__black">قائمة التجار</h4>
                                                     </div>
-                                                    <div class="col-md-8 text-right grid__4">
+                                                    <div class="col-md-7 text-right grid__4">
                                                         <span class="filters">
                                                                     <img src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
                                                             فلترة
@@ -48,8 +49,8 @@
                                                             <img src="{{ asset('images/icon/card_1x.png') }}" alt="">
                                                          مخالصة</span>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <button type="submit" class="btn btn-primary glow position-relative ">تسجيل الدخول</button>
+                                                    <div class="col-md-3">
+                                                        <button type="button" data-toggle="modal" data-target="#inlineForm" class="btn btn-primary glow position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
 
                                                     </div>
                                                 </div>
@@ -129,11 +130,7 @@
         </div>
     </div>
     <!-- END: Content-->
-</body>
-<!-- END: Body-->
-
-</html>
-
+@include('admin.dashboard.filter_modal')
 @section('js')
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
@@ -144,5 +141,7 @@
 <script src="{{asset('js/vendors/js/tables/datatable/pdfmake.min.js')}}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
 <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
+<script src="{{ asset('js/vendors/js/forms/select/select2.full.min.js') }}"></script>
+<script src="{{ asset('js/scripts/forms/select/form-select2.js') }}"></script>
 @endsection
 @endsection

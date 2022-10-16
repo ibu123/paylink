@@ -38,7 +38,7 @@
                                                             <label for="inputfirstname4" class="brando__semi__bold">رقم الهاتف</label>
                                                             <div class="pos__relative">
                                                                 <input type="text" class="form-control" id="inputfirstname4" >
-                                                                <span class="icon-in-control jali__extra__bold">توثيق</span>
+                                                                <span class="icon-in-control brando__bold">توثيق</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -49,7 +49,7 @@
                                                             <label for="exampleInputUsername1" class="brando__semi__bold"> رمز التوثيق</label>
                                                             <div class="pos__relative">
                                                                 <input type="text" class="form-control" id="exampleInputUsername1" >
-                                                                <span class="icon-in-control jali__extra__bold">إعادة طلب الرمز</span>
+                                                                <span class="icon-in-control brando__bold">إعادة طلب الرمز</span>
                                                             </div>
                                                         </div>
                                                     </div>
