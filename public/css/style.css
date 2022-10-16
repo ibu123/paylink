@@ -1,0 +1,433 @@
+@font-face {
+    font-family: brando-bold;
+    src: url('../fonts/brando/BrandoArabic Bold.otf');
+}
+
+@font-face {
+    font-family: brando-black;
+    src: url('../fonts/brando/BrandoArabic Black.otf');
+}
+
+@font-face {
+    font-family: brando-semi-bold;
+    src: url('../fonts/brando/BrandoArabic SemiBold.otf');
+}
+
+@font-face {
+    font-family: brando-extra-light;
+    src: url('../fonts/brando/BrandoArabic ExtraLight.otf');
+}
+
+@font-face {
+    font-family: brando-regular;
+    src: url('../fonts/brando/BrandoArabic Regular.otf');
+}
+
+
+@font-face {
+    font-family: brando-text;
+    src: url('../fonts/brando/BrandoArabic Text.otf');
+}
+
+@font-face {
+    font-family: brando-light;
+    src: url('../fonts/brando/BrandoArabic Light.otf');
+}
+
+.data__table__grid {
+    font-family: brando-semi-bold;
+    color : #000000;
+}
+.data__table__grid .filters img {
+    margin-left: 7px;
+}
+.data__table__grid .filters {
+    border: 2px solid;
+    border-radius: 25px;
+    padding: 0.6rem 1rem;
+    margin-right: 10px;
+    font-size: .8rem;
+    font-family: 'brando-regular';
+    border-color: #dedede;
+}
+body {
+    font-family: brando-regular;
+    color : #000000 !important;
+}
+@font-face {
+    font-family: jali-regular;
+    src: url('../fonts/jali/Jali Arabic Regular.ttf');
+}
+
+@font-face {
+    font-family: jali-bold;
+    src: url('../fonts/jali/Jali Arabic Bold.ttf');
+}
+
+@font-face {
+    font-family: jali-extra-bold;
+    src: url('../fonts/jali/Jali Arabic ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: jali-medium;
+    src: url('../fonts/jali/Jali Arabic Medium.ttf');
+}
+
+@font-face {
+    font-family: jali-semi-bold;
+    src: url('../fonts/jali/Jali Arabic SemiBold.ttf');
+}
+
+.brando__bold {
+    font-family: brando-bold !important;
+}
+.brando__semi__bold {
+    font-family: brando-semi-bold;
+}
+.brando__black {
+    font-family: brando-black;
+}
+.brando__regular {
+    font-family: brando-regular !important;
+}
+.brando-extra-light {
+    font-family: brando-extra-light;
+}
+.jali__regular {
+    font-family: jali-regular !important;
+}
+.jali__medium {
+    font-family: jali-medium;
+}
+.jali__bold {
+    font-family: jali-bold;
+}
+.jali__semi__bold {
+    font-family: jali-semi-bold;
+}
+.jali__extra__bold {
+    font-family: jali-extra-bold;
+}
+
+html body.blank-page .content-wrapper .header-container {
+    height: auto;
+    margin-bottom: 4rem;
+}
+
+html body.blank-page .content-wrapper .header-container h1{
+    font-family:  brando-semi-bold;
+}
+
+.horizontal-menu.navbar-sticky .content > .content-wrapper {
+    margin-top : 4rem !important;
+}
+.form-control {
+    color : #000000;
+}
+.form-control:focus {
+    color: initial;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+}
+
+@media screen and (max-width : 986px) {
+    html body.blank-page .content-wrapper .header-container h1{
+        font-family:  brando-semi-bold;
+        font-size : 2rem;
+    }
+
+    html body.blank-page .content-wrapper .header-container img{
+        width : 4.5rem;
+    }
+
+    .header-container .last__header {
+        display: none;
+    }
+
+    .header-container .middle__header {
+        margin-top : 2rem;
+    }
+
+    .grid__4 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* grid-row-gap: 1rem; */
+        /* grid-template-rows: 1fr 1fr; */
+        margin-right: 0px;
+        justify-items: stretch;
+        grid-row-gap: 6px;
+        grid-column-gap: 8px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        text-align: center !important;
+
+    }
+
+    .grid__header {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 10px;
+        margin-bottom: 20px !important;
+
+    }
+
+    .grid__header div:nth-child(2) {
+        grid-column-start: 1;
+        grid-row-start: 2;
+        grid-column: span 2;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+
+    .grid__header div:nth-child(3) {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: left !important;
+    }
+
+    .grid__header div:nth-child(3) h3 {
+        font-size: 1.3rem;
+    }
+
+    .grid__header div:nth-child(2) h1 {
+        font-size: 1.8rem !important;
+    }
+
+
+    .table td {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .grid__4 .filters {
+        margin-right: 0px;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, input, p, label {
+    color : #000000;
+}
+
+.card {
+    border-radius: 30px;
+    box-shadow: 0px 0px 25px 0 rgb(25 42 70 / 30%) !important;
+}
+
+.common__form p {
+    font-size : 1.2rem;
+    line-height: 2.5rem;
+}
+
+.common__form label {
+    font-size : 0.89rem;
+}
+
+.form-row {
+    margin-bottom : 15px;
+}
+
+.form-row label {
+    margin-bottom : 15px;
+}
+
+input.form-control {
+    background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(.25turn, #e93e39, 50%, #faba20) border-box;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    height: 52px;
+    font-family: jali-regular;
+    font-weight: 600;
+}
+
+.icon-in-control {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1rem;
+    background: -webkit-linear-gradient( #e93e39, #faba20);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'jali-semi-bold';
+    border-bottom : 1px solid orange;
+
+}
+
+.pos__relative {
+    position:relative;
+}
+
+
+button.btn {
+    background : linear-gradient(.30turn, #e93e39, 50%, #faba20) !important;
+    border-radius: 28px !important;
+    font-family: brando-bold ;
+}
+
+.radio__btn {
+    display:none;
+}
+
+.radio__checked {
+    position: relative;
+    margin-right: 28px;
+}
+
+.radio__checked::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(#fff, #fff) padding-box, linear-gradient(.25turn, #e93e39, 50%, #faba20) border-box;
+    border-radius: 10px;
+    border: 1.2px solid transparent;
+    width: 18px;
+    height: 100%;
+    border-radius: 50%;
+    right: -30px;
+    top: 0px;
+    max-height: 20px;
+}
+
+
+.radio__checked::before {
+    content: '';
+    position: absolute;
+    border: solid black;
+    width: 8px;
+    border-bottom-right-radius: 2px;
+    height: 18px;
+    right: -30px;
+    transform: rotate(45deg);
+    top: -5px;
+    z-index: 9999;
+    border-width: 0px;
+}
+.radio__btn:checked ~ .radio__checked::before {
+    border-width: 0px 2px 2px 0px;
+}
+
+.paging_custom {
+    text-align: center !important;
+}
+
+.paging_custom .custom-pagination {
+    border:1px solid;
+}
+
+div#DataTables_Table_0_paginate .custom-pagination {
+    padding: 2px 11px;
+    border-radius: 5px;
+    border-color: #bfbfbf;
+    font-family: jali-regular;
+}
+
+div#DataTables_Table_0_paginate {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+div#DataTables_Table_0_paginate a {
+    margin: 0.5rem;
+    font-family: brando-regular !important;
+}
+
+.table thead th {
+    font-family: brando-light;
+    color : #000000;
+    font-size : 1rem;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #DFE3E7;
+}
+
+.table td {
+    border-bottom: 2px solid #DFE3E7;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.table.dataTable thead .sorting_asc:before {
+    content: url(../images/icon/chevron-down_up.png);
+    position: absolute;
+    bottom: -23px;
+    right: 38px;
+    font-size: 3rem;
+    font-weight: 100;
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-end;
+}
+
+.table.dataTable thead .sorting_desc:before  {
+    content : url('../images/icon/chevron-down.png');
+    position: absolute;
+    bottom: -23px;
+    right: 38px;
+    font-size: 3rem;
+    font-weight: 100;
+    opacity: 1;
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-end;
+}
+
+
+.table.dataTable thead .sorting:before, .table.dataTable thead .sorting:after {
+    content : "";
+}
+
+.table thead th {
+    font-size: 1.28rem;
+}
+
+.table.dataTable thead .sorting_desc:after , .table.dataTable thead .sorting_asc:after {
+    content : "";
+}
+
+.table.dataTable tbody td {
+    color : #000000;
+
+}
+
+.table.dataTable tbody td span {
+    vertical-align: middle;
+    font-family: 'brando-regular';
+    font-size : 1rem;
+}
+
+.table.dataTable tbody td span.badge {
+    background: transparent;
+    color: #000000;
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 0.6rem 0.5rem;
+    margin-right: 10px;
+    font-size: .8rem;
+    font-family: 'brando-regular';
+    border-color: #dedede;
+}
+
+.table.dataTable tbody td span.badge  img {
+    margin-left: 7px;
+}
+
+.table.dataTable tbody td {
+    font-family: jali-medium;
+    font-size: 1.8rem;
+}
+.table.dataTable tbody td:first-child {
+    font-family: jali-bold;
+    font-size: 2rem;
+}
+
+.table.dataTable tbody td.small__fonts {
+    font-size : 1.1rem;
+}
