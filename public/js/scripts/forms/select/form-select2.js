@@ -32,8 +32,13 @@
   // Format icon
   function iconFormat(icon) {
       var originalOption = icon.element;
-      if (!icon.id) { return icon.text; }
-      var $icon = "<i class='" + $(icon.element).data('icon') + "'></i>" + icon.text;
+    //   if (!icon.id) { return icon.text; }
+
+      var color = $(icon.element).data("icon");
+      var $icon = $(
+        '<span class="option__badge" style="background :'+color+'" >' +icon.text + '</span>'
+
+    );
 
       return $icon;
   }

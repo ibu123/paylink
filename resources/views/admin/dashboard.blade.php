@@ -30,6 +30,8 @@
                                     <div class="card mb-0 p-2 h-100 d-flex justify-content-center">
                                         <div class="card-content">
                                             <div class="card-body">
+                                                @livewire('alert-component')
+
                                                 <div class="row align-items-center mb-2">
                                                     <div class="col-md-2 ">
                                                         <h4 class="brando__black">قائمة التجار</h4>
@@ -144,5 +146,10 @@
 <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
 <script src="{{ asset('js/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('js/scripts/forms/select/form-select2.js') }}"></script>
-@endsection
+
+<script>
+    Livewire.on('postAdded',() => {
+        $("#addMerchantForm").modal("hide");
+    })
+</script>
 @endsection
