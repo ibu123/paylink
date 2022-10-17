@@ -17,6 +17,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->integer('type')->comment("0 = admin, 1 = merchant")->default(1);
+            $table->string('cr_number')->comment("commercial register number");
+            $table->string('vat');
+            $table->string('iban');
+            $table->string('domain');
+            $table->string('store_display_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

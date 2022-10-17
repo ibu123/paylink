@@ -10,10 +10,6 @@
 </head>
 <body class="horizontal-layout horizontal-menu navbar-sticky 1-column   footer-static bg-full-screen-image  blank-page blank-page" >
    @yield('content')
-   <div class="bbc">
-
-    @yield('bbc')
-   </div>
     @include('includes.footer')
 </body>
 </html>

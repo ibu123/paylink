@@ -1,20 +1,9 @@
-    <!--filter form Modal -->
-<div class="modal fade text-left " id="filterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content card ">
-                <div class="modal-header my-2 border-0 d-flex align-items-center header-container">
-                    <div class="col-md-12 col-12 text-center ">
-                        <h1 class="brando__bold"> تصدير الروابط </h1>
-                     </div>
-                    <button type="button" class="modal__close" data-dismiss="modal" aria-label="Close">
-                        <img src="{{ asset('images/icon/Close Button.png') }}" alt="">
-                    </button>
-                </div>
-                <form action="#" class="common__form overflow-auto">
+
+<form wire:submit.prevent="addMerchant" class="common__form overflow-auto">
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label class="d-flex flex-sm-row flex-column justify-content-md-around">اكتب رقم رابط أو أكثر * <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
+                                <label class="d-md-flex  justify-content-md-around">اكتب رقم رابط أو أكثر * <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control">
                                 </div>
@@ -24,7 +13,8 @@
                             <div class="form-group col-md-12 mb-50">
                                 <label>حدد الحالات التي تريد تصدير روابطها <span>(اختياري)</span></label>
                                 <div class="form-group">
-                                    <input type="text"  class="form-control">
+                                    <input type="text" name="merchant_name" wire:model="merchant_name" class="form-control">
+                                    @error('merchant_name') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         </div>
@@ -70,20 +60,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <select  data-placeholder="Select a state..." class="form-control select2-icons" multiple  >
-                                    <option value="wordpress2" data-icon="red"  >WordPress</option>
-                                    <option value="codepen" data-icon="green"  > AAAAA</option>
 
-                            </select>
-                        </div>
                     </div>
                     <div class="modal-footer border-0 d-flex justify-content-center">
                         <button type="submit" class="modal__submit btn btn-primary glow position-relative px-3 py-2"
                         ">فلترة الروابط</button>
 
                     </div>
-                </form>
-            </div>
-        </div>
-</div>
+</form>
