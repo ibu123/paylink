@@ -1,5 +1,5 @@
     <!--filter form Modal -->
-<div class="modal fade text-left " id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+<div class="modal fade text-left " id="filterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content card ">
                 <div class="modal-header my-2 border-0 d-flex align-items-center header-container">
@@ -14,7 +14,7 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label class="d-md-flex  justify-content-md-around">اكتب رقم رابط أو أكثر * <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
+                                <label class="d-flex flex-sm-row flex-column justify-content-md-around">اكتب رقم رابط أو أكثر * <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control">
                                 </div>
