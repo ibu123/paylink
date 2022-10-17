@@ -35,7 +35,7 @@
                                                         <h4 class="brando__black">قائمة التجار</h4>
                                                     </div>
                                                     <div class="col-md-7 text-right grid__4">
-                                                        <span class="filters">
+                                                        <span class="filters" data-toggle="modal" data-target="#filterForm">
                                                                     <img src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
                                                             فلترة
                                                         </span>
@@ -50,7 +50,7 @@
                                                          مخالصة</span>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <button type="button" data-toggle="modal" data-target="#inlineForm" class="btn btn-primary glow position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
+                                                        <button type="button"  data-toggle="modal" data-target="#addMerchantForm" class="btn btn-primary glow position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
 
                                                     </div>
                                                 </div>
@@ -131,6 +131,7 @@
     </div>
     <!-- END: Content-->
 @include('admin.dashboard.filter_modal')
+@include('admin.dashboard.add_merchant')
 @section('js')
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
