@@ -54,31 +54,10 @@ body {
     font-family: brando-regular;
     color : #000000 !important;
 }
-@font-face {
-    font-family: jali-regular;
-    src: url('../fonts/jali/Jali Arabic Regular.ttf');
-}
 
-@font-face {
-    font-family: jali-bold;
-    src: url('../fonts/jali/Jali Arabic Bold.ttf');
+.register-form p {
+    font-family: brando-text;
 }
-
-@font-face {
-    font-family: jali-extra-bold;
-    src: url('../fonts/jali/Jali Arabic ExtraBold.ttf');
-}
-
-@font-face {
-    font-family: jali-medium;
-    src: url('../fonts/jali/Jali Arabic Medium.ttf');
-}
-
-@font-face {
-    font-family: jali-semi-bold;
-    src: url('../fonts/jali/Jali Arabic SemiBold.ttf');
-}
-
 .brando__bold {
     font-family: brando-bold !important;
 }
@@ -93,21 +72,6 @@ body {
 }
 .brando-extra-light {
     font-family: brando-extra-light;
-}
-.jali__regular {
-    font-family: jali-regular !important;
-}
-.jali__medium {
-    font-family: jali-medium;
-}
-.jali__bold {
-    font-family: jali-bold;
-}
-.jali__semi__bold {
-    font-family: jali-semi-bold;
-}
-.jali__extra__bold {
-    font-family: jali-extra-bold;
 }
 
 html body.blank-page .content-wrapper .header-container {
@@ -276,8 +240,7 @@ input.form-control {
     border-radius: 10px;
     border: 1px solid transparent;
     height: 52px;
-    font-family: jali-regular;
-    font-weight: 600;
+    font-family: brando-light;
 }
 
 .icon-in-control {
@@ -288,7 +251,6 @@ input.form-control {
     background: -webkit-linear-gradient( #e93e39, #faba20);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'jali-semi-bold';
     border-bottom : 1px solid orange;
 
 }
@@ -361,7 +323,7 @@ button.btn {
     padding: 2px 11px;
     border-radius: 5px;
     border-color: #bfbfbf;
-    font-family: jali-regular;
+    font-family: brando-regular;
 }
 
 .paging_custom {
@@ -398,7 +360,7 @@ button.btn {
 .table.dataTable thead .sorting_asc:before {
     content: url(../images/icon/chevron-down_up.png);
     position: absolute;
-    bottom: -23px;
+    bottom: -11px;
     right: 38px;
     font-size: 3rem;
     font-weight: 100;
@@ -410,7 +372,7 @@ button.btn {
 .table.dataTable thead .sorting_desc:before  {
     content : url('../images/icon/chevron-down.png');
     position: absolute;
-    bottom: -28px;
+    bottom: -16px;
     right: 38px;
     font-size: 3rem;
     font-weight: 100;
@@ -461,12 +423,12 @@ button.btn {
 }
 
 .table.dataTable tbody td {
-    font-family: jali-medium;
+    font-family: brando-regular;
     font-size: 1.8rem;
     font-variant-numeric: lining-nums;
 }
 .table.dataTable tbody td:first-child {
-    font-family: jali-bold;
+    font-family: brando-bold;
     font-size: 2rem;
 }
 
@@ -551,7 +513,8 @@ button.modal__submit {
     right: 11px;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    padding-bottom: 5px !important;
+    padding-bottom: 8px !important;
+    padding-top: 5px !important;
 }
 button.modal__close:focus {
     outline: none;

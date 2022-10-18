@@ -33,7 +33,7 @@
                                                 <form class="register-form common__form">
                                                     <div class="form-row">
                                                         <div class="form-group col-md-12 mb-50">
-                                                                <p class="jali__semi__bold">  يرجى إدخال رقم الهاتف ثم ضغط زر التوثيق </p>
+                                                                <p>  يرجى إدخال رقم الهاتف ثم ضغط زر التوثيق </p>
 
                                                             <label for="inputfirstname4" class="brando__semi__bold">رقم الهاتف</label>
                                                             <div class="pos__relative">
@@ -44,7 +44,7 @@
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-12 mb-50">
-                                                            <p  for="exampleInputUsername1" class="jali__semi__bold">ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
+                                                            <p  for="exampleInputUsername1">ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
 
                                                             <label for="exampleInputUsername1" class="brando__semi__bold"> رمز التوثيق</label>
                                                             <div class="pos__relative">
@@ -53,11 +53,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <p class="jali__semi__bold text-center">
+                                                    <p class="text-center">
                                                         هنالك أكثر من حساب مرتبط بهذا الرقم
                                                      </p>
 
-                                                    <p class="jali__semi__bold text-center">
+                                                    <p class="text-center">
                                                         الرجاء تحديد الحساب الذي تود تسجيل الدخول له
                                                     </p>
                                                     <div class="row justify-content-center">
@@ -71,7 +71,7 @@
                                                             <div class="form-row ">
                                                                 <div class="form-group m-0">
                                                                     <input type="radio" name="abc" id="yes2" class="radio__btn ">
-                                                                    <label for="yes2" class="radio__checked my-0  brando-extra-light">فندق كيتزال - فرع النزهة</label>
+                                                                    <label for="yes2" class="radio__checked my-0 brando-extra-light">فندق كيتزال - فرع النزهة</label>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row ">

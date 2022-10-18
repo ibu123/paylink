@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\ShowPosts;
+use App\Http\Livewire\AddMerchant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
+Route::get('login', function () {
     return view('admin.login');
 });
 
 
-Route::get('/dashboard', function () {
+Route::get('dashboard', function () {
     return view('admin.dashboard');
 });
 
-Route::get('live-wire',ShowPosts::class);
+Route::get('merchant-list', [AddMerchant::class, 'list'])->name('list');

@@ -6,18 +6,17 @@ use Livewire\Component;
 
 class AlertComponent extends Component
 {
-    protected $listeners = ['postAdded' => 'incrementPostCount'];
+    protected $listeners = ['merchant_created' => 'showFlashSession'];
 
-    public $count = 5;
+
 
     public function render()
     {
         return view('livewire.alert-component');
     }
 
-    public function incrementPostCount()
+    public function showFlashSession($message)
     {
-        $this->count = 6;
-        session()->flash('message', 'Post successfully updated.');
+        session()->flash('message', $message);
     }
 }

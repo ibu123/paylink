@@ -186,12 +186,17 @@ $(document).ready(function() {
     *       js of zero configuration        *
     ****************************************/
 
-
-    $('.zero-configuration').DataTable({
+    let url = $('.zero-configuration').data("url");
+    window.mainTable = $('.zero-configuration').DataTable({
         dom: 'trp',
         pagingType : 'custom',
+        processing: true,
+        serverSide: true,
+        ajax : {
+            url : url,
+            dataType : "json",
+        },
         language : {
-
             "paginate": {
                 "first":      "الأولى",
                 "last":       "الأخيرة",
@@ -199,6 +204,16 @@ $(document).ready(function() {
                 "previous":   "السابق"
             }
         },
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'phone_no', name: 'phone_no'},
+            {data: 'no_of_links', name: 'no_of_links'},
+            {data: 'revenues', name: 'revenues'},
+            {data: 'net_profit', name: 'net_profit'},
+            {data: 'action', name: 'action'},
+
+        ],
     });
 
     /********************************************
