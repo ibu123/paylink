@@ -2,6 +2,7 @@
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/tables/datatable/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/forms/select/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/pickers/daterange/daterangepicker.css') }}">
 @endsection
 @section('content')
     <!-- BEGIN: Content-->
@@ -44,7 +45,7 @@
                                                         <span class="filters">
                                                         <img src="{{ asset('images/icon/clockwise_1x.png') }}" alt="">
                                                         تحديث</span>
-                                                        <span class="filters">
+                                                        <span class="filters" data-toggle="modal" data-target="#exportForm">
                                                             <img src="{{ asset('images/icon/export copy_1x.png') }}" alt="">
                                                         تصدير</span>
                                                         <span class="filters">
@@ -57,7 +58,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table zero-configuration" id="merchant_list" data-url='{{ route("list") }}' >
+                                                    <table class="table zero-configuration" id="merchant_list" data-url='{{ route("admin.list") }}' >
                                                         <thead>
                                                             <tr>
                                                                 <th><div>الرقم</div></th>
@@ -132,17 +133,20 @@
         </div>
     </div>
     <!-- END: Content-->
+
+
 @include('admin.dashboard.add_merchant')
+@include('admin.dashboard.export_modal')
 @livewire('view-merchant')
 @endsection
 @section('js')
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
-
 <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
 <script src="{{ asset('js/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('js/scripts/forms/select/form-select2.js') }}"></script>
-
+<script src="{{ asset('js/vendors/js/pickers/daterange/moment.min.js')}}"></script>
+<script src="{{ asset('js/vendors/js/pickers/daterange/daterangepicker.js')}}"></script>
 <script>
     Livewire.on('merchant_created',() => {
         $("#addMerchantForm").modal("hide");
@@ -151,12 +155,29 @@
 
     Livewire.on('merchant_popup', () => {
 
-        Livewire.emit('refershComponent');
+        // Livewire.emit('refershComponent');
         $("#viewMerchantForm").modal("show");
     })
 
     $(document).on('click', '.view__merchant', function(){
         Livewire.emit('view_merchant', $(this).attr("id"));
     });
+
+    $(document).ready(function(){
+
+        $(".bootstrap-dt-range").daterangepicker();
+
+        // $(".bootstrap-dt-range").on('apply.daterangepicker', function(ev, picker) {
+        //     $(this).val(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
+        // });
+
+        $(document).on("change", ".select2-icons", function(){
+            Livewire.components.componentsById[
+                $("#expt__form").attr("wire:id")
+            ].set("column", $(this).val())
+        })
+
+
+    })
 </script>
 @endsection

@@ -308,6 +308,26 @@
   margin: 0;
 }
 
+.daterangepicker {
+    font-family: brando-regular;
+}
+
+.daterangepicker button {
+    font-family: brando-regular;
+    color : #fff;
+    background: linear-gradient(0.01turn, #e93e39e6, 45%, #faba20) !important;
+}
+
+
+.daterangepicker button:hover {
+    font-family: brando-regular;
+    color : #fff;
+}
+
+.daterangepicker td.active {
+   background :  #e7a402 !important;
+}
+
 .daterangepicker.show-calendar .ranges {
   margin-top: 8px;
 }
@@ -408,3 +428,4 @@
     clear: none !important;
   }
 }
+

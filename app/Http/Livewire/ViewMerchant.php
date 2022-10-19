@@ -10,7 +10,6 @@ class ViewMerchant extends Component
 
     protected $listeners = [
         'view_merchant' => 'viewMerchant',
-        'refershComponent' => '$refresh'
     ];
 
     public $merchant_name;

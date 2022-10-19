@@ -185,7 +185,10 @@ $(document).ready(function() {
     /****************************************
     *       js of zero configuration        *
     ****************************************/
-
+    $("#file").on("change", function(){
+        var file = this.files[0].name;
+        $(this).parent().find(".form-control span:first").text(file);
+    });
     let url = $('.zero-configuration').data("url");
     window.mainTable = $('.zero-configuration').DataTable({
         dom: 'trp',
@@ -206,12 +209,12 @@ $(document).ready(function() {
         },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'phone_no', name: 'phone_no'},
-            {data: 'no_of_links', name: 'no_of_links'},
-            {data: 'revenues', name: 'revenues'},
-            {data: 'net_profit', name: 'net_profit'},
-            {data: 'action', name: 'action'},
+            {data: 'name', name: 'merchant_name'},
+            {data: 'phone_no', name: 'user.phone_no'},
+            {data: 'no_of_links', name: 'no_of_links', searchable : false, sortable : false},
+            {data: 'revenues', name: 'revenues', searchable : false, sortable : false},
+            {data: 'net_profit', name: 'net_profit', searchable : false, sortable : false},
+            {data: 'action', name: 'action', searchable : false, sortable : false},
 
         ],
     });

@@ -3,12 +3,23 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use ArPHP\I18N\Arabic;
 use Livewire\Component;
+use App\Models\Merchant;
+use App\Exports\ExcelExport;
+use App\Exports\UsersExport;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Livewire\WithFileUploads;
 
 class AddMerchant extends Component
 {
+
+    use WithFileUploads;
 
     public $merchant_name;
     public $cr_number;
@@ -17,6 +28,7 @@ class AddMerchant extends Component
     public $domain;
     public $phone_no;
     public $store_display_name;
+    public $file;
 
     public function render()
     {
@@ -24,12 +36,12 @@ class AddMerchant extends Component
     }
 
     protected $rules = [
-        'merchant_name' => 'required',
-        'cr_number' => 'required',
-        'vat' => 'required',
-        'iban' => 'required',
-        'domain' => 'required',
-        'phone_no' => 'required',
+        'merchant_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'cr_number' => 'required|digits:10',
+        'vat' => 'required|alpha_num',
+        'iban' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+        'domain' => 'required|regex:/^[a-zA-Z0-9.]+$/',
+        'phone_no' => 'required|digits:10',
         'store_display_name' => 'required'
     ];
 
@@ -41,13 +53,43 @@ class AddMerchant extends Component
     public function addMerchant()
     {
         $this->validate();
-        User::create([
-            'name' => $this->merchant_name,
+        $user = User::updateOrCreate(
+        [
+            'phone_no' => $this->phone_no
+        ],[
+            'phone_no' => $this->phone_no
+        ]);
+
+        Merchant::create([
+            'merchant_name' => $this->merchant_name,
             'cr_number' =>  $this->cr_number,
+            'user_id' => $user->id,
             'vat' => $this->vat,
             'iban' => $this->iban,
             'domain' => $this->domain,
-            'phone_no' => $this->phone_no,
+            'store_display_name' => $this->store_display_name
+        ]);
+        $this->emit("merchant_created", __("Merchant Created Successfully"));
+    }
+
+
+    public function importMerchant()
+    {
+        $this->validate();
+        $user = User::updateOrCreate(
+        [
+            'phone_no' => $this->phone_no
+        ],[
+            'phone_no' => $this->phone_no
+        ]);
+
+        Merchant::create([
+            'merchant_name' => $this->merchant_name,
+            'cr_number' =>  $this->cr_number,
+            'user_id' => $user->id,
+            'vat' => $this->vat,
+            'iban' => $this->iban,
+            'domain' => $this->domain,
             'store_display_name' => $this->store_display_name
         ]);
         $this->emit("merchant_created", __("Merchant Created Successfully"));
@@ -55,10 +97,15 @@ class AddMerchant extends Component
 
     public function list(Request $request)
     {
-        return Datatables::of(User::query())
+        $merchant = Merchant::query()->with('user');
+
+        return Datatables::of($merchant)
         ->addIndexColumn()
         ->editColumn('name', function($row){
-            return substr($row->name, 0, 5)."..";
+            return "<span class='small__fonts'>".mb_substr($row->merchant_name,0,5,'utf-8').'..</span>';
+        })
+        ->editColumn('phone_no', function($row){
+            return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
         })
         ->editColumn('no_of_links', function($row){
             return 0;
@@ -76,11 +123,29 @@ class AddMerchant extends Component
         ->addColumn('action', function ($row) {
             return ' <span class="badge view__merchant" id="'.$row->id.'">
             <img src="'.asset('images/icon/preview.png').'" alt="" >عرض </span>
-            <span class="badge">
-                <img src="'.asset('images/icon/duplicate.png').'" alt=""> تحكم</span>';
+
+            <form method="POST" action="'.route('send-otp').'">
+            <input type="hidden" name="_token" value="'.csrf_token().'">
+            <input type="hidden" name="phone_no" value="'.$row->phone_no.'">
+            <button type="submit" class="badge">
+                <img src="'.asset('images/icon/duplicate.png').'" alt=""> تحكم
+            </button>
+            </form>';
         })
-        ->rawColumns(['net_profit', 'action', 'revenues'])
+        ->rawColumns(['net_profit', 'action', 'revenues', 'name', 'phone_no'])
         ->make(true);
 
     }
+
+    public function import()
+    {
+        $this->validate([
+            'file' => 'image|max:1024', // 1MB Max
+        ]);
+
+        $this->photo->store('photos');
+
+
+    }
+
 }

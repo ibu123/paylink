@@ -12,5 +12,11 @@
     "Upload store or store data" : "رفع بيانات المتجر أو المتاجر",
     "upload file" : "رفع الملف",
     "data upload" : "رفع البيانات",
-    "Add a new store" : "إضافة متجر جديد"
+    "Add a new store" : "إضافة متجر جديد",
+    "id" : "الرقم",
+    "Display Name" : "الاسم",
+    "Phone No" : "الهاتف",
+    "No Links" : "عدد الروابط",
+    "Revenue" : "الإيرادات",
+    "Net profit" : "صافي الأرباح"
 }

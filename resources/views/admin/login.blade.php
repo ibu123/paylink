@@ -30,58 +30,24 @@
 
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <form class="register-form common__form">
+                                                @livewire('alert-component')
+                                                <form method="POST" action="{{ route('send-otp') }}" class="register-form common__form">
+                                                    @csrf
                                                     <div class="form-row">
                                                         <div class="form-group col-md-12 mb-50">
                                                                 <p>  يرجى إدخال رقم الهاتف ثم ضغط زر التوثيق </p>
 
-                                                            <label for="inputfirstname4" class="brando__semi__bold">رقم الهاتف</label>
+                                                            <label for="phone_no" class="brando__semi__bold">رقم الهاتف</label>
                                                             <div class="pos__relative">
-                                                                <input type="text" class="form-control" id="inputfirstname4" >
+                                                                <input type="text" class="form-control" name="phone_no" id="phone_no" >
                                                                 <span class="icon-in-control brando__bold">توثيق</span>
+                                                                @error('phone_no')
+                                                                    <span class="text text-danger">{{ $message }}<span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-12 mb-50">
-                                                            <p  for="exampleInputUsername1">ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
 
-                                                            <label for="exampleInputUsername1" class="brando__semi__bold"> رمز التوثيق</label>
-                                                            <div class="pos__relative">
-                                                                <input type="text" class="form-control" id="exampleInputUsername1" >
-                                                                <span class="icon-in-control brando__bold">إعادة طلب الرمز</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <p class="text-center">
-                                                        هنالك أكثر من حساب مرتبط بهذا الرقم
-                                                     </p>
-
-                                                    <p class="text-center">
-                                                        الرجاء تحديد الحساب الذي تود تسجيل الدخول له
-                                                    </p>
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-sm-5 col-md-6 col-12">
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes" class="radio__btn ">
-                                                                    <label for="yes" class="radio__checked my-0 brando-extra-light">فندق كيتزال - فرع العليا</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes2" class="radio__btn ">
-                                                                    <label for="yes2" class="radio__checked my-0 brando-extra-light">فندق كيتزال - فرع النزهة</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes3" class="radio__btn ">
-                                                                    <label for="yes3" class="radio__checked my-0 brando-extra-light">سلسلة فنادق كيتزال - الإدارة العامة</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="text-center my-2">
                                                         <button type="submit" class="btn btn-primary glow position-relative ">تسجيل الدخول</button>
 

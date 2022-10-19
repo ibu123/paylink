@@ -1,5 +1,5 @@
     <!--filter form Modal -->
-    <div class="modal fade text-left " id="viewMerchantForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal fade text-left " wire:ignore.self id="viewMerchantForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content card ">
                 <div class="modal-header my-2 border-0 d-flex align-items-center header-container">
