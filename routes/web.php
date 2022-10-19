@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Livewire\ShowPosts;
+
+use App\Http\Livewire\AddMerchant;
+use App\Http\Livewire\ExportMerchant;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('admin.login');
-});
+})->name('login')->middleware('guest');
 
+Route::get('/login', function () {
+    return view('admin.otp');
+})->name('login');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
+Route::post('send-otp', [ AuthController::class, 'sendOTP'])->name('send-otp');
+Route::post('verify-top', [ AuthController::class, 'verifyOTP'])->name('verify-otp');
 
-Route::get('live-wire',ShowPosts::class);
+// Route::group(['middleware' => 'auth'] , function(){
+
+    Route::prefix('admin')
+    // ->middleware('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+        Route::get('merchant-list', [AddMerchant::class, 'list'])->name('list');
+        Route::any('export', [ExportMerchant::class, 'export'])->name('export');
+    });
+
+// });
+

@@ -1,3 +1,22 @@
 {
-    "I love programming": "تصدير"
+    "Merchant Name": "الاسم التجاري",
+    "As mentioned in the commercial register" : "حسب المذكور في السجل التجاري",
+    "Commercial Registration No" : "رقم السجل التجاري",
+    "VAT registration number" : "رقم تسجيل ضريبة القيمة المضافة",
+    "IBAN Bank Account Number" : "رقم الحساب البنكي IBAN",
+    "Write english domain" : "كتابة النطاق الإنجليزية",
+    "Phone number to log in" : "رقم الهاتف لتسجيل الدخول",
+    "Store display name" : "اسم العرض للمتجر",
+    "Add merchant" : "إضافة التاجر",
+    "Or upload data in bulk" : "أو ارفع البيانات بالجملة",
+    "Upload store or store data" : "رفع بيانات المتجر أو المتاجر",
+    "upload file" : "رفع الملف",
+    "data upload" : "رفع البيانات",
+    "Add a new store" : "إضافة متجر جديد",
+    "id" : "الرقم",
+    "Display Name" : "الاسم",
+    "Phone No" : "الهاتف",
+    "No Links" : "عدد الروابط",
+    "Revenue" : "الإيرادات",
+    "Net profit" : "صافي الأرباح"
 }

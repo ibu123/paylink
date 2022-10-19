@@ -50,35 +50,19 @@
     font-family: 'brando-regular';
     border-color: #dedede;
 }
+
+* {
+    font-variant-numeric: lining-nums !important;
+}
+
 body {
     font-family: brando-regular;
     color : #000000 !important;
 }
-@font-face {
-    font-family: jali-regular;
-    src: url('../fonts/jali/Jali Arabic Regular.ttf');
-}
 
-@font-face {
-    font-family: jali-bold;
-    src: url('../fonts/jali/Jali Arabic Bold.ttf');
+.register-form p {
+    font-family: brando-text;
 }
-
-@font-face {
-    font-family: jali-extra-bold;
-    src: url('../fonts/jali/Jali Arabic ExtraBold.ttf');
-}
-
-@font-face {
-    font-family: jali-medium;
-    src: url('../fonts/jali/Jali Arabic Medium.ttf');
-}
-
-@font-face {
-    font-family: jali-semi-bold;
-    src: url('../fonts/jali/Jali Arabic SemiBold.ttf');
-}
-
 .brando__bold {
     font-family: brando-bold !important;
 }
@@ -93,21 +77,6 @@ body {
 }
 .brando-extra-light {
     font-family: brando-extra-light;
-}
-.jali__regular {
-    font-family: jali-regular !important;
-}
-.jali__medium {
-    font-family: jali-medium;
-}
-.jali__bold {
-    font-family: jali-bold;
-}
-.jali__semi__bold {
-    font-family: jali-semi-bold;
-}
-.jali__extra__bold {
-    font-family: jali-extra-bold;
 }
 
 html body.blank-page .content-wrapper .header-container {
@@ -269,16 +238,17 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, input, p, label {
     margin-bottom : 15px;
 }
 
-input.form-control {
+input.form-control,
+div.form-control {
     background:
     linear-gradient(#fff, #fff) padding-box,
     linear-gradient(.25turn, #e93e39, 50%, #faba20) border-box;
     border-radius: 10px;
     border: 1px solid transparent;
     height: 52px;
-    font-family: jali-regular;
-    font-weight: 600;
+    font-family: brando-light;
 }
+
 
 .icon-in-control {
     position: absolute;
@@ -288,7 +258,6 @@ input.form-control {
     background: -webkit-linear-gradient( #e93e39, #faba20);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'jali-semi-bold';
     border-bottom : 1px solid orange;
 
 }
@@ -361,7 +330,7 @@ button.btn {
     padding: 2px 11px;
     border-radius: 5px;
     border-color: #bfbfbf;
-    font-family: jali-regular;
+    font-family: brando-regular;
 }
 
 .paging_custom {
@@ -398,7 +367,7 @@ button.btn {
 .table.dataTable thead .sorting_asc:before {
     content: url(../images/icon/chevron-down_up.png);
     position: absolute;
-    bottom: -23px;
+    bottom: -22px;
     right: 38px;
     font-size: 3rem;
     font-weight: 100;
@@ -410,7 +379,7 @@ button.btn {
 .table.dataTable thead .sorting_desc:before  {
     content : url('../images/icon/chevron-down.png');
     position: absolute;
-    bottom: -28px;
+    bottom: -27px;
     right: 38px;
     font-size: 3rem;
     font-weight: 100;
@@ -444,7 +413,13 @@ button.btn {
     font-size : 1rem;
 }
 
-.table.dataTable tbody td span.badge {
+td button.badge:focus {
+    outline: none !important;
+}
+.table.dataTable tbody td span.badge,
+.table.dataTable tbody td a.badge,
+.table.dataTable tbody td button.badge
+{
     background: transparent;
     color: #000000;
     border: 2px solid;
@@ -456,17 +431,20 @@ button.btn {
     border-color: #dedede;
 }
 
-.table.dataTable tbody td span.badge  img {
+.table.dataTable tbody td span.badge  img,
+.table.dataTable tbody td a.badge  img,
+.table.dataTable tbody td button.badge  img
+{
     margin-left: 7px;
 }
 
 .table.dataTable tbody td {
-    font-family: jali-medium;
+    font-family: brando-regular;
     font-size: 1.8rem;
     font-variant-numeric: lining-nums;
 }
 .table.dataTable tbody td:first-child {
-    font-family: jali-bold;
+    font-family: brando-bold;
     font-size: 2rem;
 }
 
@@ -527,13 +505,24 @@ button.modal__submit {
 
 .option__badge {
     background-color: green;
-    padding: 2px 23px 2px 12px;
+    padding: 2px 23px 4px 12px;
     color: #fff !important;
     border-radius: 14px;
+    font-family: 'brando-extra-light' !important;
+}
+
+.select2-results__option {
+    font-family: 'brando-extra-light' !important;
+    padding: 8px;
 }
 
 .select2-container--classic .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice {
     position: relative;
+    background-color: #fff !important;
+    margin-top: 10px !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
     background-color: #fff !important;
 }
 .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
@@ -551,7 +540,8 @@ button.modal__submit {
     right: 11px;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    padding-bottom: 5px !important;
+    padding-bottom: 8px !important;
+    padding-top: 5px !important;
 }
 button.modal__close:focus {
     outline: none;
@@ -575,5 +565,17 @@ button.modal__close:focus {
 .select2-container--default.select2-container--focus .select2-selection--multiple,
 .select2-container--default .select2-selection--multiple {
     min-height: 52px !important;
+}
+
+.icon-in-control-with-text {
+    top: 10px;
+}
+
+.icon-in-control-with-text span {
+    -webkit-text-fill-color: black;
+    background: transparent;
+    font-size: 10px;
+    margin-top: 4px;
+    color: black;
 }
 

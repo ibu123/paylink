@@ -74,6 +74,7 @@
                             <select  data-placeholder="Select a state..." class="form-control select2-icons" multiple  >
                                     <option value="wordpress2" data-icon="red"  >WordPress</option>
                                     <option value="codepen" data-icon="green"  > AAAAA</option>
+                                    <option value="codepen" data-icon="green"  > AAAAA</option>      <option value="codepen" data-icon="green"  > AAAAA</option>      <option value="codepen" data-icon="green"  > AAAAA</option>      <option value="codepen" data-icon="green"  > AAAAA</option>      <option value="codepen" data-icon="green"  > AAAAA</option>
 
                             </select>
                         </div>
