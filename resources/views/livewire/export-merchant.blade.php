@@ -5,7 +5,10 @@
             <div class="form-group col-md-12 mb-50">
                 <label class="d-flex flex-sm-row flex-column justify-content-md-around">اكتب رقم رابط أو أكثر * <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" wire:model="merchantId">
+                    <input type="text" class="form-control" oninput="javascript: this.value = this.value.replace(/[^0-9,]/g, '');" wire:model="merchantId">
+                    @error('merchantId')
+                        <span class="error text-danger">{{ $message }} </span>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -14,7 +17,7 @@
             <div class="form-group col-md-12 mb-50">
                 <label >حدد البيانات التي تريد تصديرها <span>(اختياري)</span></label>
                 <div class="form-group"  wire:ignore>
-                    <select data-placeholder="Select a state..." class="form-control select2-icons" multiple >
+                    <select  class="form-control select2-icons" multiple >
                         <option value="id" data-icon="#3cb878">الرقم</option>
                         <option value="store_display_name" data-icon="#3cb878">الاسم</option>
                         <option value="phone_no" data-icon="#3cb878">الهاتف</option>

@@ -15,6 +15,10 @@ class AuthController extends Controller
 
         $request->validate([
             'phone_no' => 'required|exists:users,phone_no'
+        ],
+        [
+            'phone_no.required' => __( "The Phone No field is required and it must require to have 10 digits"),
+            'phone_no.exists' => __( "The Phone No Does not match with our records")
         ]);
 
         $phone_no = env('COUNTRY_CODE').$request->phone_no;
@@ -35,16 +39,16 @@ class AuthController extends Controller
 
     public function reSendOTP(Request $request)
     {
-
+        $phone_no = Session::get('phone_no');
         $requestPhoneNo = env('COUNTRY_CODE').\Session::get('phone_no');
 
         if(\Auth::check() && \Auth::user()->type == 0) {
-            $phone_no = env('COUNTRY_CODE').\Auth::user()->phone_no;
+            $requestPhoneNo = env('COUNTRY_CODE').\Auth::user()->phone_no;
         }
 
-        if(sendOTP($phone_no))
+        if(sendOTP($requestPhoneNo))
         {
-            \Session::put('phone_no', $requestPhoneNo);
+            \Session::put('phone_no', $phone_no);
             return redirect()->route('login');
         }
 
@@ -58,7 +62,12 @@ class AuthController extends Controller
         $request->validate([
             "otp" => "required|digits:4",
             "store" => Rule::requiredIf(\Session::get('has_store') == 1)
-        ]);
+        ],
+        [
+            'otp.*' => __( "The OTP field is required and it must require to have 4 digits"),
+            'store.*' => __( "Please Select At Least one store")
+        ]
+        );
 
         $phone_no = env('COUNTRY_CODE').\Session::get('phone_no');
         if(\Auth::check() && \Auth::user()->type == 0) {
@@ -79,6 +88,7 @@ class AuthController extends Controller
     }
 
     public function login() {
+
         $user = User::where('phone_no', \Session::get('phone_no'))->firstOrFail();
         $stores = Merchant::where('user_id', $user->id)->get();
         if($stores->isNotEmpty() && $stores->count() > 1) {

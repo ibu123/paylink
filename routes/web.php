@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'] , function(){
         Route::get('dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
-        Route::get('merchant-list', [AddMerchant::class, 'list'])->name('list');
+        Route::post('merchant-list', [AddMerchant::class, 'list'])->name('list');
         Route::any('export', [ExportMerchant::class, 'export'])->name('export');
      });
 

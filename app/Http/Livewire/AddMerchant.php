@@ -39,26 +39,41 @@ class AddMerchant extends Component
         return view('livewire.add-merchant');
     }
 
-    protected $rules = [
-        'merchant_name' => 'required|regex:/^[\pL\s]+$/u',
-        'cr_number' => 'required|digits:10',
-        'vat' => 'required|digits:15',
-        'iban' => 'required|regex:/^[\pL\pN\s]+$/u',
-        'domain' => 'required|regex:/^[a-zA-Z0-9.]+$/',
-        'phone_no' => 'required|digits:10',
-        'store_display_name' => 'required|regex:/^[\pL\s]+$/u|unique:merchants,store_display_name'
-    ];
 
-    protected $messages = [
-        'merchant_name.*' => 'The Merhchant Name field is required and it only contains letters',
-        'cr_number.*' => 'The Commercial No field is required and it must require to have 10 digits',
-        'vat.*' => 'The Vat No field is required and it must require to have 15 digits',
-        'iban.*' => 'The IBan field is required and it must require to have letters and digits',
-        'domain.*' => 'The Domain field is required and it only contains letters, numbers and dot(.).',
-        'phone_no.*' => 'The Phone No field is required and it must require to have 10 digits',
-        'store_display_name.*' => 'The Store Display Name field is required and it only contains letters',
-    ];
+    public function messages() {
 
+        return [
+            'merchant_name.*' => __('The Merchant Name field is required and it only contains letters'),
+            'cr_number.*' => __('The Commercial No field is required and it must require to have 10 digits'),
+            'vat.*' => __('The Vat No field is required and it must require to have 15 digits'),
+            'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
+            'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'phone_no.required' => __('The Phone No field is required and it must require to have 10 digits'),
+            'phone_no.digits' => __('The Phone No field is required and it must require to have 10 digits'),
+            'store_display_name.required' => __('The Store Display Name field is required and it only contains letters'),
+            'store_display_name.regex' => __('The Store Display Name field is required and it only contains letters'),
+            'store_display_name.unique' => __('The Store Display Name Requires to be unique')
+
+        ];
+    }
+
+
+    public function rules()
+    {
+        return [
+            'merchant_name' => 'required|regex:/^[\pL\s]+$/u',
+            'cr_number' => 'required|digits:10',
+            'vat' => 'required|digits:15',
+            'iban' => 'required|regex:/^[\pL\pN\s]+$/u',
+            'domain' => 'required|regex:/^[a-zA-Z0-9-]+$/',
+            'phone_no' => ['required','digits:10', function($attribute, $value, $fail){
+                if($value == \Auth::user()->phone_no) {
+                    $fail(__('Admin is not able to create store for himself'));
+                }
+            }],
+            'store_display_name' => 'required|regex:/^[\pL\s]+$/u|unique:merchants,store_display_name'
+        ];
+    }
 
     public function updated()
     {
@@ -109,12 +124,22 @@ class AddMerchant extends Component
             'domain' => $this->domain,
             'store_display_name' => $this->store_display_name
         ]);
-        $this->emit("merchant_created", __("Merchant Created Successfully"));
+
+    }
+
+    public function resetProp()
+    {
+        $this->resetValidation();
+        $this->reset();
     }
 
     public function list(Request $request)
     {
-        $merchant = Merchant::query()->with('user');
+
+        $merchant = Merchant::query()->with('user')
+        ->when(!empty($request->id), function($q) use ($request){
+            $q->whereIn('id', explode(",",$request->id));
+        });
 
         return Datatables::of($merchant)
         ->addIndexColumn()
@@ -128,12 +153,12 @@ class AddMerchant extends Component
             return 0;
         })
         ->editColumn('revenues', function($row){
-            return "45k <span>
+            return "0 <span>
             ريال
         </span>";
         })
         ->editColumn('net_profit', function($row){
-            return "45k <span>
+            return "0 <span>
             ريال
         </span>";
         })
@@ -167,10 +192,10 @@ class AddMerchant extends Component
 
             if(!empty($import->failures())) {
                 foreach ($import->failures() as $key => $failure) {
-                    $this->addError('row', 'row '.$failure->row().' skipped - error -'.$failure->errors()[0]);
+                    $this->addError('row', __('Row').' '. $failure->row().' '.__('Error').__('Skipped').' '.$failure->errors()[0]);
                 }
             } else {
-                $this->emit("merchant_created", __("Merchant Added Successfully"));
+                $this->emit("merchant_created", __("Merchant Data Imported Successfully"));
             }
 
 

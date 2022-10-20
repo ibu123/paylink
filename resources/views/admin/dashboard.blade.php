@@ -44,7 +44,7 @@
                                                                     <img src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
                                                             فلترة
                                                         </span>
-                                                        <span class="filters">
+                                                        <span class="filters" id="refresh">
                                                         <img src="{{ asset('images/icon/clockwise_1x.png') }}" alt="">
                                                         تحديث</span>
                                                         <span class="filters" data-toggle="modal" data-target="#exportForm">
@@ -60,7 +60,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table zero-configuration" id="merchant_list" data-url='{{ route("admin.list") }}' >
+                                                    <table class="table zero-configuration"  id="merchant_list" data-url='{{ route("admin.list") }}' >
                                                         <thead>
                                                             <tr>
                                                                 <th><div>الرقم</div></th>
@@ -139,9 +139,14 @@
 
 @include('admin.dashboard.add_merchant')
 @include('admin.dashboard.export_modal')
+@include('admin.dashboard.filter_merchant')
 @livewire('view-merchant')
 @endsection
 @section('js')
+<script>
+      window.filtreIDS = [];
+      window._token = "{{ csrf_token() }}"
+</script>
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
@@ -151,6 +156,7 @@
 <script src="{{ asset('js/vendors/js/pickers/daterange/daterangepicker.js')}}"></script>
 <script>
     Livewire.on('merchant_created',() => {
+        window.filtreIDS = [];
         $("#addMerchantForm").modal("hide");
         $('.zero-configuration').DataTable().draw()
     })
@@ -161,17 +167,45 @@
         $("#viewMerchantForm").modal("show");
     })
 
+
+    Livewire.on('redraw-DataTable', (Ids) => {
+
+        window.filtreIDS = Ids;
+        $('.zero-configuration').DataTable().draw()
+        $("#filterForm").modal("hide");
+    })
     $(document).on('click', '.view__merchant', function(){
         Livewire.emit('view_merchant', $(this).attr("id"));
     });
 
     $(document).ready(function(){
 
+        $("#refresh").click(function(){
+            window.filtreIDS = [];
+            $('.zero-configuration').DataTable().draw()
+        })
         $(".bootstrap-dt-range").daterangepicker();
 
         // $(".bootstrap-dt-range").on('apply.daterangepicker', function(ev, picker) {
-        //     $(this).val(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
+        //     $("#abcb").html(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
         // });
+        $('.modal').on('show.bs.modal', function(){
+            if( $(this).find("form").attr("id") != "filter_Form") {
+                componentID = $(this).find("form").attr("wire:id");
+                if(componentID) {
+                    Livewire.components.componentsById[
+                        componentID
+                    ].call("resetProp");
+                } else {
+                    componentID = $(this).find(".modal-body").attr("wire:id");
+                    if(componentID) {
+                        Livewire.components.componentsById[
+                            componentID
+                        ].call("resetProp");
+                    }
+                }
+            }
+        });
 
         $(document).on("change", ".select2-icons", function(){
             Livewire.components.componentsById[

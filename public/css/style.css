@@ -49,6 +49,7 @@
     font-size: .8rem;
     font-family: 'brando-regular';
     border-color: #dedede;
+    cursor: pointer;
 }
 
 * {
@@ -193,6 +194,10 @@ html body.blank-page .content-wrapper .header-container h1{
 
     .dataTables_wrapper .paging_custom {
         align-items: justify-conte;
+    }
+
+    button.modal__submit {
+        font-size: 1.1rem !important;
     }
 }
 
@@ -438,6 +443,10 @@ td button.badge:focus {
     margin-left: 7px;
 }
 
+.view__merchant {
+    cursor: pointer;
+}
+
 .table.dataTable tbody td {
     font-family: brando-regular;
     font-size: 1.8rem;
@@ -576,7 +585,20 @@ button.modal__close:focus {
     border: 1px solid transparent !important;
     border-color : none;
     font-weight: 600;
+
 }
+
+.select2-dropdown {
+    border-bottom-left-radius: 14px !important;
+    border-bottom-right-radius: 15px !important;
+    padding: 5px 0px 5px 0px !important;
+    margin-top: 1px;
+}
+
+.dataTables_empty {
+    font-family: 'brando-text' !important;
+}
+
 
 .select2-container--default.select2-container--focus .select2-selection--multiple,
 .select2-container--default .select2-selection--multiple {
@@ -606,3 +628,35 @@ button.modal__close:focus {
     border-bottom : 1px solid orange;
 
 }
+
+.domain__link {
+    text-transform: lowercase;
+    font-size : 0.9rem !important;
+    font-family: 'brando-extra-light' !important;
+}
+
+
+.domain__link span {
+    text-transform: lowercase;
+    color: #fab920;
+    font-size : 0.9rem !important;
+    font-family: 'brando-extra-light';
+    font-weight: 600;
+}
+
+.common__form span.error {
+    font-size: .845rem;
+    font-family: 'brando-semi-bold';
+}
+
+.dataTables_processing{
+    border: 2px solid rgb(222, 222, 222);
+    border-radius: 25px;
+    padding: 0.6rem 1rem;
+    margin-right: 10px;
+    font-size: 1rem;
+    font-family: brando-regular;
+    cursor: pointer;
+
+}
+

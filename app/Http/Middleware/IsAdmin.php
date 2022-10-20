@@ -20,7 +20,7 @@ class IsAdmin
 
         if(!\Auth::check()) {
 
-            return redirect()->route('login');
+            return redirect()->route('home');
         }
 
         if(\Auth::user()->type == 0)

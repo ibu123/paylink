@@ -35,25 +35,26 @@
                                                     @csrf
                                                     <div class="form-row">
                                                         <div class="form-group col-md-12 mb-50">
-                                                            <p  for="exampleInputUsername1">ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
+                                                            <p  >ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
 
-                                                            <label for="exampleInputUsername1" class="brando__semi__bold"> رمز التوثيق</label>
+                                                            <label class="brando__semi__bold"> رمز التوثيق</label>
                                                             <div class="pos__relative">
-                                                                <input type="text" class="form-control" name="otp" id="exampleInputUsername1" >
+                                                                <input type="text" class="form-control" maxlength="4" name="otp" oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  >
                                                                 <span class="icon-in-control brando__bold">إعادة طلب الرمز</span>
                                                                 @error('otp')
-                                                                    <span class="text-danger">{{ $message }} </span>
+                                                                    <span class="text-danger error">{{ $message }} </span>
                                                                 @enderror
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    @if($stores->isNotEmpty())
                                                     <p class="text-center">
                                                         هنالك أكثر من حساب مرتبط بهذا الرقم
-                                                     </p>
-                                                    @if($stores->isNotEmpty())
-                                                        <p class="text-center">
-                                                            الرجاء تحديد الحساب الذي تود تسجيل الدخول له
-                                                        </p>
+                                                    </p>
+                                                    <p class="text-center">
+                                                        الرجاء تحديد الحساب الذي تود تسجيل الدخول له
+                                                    </p>
                                                     @endif
 
                                                         <div class="row justify-content-center">
@@ -67,7 +68,7 @@
                                                                     </div>
                                                                 @endforeach
                                                                 @error('store')
-                                                                    <span class="text-danger">{{ $message }} </span>
+                                                                    <span class="text-danger error">{{ $message }} </span>
                                                                 @enderror
                                                             </div>
 
@@ -111,7 +112,7 @@
 @section('js')
 <script>
     function countdown() {
-        var seconds = 10;
+        var seconds = 61;
         function tick() {
           var counter = document.getElementById("counter");
           seconds--;

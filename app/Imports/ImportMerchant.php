@@ -64,10 +64,36 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
     public function rules(): array
     {
         return [
-            'store_display_name' => ['required']
+            'merchant_name' => ['required','regex:/^[\pL\s]+$/u'],
+            'cr_number' => ['required', 'digits:10'],
+            'vat' => ['required','digits:15'],
+            'iban' => ['required','regex:/^[\pL\pN\s]+$/u'],
+            'domain' => ['required','regex:/^[a-zA-Z0-9-]+$/'],
+            'phone_no' => ['required','digits:10', function($attribute, $value, $fail){
+                if($value == \Auth::user()->phone_no) {
+                    $fail(__('Admin is not able to create store for himself'));
+                }
+            }],
+            'store_display_name' => ['required','regex:/^[\pL\s]+$/u', 'unique:merchants,store_display_name']
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function customValidationMessages()
+    {
+        return [
+            'merchant_name.*' => __('The Merchant Name field is required and it only contains letters'),
+            'cr_number.*' => __('The Commercial No field is required and it must require to have 10 digits'),
+            'vat.*' => __('The Vat No field is required and it must require to have 15 digits'),
+            'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
+            'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'phone_no.required' => __('The Phone No field is required and it must require to have 10 digits'),
+            'phone_no.digits' => __('The Phone No field is required and it must require to have 10 digits'),
+            'store_display_name.*' => __('The Store Display Name field is required and it only contains letters'),
+        ];
+    }
 
 
 }

@@ -44,9 +44,9 @@
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
                 <div class="form-group">
-                    <label>{{ __('Write english domain') }}</label>
+                    <label class="d-flex flex-sm-row flex-column justify-content-md-between">{{  __('Write english domain') }} <span class="domain__link"> dafapay.io/<span>name</span>/link/281</span></label>
                     <div class="pos__relative">
-                        <input type="text" class="form-control" name="domain" oninput="javascript: this.value = this.value.replace(/[^a-zA-Z0-9.]/g, '');" wire:model="domain">
+                        <input type="text" class="form-control" name="domain" oninput="javascript: this.value = this.value.replace(/[^a-zA-Z0-9-]/g, '');" wire:model="domain">
                         @error('domain') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -104,13 +104,19 @@
                     @error('file') <span class="error text-danger">{{ $message }}</span> @enderror
                     @if($errors && isset($errors->messages()["row"]))
                         @foreach($errors->messages()["row"] as $error)
-                            <span class="error text-danger d-block">{{ $error }}</span>
+                            <span class="error text-danger d-block mb-1">{{ $error }}</span>
                         @endforeach
                     @endif
-
+                    <div class="text-center ">
+                        <a href="{{ asset('exports/export.xlsx') }}" class="time icon-in-control-without-abs brando__bold">
+                            تنزيل ملف نموذج الاستيراد
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
+
         <div class="modal-footer border-0 d-flex justify-content-center w-100">
             <button type="submit" class="modal__submit btn btn-primary glow position-relative px-3 py-2"
             ">رفع البيانات</button>

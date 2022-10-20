@@ -51,7 +51,6 @@ $.extend( DataTable.ext.pager, {
 $.extend(true, DataTable.ext.renderer, {
     pageButton: {
       bootstrap: function(settings, host, idx, buttons, page, pages, eeee) {
-        console.log(buttons);
         var classes = settings.oClasses;
         var lang = settings.oLanguage.oPaginate;
         var aria = settings.oLanguage.oAria.paginate || {};
@@ -108,7 +107,6 @@ $.extend(true, DataTable.ext.renderer, {
                   btnClass =
                     button +
                     (page < pages - 1 ? "" : " " + classes.sPageButtonDisabled);
-                    console.log(btnClass)
                   break;
 
                 case "last":
@@ -122,7 +120,6 @@ $.extend(true, DataTable.ext.renderer, {
                   // To Button
                   btnDisplay = button + 1;
                   btnClass = page === button ? classes.sPageButtonActive : "";
-                  console.log(btnDisplay);
                   break;
               }
 
@@ -191,15 +188,7 @@ $(document).ready(function() {
     let url = $('.zero-configuration').data("url");
     window.mainTable = $('.zero-configuration').DataTable({
 
-        "columns": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            { },
-        ],
+
         dom: 'trp',
         pagingType : 'custom',
         processing: true,
@@ -207,6 +196,13 @@ $(document).ready(function() {
         ajax : {
             url : url,
             dataType : "json",
+            type : "POST",
+            data : function ( d ) {
+                return $.extend( {}, d, {
+                    "id" : window.filtreIDS,
+                    "_token" : window._token
+                } );
+            }
         },
         language : {
             "paginate": {
@@ -214,7 +210,9 @@ $(document).ready(function() {
                 "last":       "الأخيرة",
                 "next":       "التالي",
                 "previous":   "السابق"
-            }
+            },
+            "emptyTable" : "لا توجد بيانات متوفرة في الجدول",
+            "processing" : "يتم المعالجة"
         },
         order: [[0, 'desc']],
         columns: [

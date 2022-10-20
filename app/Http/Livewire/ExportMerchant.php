@@ -23,14 +23,32 @@ class ExportMerchant extends Component
     public $date_range;
     public $type = [];
 
+    protected $rules = [
+        'merchantId' => 'nullable|regex:/^[0-9,]+$/'
+    ];
+
+    public function messages()
+    {
+        return [
+            'merchantId.*' => __('The merhcant Id field only contains digits and comma(,) with no sapce')
+        ];
+    }
+
     public function render()
     {
         return view('livewire.export-merchant');
     }
 
+
+    public function resetProp()
+    {
+        $this->resetValidation();
+        $this->reset();
+    }
+
     public function export()
     {
-
+        $this->validate();
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
         $data = Merchant::when(!empty($this->merchantId), function($q){

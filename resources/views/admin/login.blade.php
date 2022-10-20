@@ -39,7 +39,7 @@
 
                                                             <label for="phone_no" class="brando__semi__bold">رقم الهاتف</label>
                                                             <div class="pos__relative">
-                                                                <input type="text" class="form-control" name="phone_no" id="phone_no" >
+                                                                <input type="text" class="form-control" name="phone_no" id="phone_no" maxlength="10" oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
                                                                 <span class="icon-in-control brando__bold">توثيق</span>
                                                                 @error('phone_no')
                                                                     <span class="text text-danger">{{ $message }}<span>
