@@ -5,7 +5,7 @@
             <div class="form-group col-md-12 mb-50">
                 <label class="d-flex flex-sm-row flex-column justify-content-md-between">{{ __('Merchant Name') }} <span> {{ __('As mentioned in the commercial register') }}</span></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="merchant_name" oninput="javascript: this.value = this.value.replace(/[^{Arabic}\s]/g, '');" wire:model="merchant_name" class="form-control">
+                    <input type="text" class="form-control" name="merchant_name"  wire:model="merchant_name" class="form-control">
                     @error('merchant_name') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label>{{ __('VAT registration number') }}</label>
                     <div class="pos__relative">
-                        <input type="text" class="form-control" name="vat" wire:model="vat" >
+                        <input type="text" class="form-control" oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); "  name="vat" wire:model="vat" >
                         @error('vat') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         ">فلترة الروابط</button>
         </div>
     </form>
-    <form wire:submit.prevent="export" accept="multipart/form-data" class="common__form">
+    <form wire:submit.prevent="import" enctpye="multipart/form-data" class="common__form">
         <div class="col-md-12 col-12 text-center mt-3 mb-2">
             <h5 class="brando__bold"> أو ارفع البيانات بالجملة </h5>
         </div>
@@ -89,11 +89,10 @@
                     {{ __('Upload store or store data') }}
                 </label>
                 <div class="form-group">
-                    <label class="w-100" for="file">
+                    <label class="w-100" for="file" wire:ignore>
                         <div class="pos__relative">
-                            <div  class="form-control d-flex align-items-center">
+                            <div class="form-control d-flex align-items-center">
                                 <span></span>
-                                @error('merchant_name') <span class="error text-danger">{{ $message }}</span> @enderror
                                 <span class="icon-in-control icon-in-control-with-text  brando__extra__bold border-0 d-flex flex-column align-items-center">
                                     <img src="{{ asset('images/icon/upload copy.png') }}" alt="" height="16px">
                                     <span color="text-black"> رفع الملف </span>
@@ -101,8 +100,13 @@
                             </div>
                         </div>
                     </label>
-                    <input type="file" id="file" class="d-none" name="file" accept="xlsx">
+                    <input type="file" id="file" class="d-none" wire:model="file" accept="xlsx">
                     @error('file') <span class="error text-danger">{{ $message }}</span> @enderror
+                    @if($errors && isset($errors->messages()["row"]))
+                        @foreach($errors->messages()["row"] as $error)
+                            <span class="error text-danger d-block">{{ $error }}</span>
+                        @endforeach
+                    @endif
 
                 </div>
             </div>

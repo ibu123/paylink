@@ -41,42 +41,52 @@
                                                             <div class="pos__relative">
                                                                 <input type="text" class="form-control" name="otp" id="exampleInputUsername1" >
                                                                 <span class="icon-in-control brando__bold">إعادة طلب الرمز</span>
+                                                                @error('otp')
+                                                                    <span class="text-danger">{{ $message }} </span>
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <p class="text-center">
                                                         هنالك أكثر من حساب مرتبط بهذا الرقم
                                                      </p>
+                                                    @if($stores->isNotEmpty())
+                                                        <p class="text-center">
+                                                            الرجاء تحديد الحساب الذي تود تسجيل الدخول له
+                                                        </p>
+                                                    @endif
 
-                                                    <p class="text-center">
-                                                        الرجاء تحديد الحساب الذي تود تسجيل الدخول له
-                                                    </p>
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-sm-5 col-md-6 col-12">
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes" class="radio__btn ">
-                                                                    <label for="yes" class="radio__checked my-0 brando-extra-light">فندق كيتزال - فرع العليا</label>
-                                                                </div>
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-sm-5 col-md-6 col-12">
+                                                                @foreach($stores as $store)
+                                                                    <div class="form-row ">
+                                                                        <div class="form-group m-0">
+                                                                            <input type="radio" name="store" id="{{$store->id}}__store" class="radio__btn ">
+                                                                            <label for="{{$store->id}}__store" class="radio__checked my-0 brando-extra-light">{{ $store->store_display_name}}</label>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                                @error('store')
+                                                                    <span class="text-danger">{{ $message }} </span>
+                                                                @enderror
                                                             </div>
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes2" class="radio__btn ">
-                                                                    <label for="yes2" class="radio__checked my-0 brando-extra-light">فندق كيتزال - فرع النزهة</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-row ">
-                                                                <div class="form-group m-0">
-                                                                    <input type="radio" name="abc" id="yes3" class="radio__btn ">
-                                                                    <label for="yes3" class="radio__checked my-0 brando-extra-light">سلسلة فنادق كيتزال - الإدارة العامة</label>
-                                                                </div>
-                                                            </div>
+
                                                         </div>
-                                                    </div>
-                                                    <div class="text-center my-2">
-                                                        <button type="submit" class="btn btn-primary glow position-relative ">تسجيل الدخول</button>
 
-                                                    </div>
+                                                        <div class="text-center my-2 pos__relative">
+                                                            <span class="time icon-in-control-without-abs brando__bold" id="time__cnt">
+                                                                إعادة إرسال OTP بعد <span id="counter"></span>
+                                                            </span>
+                                                        </div>
+                                                        <div class="text-center re-send-otp d-none">
+                                                            <a href="{{ route('re-send-otp') }}" class="time icon-in-control-without-abs brando__bold">
+                                                                إعادة إرسال OTP
+                                                            </a>
+                                                        </div>
+                                                        <div class="text-center my-2">
+                                                            <button type="submit" class="btn btn-primary glow position-relative ">تسجيل الدخول</button>
+
+                                                        </div>
                                                   </form>
                                               </div>
                                         </div>
@@ -97,9 +107,29 @@
             </div>
         </div>
     </div>
-    <!-- END: Content-->
-</body>
-<!-- END: Body-->
+@endsection
+@section('js')
+<script>
+    function countdown() {
+        var seconds = 10;
+        function tick() {
+          var counter = document.getElementById("counter");
+          seconds--;
+          counter.innerHTML =
+            "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+          if (seconds > 0) {
+            setTimeout(tick, 1000);
+          } else {
+            $("#time__cnt").addClass("d-none");
+            $(".re-send-otp").removeClass("d-none");
+            document.getElementById("counter").innerHTML = "";
+          }
+        }
+        tick();
+    }
 
-</html>
+    $(document).ready(function(){
+        countdown();
+    })
+</script>
 @endsection

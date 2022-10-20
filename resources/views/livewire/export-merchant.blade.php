@@ -12,7 +12,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
-                <label class="d-flex flex-sm-row flex-column justify-content-md-around">حدد البيانات التي تريد تصديرها <span>(اختياري)</span></label>
+                <label >حدد البيانات التي تريد تصديرها <span>(اختياري)</span></label>
                 <div class="form-group"  wire:ignore>
                     <select data-placeholder="Select a state..." class="form-control select2-icons" multiple >
                         <option value="id" data-icon="#3cb878">الرقم</option>

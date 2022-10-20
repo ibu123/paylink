@@ -34,11 +34,7 @@ class ExportMerchant extends Component
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
         $data = Merchant::when(!empty($this->merchantId), function($q){
-            $q->whereIn('id', explode($this->merchantId));
-        })->when(!empty($this->date_range), function($q){
-            $dates = explode(" - ", $this->date_range);
-            $q->where('created_at', '>=', $dates[0]);
-            $q->where('created_at', '<=', $dates[0]);
+            $q->whereIn('id', explode("," , $this->merchantId));
         })->get();
 
         if(in_array(1, $this->type)) {
@@ -74,8 +70,8 @@ class ExportMerchant extends Component
         }
         elseif (in_array(2, $this->type) && !in_array(1, $this->type))
         {
-            return response()->streamDownload(function () use ($pdf){
-                echo $pdf;
+            return response()->streamDownload(function () use ($output){
+                echo $output;
             }, 'export.pdf');
         }
         else
