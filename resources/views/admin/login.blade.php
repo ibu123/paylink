@@ -6,7 +6,7 @@
         <div class="content-wrapper">
             <div class="row header-container justify-content-center">
 
-                    <div class="col-md-8 col-10 row align-items-center">
+                    <div class="col-md-8 col-11 row align-items-center">
 
                         <div class="col-md-3 col-3 text-left">
                             <img src="{{ asset('images/logo/header-logo.png')}}"  alt="">
@@ -20,12 +20,12 @@
             <div class="content-body">
                 <!-- register section starts -->
                 <section class="row justify-content-center">
-                    <div class="col-md-5 col-10">
+                    <div class="col-md-5 col-11">
                         <div class="card bg-authentication mb-0">
                             <div class="row m-0">
                                 <!-- register section left -->
                                 <div class="col-md-12 col-12 px-0">
-                                    <div class="card mb-0 p-2 h-100 d-flex justify-content-center">
+                                    <div class="card mb-0  h-100 d-flex justify-content-center">
 
 
                                         <div class="card-content">
