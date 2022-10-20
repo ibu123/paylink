@@ -448,6 +448,11 @@ td button.badge:focus {
     font-size: 2rem;
 }
 
+.table.dataTable tbody td.bold {
+    font-family: brando-bold;
+    font-size: 2rem;
+}
+
 .table.dataTable tbody td.small__fonts {
     font-size : 1.1rem;
 }
@@ -504,11 +509,22 @@ button.modal__submit {
 }
 
 .option__badge {
-    background-color: green;
+    background-color: #3cb878;
     padding: 2px 23px 4px 12px;
     color: #fff !important;
     border-radius: 14px;
     font-family: 'brando-extra-light' !important;
+}
+
+.td__badge {
+    background: #3cb878;
+    color: #fff;
+    border-radius: 15px;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    font-size: .9rem;
+    font-family: 'brando-text' !important;
+
+    width: auto;
 }
 
 .select2-results__option {
@@ -579,3 +595,14 @@ button.modal__close:focus {
     color: black;
 }
 
+.icon-in-control-without-abs {
+    position: initial !important;
+    top: 15px;
+    left: 15px;
+    font-size: 1rem;
+    background: -webkit-linear-gradient( #e93e39, #faba20);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom : 1px solid orange;
+
+}

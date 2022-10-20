@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use App\Models\Merchant;
 use Livewire\Component;
 
 class ViewMerchant extends Component
@@ -29,14 +30,14 @@ class ViewMerchant extends Component
 
     public function viewMerchant($id)
     {
-        $user = User::find($id);
-        $this->merchant_name = $user->name;
-        $this->cr_number = $user->cr_number;
-        $this->vat = $user->vat;
-        $this->iban = $user->iban;
-        $this->domain = $user->domain;
-        $this->phone_no = $user->phone_no;
-        $this->store_display_name = $user->store_display_name;
+        $merhchant = Merchant::find($id);
+        $this->merchant_name = $merhchant->merchant_name;
+        $this->cr_number = $merhchant->cr_number;
+        $this->vat = $merhchant->vat;
+        $this->iban = $merhchant->iban;
+        $this->domain = $merhchant->domain;
+        $this->phone_no = $merhchant->user->phone_no;
+        $this->store_display_name = $merhchant->store_display_name;
         $this->emit('merchant_popup');
     }
 }

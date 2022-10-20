@@ -86,7 +86,7 @@ class ExcelExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
             }
             return $columnDef;
         } else {
-            [
+            return [
                 $merchant->id,
                 $merchant->store_display_name,
                 $merchant->user->phone_no,

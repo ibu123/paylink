@@ -17,7 +17,9 @@
                             <h1> المارينفورد</h1>
                             </div>
                             <div class="col-md-4 text-center brando__bold">
-                                <h3 class="brando-extra-light"> تسجيل الخروج </h3>
+                                <a href="{{ route('logout') }}">
+                                    <h3 class="brando-extra-light" > تسجيل الخروج </h3>
+                                </a>
                             </div>
                 </div>
             <div class="content-body">
@@ -150,7 +152,7 @@
 <script>
     Livewire.on('merchant_created',() => {
         $("#addMerchantForm").modal("hide");
-        window.mainTable.draw();
+        $('.zero-configuration').DataTable().draw()
     })
 
     Livewire.on('merchant_popup', () => {

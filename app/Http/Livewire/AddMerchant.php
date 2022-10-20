@@ -6,15 +6,19 @@ use App\Models\User;
 use ArPHP\I18N\Arabic;
 use Livewire\Component;
 use App\Models\Merchant;
+use Illuminate\Http\File;
 use App\Exports\ExcelExport;
 use App\Exports\UsersExport;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Livewire\WithFileUploads;
+use App\Imports\ImportMerchant;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
-use Livewire\WithFileUploads;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Exceptions\RowSkippedException;
 
 class AddMerchant extends Component
 {
@@ -36,18 +40,31 @@ class AddMerchant extends Component
     }
 
     protected $rules = [
-        'merchant_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+        'merchant_name' => 'required|regex:/^[\pL\s]+$/u',
         'cr_number' => 'required|digits:10',
-        'vat' => 'required|alpha_num',
-        'iban' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+        'vat' => 'required|digits:15',
+        'iban' => 'required|regex:/^[\pL\pN\s]+$/u',
         'domain' => 'required|regex:/^[a-zA-Z0-9.]+$/',
         'phone_no' => 'required|digits:10',
-        'store_display_name' => 'required'
+        'store_display_name' => 'required|regex:/^[\pL\s]+$/u|unique:merchants,store_display_name'
     ];
+
+    protected $messages = [
+        'merchant_name.*' => 'The Merhchant Name field is required and it only contains letters',
+        'cr_number.*' => 'The Commercial No field is required and it must require to have 10 digits',
+        'vat.*' => 'The Vat No field is required and it must require to have 15 digits',
+        'iban.*' => 'The IBan field is required and it must require to have letters and digits',
+        'domain.*' => 'The Domain field is required and it only contains letters, numbers and dot(.).',
+        'phone_no.*' => 'The Phone No field is required and it must require to have 10 digits',
+        'store_display_name.*' => 'The Store Display Name field is required and it only contains letters',
+    ];
+
 
     public function updated()
     {
-        $this->resetValidation(request()->updates[0]['payload']['name']);
+        if(isset(request()->updates[0]['payload']['name'])) {
+            $this->resetValidation(request()->updates[0]['payload']['name']);
+        }
     }
 
     public function addMerchant()
@@ -101,8 +118,8 @@ class AddMerchant extends Component
 
         return Datatables::of($merchant)
         ->addIndexColumn()
-        ->editColumn('name', function($row){
-            return "<span class='small__fonts'>".mb_substr($row->merchant_name,0,5,'utf-8').'..</span>';
+        ->editColumn('store_display_name', function($row){
+            return "<span class='small__fonts'>".mb_substr($row->store_display_name,0,5,'utf-8').'..</span>';
         })
         ->editColumn('phone_no', function($row){
             return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
@@ -121,18 +138,19 @@ class AddMerchant extends Component
         </span>";
         })
         ->addColumn('action', function ($row) {
-            return ' <span class="badge view__merchant" id="'.$row->id.'">
-            <img src="'.asset('images/icon/preview.png').'" alt="" >عرض </span>
+            return '
 
-            <form method="POST" action="'.route('send-otp').'">
+            <form method="POST" class="d-flex" action="'.route('send-otp').'">
             <input type="hidden" name="_token" value="'.csrf_token().'">
-            <input type="hidden" name="phone_no" value="'.$row->phone_no.'">
+            <input type="hidden" name="phone_no" value="'.$row->user->phone_no.'">
+            <span class="badge view__merchant" id="'.$row->id.'">
+            <img src="'.asset('images/icon/preview.png').'" alt="" >عرض </span>
             <button type="submit" class="badge">
                 <img src="'.asset('images/icon/duplicate.png').'" alt=""> تحكم
             </button>
             </form>';
         })
-        ->rawColumns(['net_profit', 'action', 'revenues', 'name', 'phone_no'])
+        ->rawColumns(['net_profit', 'action', 'revenues', 'store_display_name', 'phone_no'])
         ->make(true);
 
     }
@@ -140,10 +158,20 @@ class AddMerchant extends Component
     public function import()
     {
         $this->validate([
-            'file' => 'image|max:1024', // 1MB Max
+            'file' => 'required|mimes:xlsx,xls'
         ]);
 
-        $this->photo->store('photos');
+
+            $import = new ImportMerchant();
+            $import->import($this->file);
+
+            if(!empty($import->failures())) {
+                foreach ($import->failures() as $key => $failure) {
+                    $this->addError('row', 'row '.$failure->row().' skipped - error -'.$failure->errors()[0]);
+                }
+            } else {
+                $this->emit("merchant_created", __("Merchant Added Successfully"));
+            }
 
 
     }

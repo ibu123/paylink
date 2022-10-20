@@ -63,7 +63,6 @@ $.extend(true, DataTable.ext.renderer, {
         var attach = function(container, buttons) {
           var i, ien, node, button;
           var clickHandler = function(e) {
-            alert(e.data.action);
             _fnPageChange(settings, e.data.action, true);
           };
           for (i = 0, ien = buttons.length; i < ien; i++) {
@@ -91,7 +90,7 @@ $.extend(true, DataTable.ext.renderer, {
                   break;
 
                 case "first":
-                  btnDisplay = lang.sFirst + " (" + (page + 1) + "";
+                  btnDisplay = lang.sFirst + " (" + 1 + "";
                   btnClass =
                     button +
                     (page > 0 ? "" : " " + classes.sPageButtonDisabled);
@@ -191,6 +190,16 @@ $(document).ready(function() {
     });
     let url = $('.zero-configuration').data("url");
     window.mainTable = $('.zero-configuration').DataTable({
+
+        "columns": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            { },
+        ],
         dom: 'trp',
         pagingType : 'custom',
         processing: true,
@@ -207,9 +216,10 @@ $(document).ready(function() {
                 "previous":   "السابق"
             }
         },
+        order: [[0, 'desc']],
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'merchant_name'},
+            {data: 'store_display_name', name: 'store_display_name'},
             {data: 'phone_no', name: 'user.phone_no'},
             {data: 'no_of_links', name: 'no_of_links', searchable : false, sortable : false},
             {data: 'revenues', name: 'revenues', searchable : false, sortable : false},
@@ -217,6 +227,19 @@ $(document).ready(function() {
             {data: 'action', name: 'action', searchable : false, sortable : false},
 
         ],
+    });
+
+    window.mainTable = $('.zero-configuration-2').DataTable({
+        dom: 'trp',
+        pagingType : 'custom',
+        language : {
+            "paginate": {
+                "first":      "الأولى",
+                "last":       "الأخيرة",
+                "next":       "التالي",
+                "previous":   "السابق"
+            }
+        },
     });
 
     /********************************************
