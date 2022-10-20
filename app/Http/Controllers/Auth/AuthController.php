@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            "otp" => "required|digits:6",
+            "otp" => "required|digits:4",
             "store" => Rule::requiredIf(\Session::get('has_store') == 1)
         ]);
 
@@ -81,10 +81,11 @@ class AuthController extends Controller
     public function login() {
         $user = User::where('phone_no', \Session::get('phone_no'))->firstOrFail();
         $stores = Merchant::where('user_id', $user->id)->get();
-        if($stores->isNotEmpty()) {
+        if($stores->isNotEmpty() && $stores->count() > 1) {
             \Session::put('has_store' , 1);
         } else {
             \Session::put('has_store' , 0);
+            $stores = collect([]);
         }
         return view('admin.otp', compact('stores'));
     }

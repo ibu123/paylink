@@ -7,7 +7,7 @@
         <style type="text/css" media="screen">
             html {
 
-                font-family: jail-regular;
+                font-family: jali-regular;
                 line-height: 1.15;
                 margin: 0;
             }
@@ -315,16 +315,16 @@
                         <td class="pl-0">
                             {{ $merchant->id }}
                         </td>
-                        <td class="text-center">{{ $merchant->store_display_name }}</td>
-                        <td class="text-center">{{ $merchant->user->phone_no }}</td>
-                        <td class="text-right">
+                        <td >{{ $merchant->store_display_name }}</td>
+                        <td >{{ $merchant->user->phone_no }}</td>
+                        <td >
                           0
                         </td>
 
-                        <td class="text-right">
+                        <td >
                             0
                         </td>
-                        <td class="text-right">
+                        <td >
                             0
                         </td>
                     @endif
