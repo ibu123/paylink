@@ -189,12 +189,12 @@ class AddMerchant extends Component
 
             $import = new ImportMerchant();
             $import->import($this->file);
-
-            if(!empty($import->failures())) {
+            if($import->failures()->isNotEmpty()) {
                 foreach ($import->failures() as $key => $failure) {
                     $this->addError('row', __('Row').' '. $failure->row().' '.__('Error').__('Skipped').' '.$failure->errors()[0]);
                 }
             } else {
+
                 $this->emit("merchant_created", __("Merchant Data Imported Successfully"));
             }
 

@@ -91,7 +91,9 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
             'phone_no.required' => __('The Phone No field is required and it must require to have 10 digits'),
             'phone_no.digits' => __('The Phone No field is required and it must require to have 10 digits'),
-            'store_display_name.*' => __('The Store Display Name field is required and it only contains letters'),
+            'store_display_name.required' => __('The Store Display Name field is required and it only contains letters'),
+            'store_display_name.regex' => __('The Store Display Name field is required and it only contains letters'),
+            'store_display_name.unique' => __('The Store Display Name Requires to be unique')
         ];
     }
 
