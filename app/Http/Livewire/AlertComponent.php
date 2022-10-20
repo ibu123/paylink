@@ -18,5 +18,6 @@ class AlertComponent extends Component
     public function showFlashSession($message)
     {
         session()->flash('message', $message);
+        $this->emit('flash_hide');
     }
 }

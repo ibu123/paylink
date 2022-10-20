@@ -161,6 +161,12 @@
         $('.zero-configuration').DataTable().draw()
     })
 
+    Livewire.on('flash_hide', () => {
+        setTimeout(() => {
+            $(".alert").fadeOut("slow");
+        }, 100);
+    })
+
     Livewire.on('merchant_popup', () => {
 
         // Livewire.emit('refershComponent');
@@ -179,6 +185,9 @@
     });
 
     $(document).ready(function(){
+        setTimeout(() => {
+            $(".alert").fadeOut("slow");
+        }, 100);
 
         $("#refresh").click(function(){
             window.filtreIDS = [];
@@ -189,6 +198,24 @@
         // $(".bootstrap-dt-range").on('apply.daterangepicker', function(ev, picker) {
         //     $("#abcb").html(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
         // });
+        $('.modal').on('show.bs.modal', function(){
+            if( $(this).find("form").attr("id") != "filter_Form") {
+                componentID = $(this).find("form").attr("wire:id");
+                if(componentID) {
+                    Livewire.components.componentsById[
+                        componentID
+                    ].call("resetProp");
+                } else {
+                    componentID = $(this).find(".modal-body").attr("wire:id");
+                    if(componentID) {
+                        Livewire.components.componentsById[
+                            componentID
+                        ].call("resetProp");
+                    }
+                }
+            }
+        });
+
         $('.modal').on('show.bs.modal', function(){
             if( $(this).find("form").attr("id") != "filter_Form") {
                 componentID = $(this).find("form").attr("wire:id");
