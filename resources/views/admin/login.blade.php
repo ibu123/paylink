@@ -20,12 +20,12 @@
             <div class="content-body">
                 <!-- register section starts -->
                 <section class="row justify-content-center">
-                    <div class="col-md-5 col-11">
+                    <div class="col-md-5 col-11 px__500">
                         <div class="card bg-authentication mb-0">
                             <div class="row m-0">
                                 <!-- register section left -->
                                 <div class="col-md-12 col-12 px-0">
-                                    <div class="card mb-0  h-100 d-flex justify-content-center">
+                                    {{-- <div class="mb-0 h-100 d-flex justify-content-center"> --}}
 
 
                                         <div class="card-content">
@@ -34,7 +34,7 @@
                                                 <form method="POST" action="{{ route('send-otp') }}" class="register-form common__form">
                                                     @csrf
                                                     <div class="form-row">
-                                                        <div class="form-group col-md-12 mb-50">
+                                                        <div class="form-group col-md-12 mb-50 text-center">
                                                                 <p>  يرجى إدخال رقم الهاتف ثم ضغط زر التوثيق </p>
 
                                                             <label for="phone_no" class="brando__semi__bold">رقم الهاتف</label>
@@ -55,7 +55,7 @@
                                                   </form>
                                               </div>
                                         </div>
-                                    </div>
+                                    {{-- </div> --}}
                                 </div>
                             </div>
                         </div>
