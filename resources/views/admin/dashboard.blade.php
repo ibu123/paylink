@@ -10,13 +10,13 @@
         <div class="content-overlay"></div>
         <div class="content-wrapper container">
                 <div class="d-flex header-container justify-content-center align-items-center grid__header col-md-12 col-12">
-                            <div class="col-md-4 text-left">
+                            <div class="col-md-3 text-left">
                                 <img src="{{ asset('images/logo/header-logo.png')}}"  alt="">
                             </div>
-                            <div class="col-md-4  text-center brando__bold">
+                            <div class="col-md-6  text-center brando__bold">
                             <h1> المارينفورد</h1>
                             </div>
-                            <div class="col-md-4 text-center brando__bold">
+                            <div class="col-md-3 text-center brando__bold">
                                 <a href="{{ route('logout') }}">
                                     <h3 class="brando-extra-light" > تسجيل الخروج </h3>
                                 </a>
@@ -25,23 +25,29 @@
             <div class="content-body">
                 <!-- register section starts -->
                 <section class="row justify-content-center">
-                    <div class="col-md-12 col-11">
+                    <div class="col-md-12 col-12" style="max-width: 1050px">
                         <div class="card data__table__grid mb-0">
                             <div class="row m-0">
                                 <!-- register section left -->
                                 <div class="col-md-12 col-12 px-0">
-                                    <div class="card mb-0 p-2 h-100 d-flex justify-content-center">
+                                    <div class="mb-0 py-2 px-0 h-100 ">
                                         <div class="card-content">
-                                            <div class="card-body">
+                                            <div class="card-body px-0">
                                                 @livewire('alert-component')
-
-                                                <div class="row align-items-center mb-2">
+                                                <span class="filters back__button" >
+                                                    <img src="{{ asset('images/icon/chevron-right.png') }}" alt="">
+                                                    العودة
+                                                </span>
+                                                <div class="row align-items-center mb-2 px-3">
                                                     <div class="col-md-2 ">
                                                         <h4 class="brando__black">قائمة التجار</h4>
                                                     </div>
                                                     <div class="col-md-7 text-right grid__4">
-                                                        <span class="filters" data-toggle="modal" data-target="#filterForm">
-                                                                    <img src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
+                                                        <span class="filters  pos__relative" data-toggle="modal" data-target="#filterForm">
+                                                                    <img class="active-image" src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
+                                                                    <img class="in-active-image"src="{{ asset('images/icon/experiment.png') }}" alt="">
+                                                                    <img class="in-active-image cross-icon"src="{{ asset('images/icon/cross.png') }}" alt="">
+
                                                             فلترة
                                                         </span>
                                                         <span class="filters" id="refresh">
@@ -54,13 +60,12 @@
                                                             <img src="{{ asset('images/icon/card_1x.png') }}" alt="">
                                                          مخالصة</span>
                                                     </div>
-                                                    <div class="col-md-3">
-                                                        <button type="button"  data-toggle="modal" data-target="#addMerchantForm" class="btn btn-primary glow position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
-
+                                                    <div class="col-md-3 text-md-right add__button">
+                                                        <button type="button"  data-toggle="modal" data-target="#addMerchantForm" class="btn btn-primary  position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table zero-configuration"  id="merchant_list" data-url='{{ route("admin.list") }}' >
+                                                    <table class="table admin_tbl zero-configuration" width="100%" id="merchant_list" data-url='{{ route("admin.list") }}' >
                                                         <thead>
                                                             <tr>
                                                                 <th><div>الرقم</div></th>
@@ -140,11 +145,14 @@
 @include('admin.dashboard.add_merchant')
 @include('admin.dashboard.export_modal')
 @include('admin.dashboard.filter_merchant')
+@include('admin.dashboard.auth')
 @livewire('view-merchant')
 @endsection
 @section('js')
 <script>
+      window.pagination = 0;
       window.filtreIDS = [];
+      window.filterMerchantName = '';
       window._token = "{{ csrf_token() }}"
 </script>
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
@@ -173,13 +181,26 @@
         $("#viewMerchantForm").modal("show");
     })
 
+    $(document).on("click", ".in-active-image.cross-icon, .filters.back__button", function(event){
+        event.stopPropagation();
+        componentID = $("#filter_Form").attr("wire:id");
+        Livewire.components.componentsById[
+                        componentID
+                    ].call("resetProp");
+        Livewire.emit('redraw-DataTable', '');
+        $(".in-active-image.cross-icon").parent().removeClass("active");
+    });
 
-    Livewire.on('redraw-DataTable', (Ids) => {
+    Livewire.on('redraw-DataTable', (Ids, merchantName) => {
 
         window.filtreIDS = Ids;
+        window.filterMerchantName = merchantName;
+        console.log(window.filterMerchantName);
         $('.zero-configuration').DataTable().draw()
         $("#filterForm").modal("hide");
+        $(".in-active-image.cross-icon").parent().addClass("active");
     })
+
     $(document).on('click', '.view__merchant', function(){
         Livewire.emit('view_merchant', $(this).attr("id"));
     });
@@ -195,6 +216,11 @@
         })
         $(".bootstrap-dt-range").daterangepicker();
 
+        $(document).on("change", ".custom-pagination", function(){
+            alert($(this).val());
+            window.pagination = $(this).val() - 1;
+            $('.zero-configuration').DataTable().draw()
+        })
         // $(".bootstrap-dt-range").on('apply.daterangepicker', function(ev, picker) {
         //     $("#abcb").html(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
         // });
@@ -234,7 +260,23 @@
             }
         });
 
+        $(document).on("click", ".auth__merchant", function(){
+            $("#authForm").modal("show");
+            componentID = $(".register-form").attr("wire:id");
+            if(componentID) {
+                Livewire.components.componentsById[
+                            componentID
+                        ].set("phoneNo", $(this).data("phone"));
+            }
+        })
+
         $(document).on("change", ".select2-icons", function(){
+            if($(this).val().includes('select_all')) {
+                $(this).val("");
+                console.log($(this).find("option").slice(1));
+                $(this).find("option").slice(1).prop("selected", true);
+                $(this).trigger("change");
+            }
             Livewire.components.componentsById[
                 $("#expt__form").attr("wire:id")
             ].set("column", $(this).val())

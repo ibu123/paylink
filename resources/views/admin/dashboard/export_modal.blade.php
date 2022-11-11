@@ -4,7 +4,7 @@
         <div class="modal-content card ">
             <div class="modal-header my-2 border-0 d-flex align-items-center header-container">
                 <div class="col-md-12 col-12 text-center ">
-                    <h1 class="brando__bold"> تصدير الروابط </h1>
+                    <h1 class="brando__bold"> تصدير بيانات المتاجر </h1>
                     </div>
                 <button type="button" class="modal__close" data-dismiss="modal" aria-label="Close">
                     <img src="{{ asset('images/icon/Close Button.png') }}" alt="">

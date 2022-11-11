@@ -7,10 +7,12 @@ use Livewire\Component;
 class FiltersMerchant extends Component
 {
 
-    public $merchantId;
+    public $merchantId = '';
+    public $merchantName = '';
 
     protected $rules = [
-        'merchantId' => 'nullable|regex:/^[0-9,]+$/'
+        'merchantId' => 'nullable|regex:/^[0-9,]+$/',
+        'merchantName' => 'nullable'
     ];
 
     public function messages()
@@ -18,6 +20,12 @@ class FiltersMerchant extends Component
         return [
             'merchantId.*' => __('The merhcant Id field only contains digits and comma(,) with no sapce')
         ];
+    }
+
+    public function resetProp()
+    {
+        $this->resetValidation();
+        $this->reset();
     }
 
     public function render()
@@ -28,7 +36,7 @@ class FiltersMerchant extends Component
     public function filters()
     {
         $this->validate();
-        $this->emit("redraw-DataTable", $this->merchantId );
+        $this->emit("redraw-DataTable", $this->merchantId , $this->merchantName);
 
     }
 }

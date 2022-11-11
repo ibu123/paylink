@@ -48,8 +48,7 @@ class AddMerchant extends Component
             'vat.*' => __('The Vat No field is required and it must require to have 15 digits'),
             'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
             'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
-            'phone_no.required' => __('The Phone No field is required and it must require to have 10 digits'),
-            'phone_no.digits' => __('The Phone No field is required and it must require to have 10 digits'),
+            'phone_no.*' => __('Invalid Phone No'),
             'store_display_name.required' => __('The Store Display Name field is required and it only contains letters'),
             'store_display_name.regex' => __('The Store Display Name field is required and it only contains letters'),
             'store_display_name.unique' => __('The Store Display Name Requires to be unique')
@@ -60,18 +59,32 @@ class AddMerchant extends Component
 
     public function rules()
     {
+        $env_code = str_replace('+', '', env('COUNTRY_CODE'));
+
         return [
             'merchant_name' => 'required|regex:/^[\pL\s]+$/u',
-            'cr_number' => 'required|digits:10',
-            'vat' => 'required|digits:15',
+            'cr_number' => 'required|integer',
+            'vat' => 'required|integer',
             'iban' => 'required|regex:/^[\pL\pN\s]+$/u',
             'domain' => 'required|regex:/^[a-zA-Z0-9-]+$/',
-            'phone_no' => ['required','digits:10', function($attribute, $value, $fail){
+            'phone_no' => ['required', function($attribute, $value, $fail) use ($env_code){
+                if(substr($value,0,1) == '+' &&  (preg_match('/[^0-9]/', substr($value,1)) || strlen((string) $value) != 13)) {
+                    $fail(__('Invalid Phone No'));
+                } elseif (substr($value,0,5) == '00'.$env_code && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 14)) {
+                    $fail(__('Invalid Phone No'));
+                } elseif (substr($value,0,1) == '0' && substr($value,0,1) != '0' && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 11)) {
+                    $fail(__('Invalid Phone No'));
+                }  elseif (substr($value,0,3) == $env_code && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 12)) {
+                    $fail(__('Invalid Phone No'));
+                } elseif (substr($value,0,1) != '+' && substr($value,0,2) != '00' && substr($value,0,1) != '0' && substr($value,0,3) != '966') {
+                    $fail(__('Invalid Phone No'));
+                }
+            }, function($attribute, $value, $fail){
                 if($value == \Auth::user()->phone_no) {
                     $fail(__('Admin is not able to create store for himself'));
                 }
             }],
-            'store_display_name' => 'required|regex:/^[\pL\s]+$/u|unique:merchants,store_display_name'
+            'store_display_name' => 'required|unique:merchants,store_display_name'
         ];
     }
 
@@ -84,12 +97,29 @@ class AddMerchant extends Component
 
     public function addMerchant()
     {
+
         $this->validate();
+        $value = $this->phone_no;
+        $env_code = str_replace('+', '', env('COUNTRY_CODE'));
+
+        if(substr($value,0,1) == '+' && !preg_match('/[^0-9]/', substr($value,1)) && strlen((string) $value) == 13) {
+            $phone = "0".substr($value,4);
+        } elseif (substr($value,0,5) == '00'.$env_code && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 14) {
+            $phone = "0".substr($value,5);
+        } elseif (substr($value,0,1) == '0' && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 10) {
+            $phone = $value;
+        }  elseif (substr($value,0,3) == $env_code && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 12) {
+            $phone = "0".substr($value,3);
+        } else {
+            $this->addError('phone_no', __('Invalid Phone No'));
+            return;
+        }
+
         $user = User::updateOrCreate(
         [
-            'phone_no' => $this->phone_no
+            'phone_no' => $phone
         ],[
-            'phone_no' => $this->phone_no
+            'phone_no' => $phone
         ]);
 
         Merchant::create([
@@ -139,8 +169,9 @@ class AddMerchant extends Component
         $merchant = Merchant::query()->with('user')
         ->when(!empty($request->id), function($q) use ($request){
             $q->whereIn('id', explode(",",$request->id));
+        })->when(!empty($request->merchant_name), function($q) use ($request){
+            $q->where('store_display_name', 'like', '%'.$request->merchant_name.'%');
         });
-
         return Datatables::of($merchant)
         ->addIndexColumn()
         ->editColumn('store_display_name', function($row){
@@ -163,17 +194,27 @@ class AddMerchant extends Component
         </span>";
         })
         ->addColumn('action', function ($row) {
-            return '
+            // return '
 
-            <form method="POST" class="d-flex" action="'.route('send-otp').'">
-            <input type="hidden" name="_token" value="'.csrf_token().'">
-            <input type="hidden" name="phone_no" value="'.$row->user->phone_no.'">
-            <span class="badge view__merchant" id="'.$row->id.'">
+            // <form method="POST" class="d-flex" action="'.route('send-otp').'">
+            // <input type="hidden" name="_token" value="'.csrf_token().'">
+            // <input type="hidden" name="phone_no" value="'.$row->user->phone_no.'">
+            // <span class="badge view__merchant" id="'.$row->id.'">
+            // <img src="'.asset('images/icon/preview.png').'" alt="" >عرض </span>
+            // <span class="badge auth__merchant" data-phone="'.$row->user->phone_no.'" id="'.$row->id.'">
+            // <img src="'.asset('images/icon/duplicate.png').'" alt="" >تحكم </span>
+            // <button type="submit" class="badge">
+            //     <img src="'.asset('images/icon/duplicate.png').'" alt=""> تحكم
+            // </button>
+            // </form>';
+            return
+            '
+            <div class="d-flex">
+            <span class="badge view__merchant cursor__pointer" id="'.$row->id.'">
             <img src="'.asset('images/icon/preview.png').'" alt="" >عرض </span>
-            <button type="submit" class="badge">
-                <img src="'.asset('images/icon/duplicate.png').'" alt=""> تحكم
-            </button>
-            </form>';
+            <span class="badge auth__merchant cursor__pointer" data-phone="'.$row->user->phone_no.'" id="'.$row->id.'">
+            <img src="'.asset('images/icon/duplicate.png').'" alt="" >تحكم </span></div>
+            ';
         })
         ->rawColumns(['net_profit', 'action', 'revenues', 'store_display_name', 'phone_no'])
         ->make(true);

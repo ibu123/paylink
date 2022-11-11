@@ -71,7 +71,7 @@ $.extend(true, DataTable.ext.renderer, {
               var inner;
               if (settings.sPaginationType == "custom") {
                 inner = $(
-                  "<span class='custom-pagination'>" + parseInt(page + 1) + "</span>"
+                  "<input type='text' class='custom-pagination' value='" + parseInt(window.pagination + 1) + "'>"
                 ).appendTo(container);
               } else {
                 inner = $("<" + (button.DT_el || "div") + "/>").appendTo(
@@ -200,7 +200,9 @@ $(document).ready(function() {
             data : function ( d ) {
                 return $.extend( {}, d, {
                     "id" : window.filtreIDS,
-                    "_token" : window._token
+                    "merchant_name" : window.filterMerchantName,
+                    "_token" : window._token,
+                    "start" : window.pagination * 10,
                 } );
             }
         },
@@ -238,6 +240,8 @@ $(document).ready(function() {
                 "previous":   "السابق"
             }
         },
+
+
     });
 
     /********************************************

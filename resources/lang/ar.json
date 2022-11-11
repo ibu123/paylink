@@ -41,5 +41,11 @@
     "The OTP field is required and it must require to have 4 digits" : "حقل OTP مطلوب ويجب أن يحتوي على 4 أرقام",
     "Please Select At Least one store" : "يرجى تحديد متجر واحد على الأقل",
     "The merhcant Id field only contains digits and comma(,) with no sapce" : "يحتوي حقل معرف التاجر فقط على أرقام وفاصلة (،) بدون أي عنصر",
-    "The Store Display Name Requires to be unique" : "يتطلب حقل اسم العرض أن يكون فريدًا"
+    "The Store Display Name Requires to be unique" : "يتطلب حقل اسم العرض أن يكون فريدًا",
+    "Invalid Phone No" : "رقم الهاتف غير صالح",
+    "The amount required" : "المبلغ المطلوب",
+    "Taxes included" : "شامل الضريبة",
+    "Link validity" : "صلاحية الرابط",
+    "Notes" : "الملاحظات",
+    "Click the hour field to modify the validity of the link" : "اضغط حقل الساعة لتعديل صلاحية الرابط"
 }

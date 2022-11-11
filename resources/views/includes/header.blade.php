@@ -5,8 +5,10 @@
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.css"/>
+
 <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-extended.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-extended.css') }}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/colors.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/components.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/themes/dark-layout.min.css')}}">

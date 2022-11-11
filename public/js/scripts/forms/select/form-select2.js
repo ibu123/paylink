@@ -25,7 +25,7 @@
       width: '100%',
       minimumResultsForSearch: Infinity,
       templateResult: iconFormat,
-      templateSelection: iconFormat,
+      templateSelection: iconFormat2,
       escapeMarkup: function(es) { return es; }
   });
 
@@ -36,14 +36,25 @@
 
       var color = $(icon.element).data("icon");
       var $icon = $(
-        '<span class="option__badge" style="background :'+color+'" >' +icon.text + '</span>'
+        '<span class="option__badge pr-12" style="background :'+color+'" >' +icon.text + '</span>'
 
     );
 
       return $icon;
   }
 
+  function iconFormat2(icon){
+    var originalOption = icon.element;
+    //   if (!icon.id) { return icon.text; }
 
+      var color = $(icon.element).data("icon");
+      var $icon = $(
+        '<span class="option__badge" style="background :'+color+'" >' +icon.text + '</span>'
+
+    );
+
+      return $icon;
+  }
   // Limiting the number of selections
   $(".max-length").select2({
     dropdownAutoWidth: true,

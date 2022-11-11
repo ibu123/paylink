@@ -11,7 +11,7 @@
                         <div class="col-md-3 col-3 text-left">
                             <img src="{{ asset('images/logo/header-logo.png')}}"  alt="">
                         </div>
-                        <div class="col-md-6 col-9 text-center brando__bold">
+                        <div class="col-md-6 col-9 text-center brando__bold px__470">
                            <h1> تسجيل الدخول </h1>
                         </div>
 
@@ -31,28 +31,7 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 @livewire('alert-component')
-                                                <form method="POST" action="{{ route('send-otp') }}" class="register-form common__form">
-                                                    @csrf
-                                                    <div class="form-row">
-                                                        <div class="form-group col-md-12 mb-50 text-center">
-                                                                <p>  يرجى إدخال رقم الهاتف ثم ضغط زر التوثيق </p>
-
-                                                            <label for="phone_no" class="brando__semi__bold">رقم الهاتف</label>
-                                                            <div class="pos__relative">
-                                                                <input type="text" class="form-control" name="phone_no" id="phone_no" maxlength="10" oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-                                                                <span class="icon-in-control brando__bold">توثيق</span>
-                                                                @error('phone_no')
-                                                                    <span class="text text-danger">{{ $message }}<span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="text-center my-2">
-                                                        <button type="submit" class="btn btn-primary glow position-relative ">تسجيل الدخول</button>
-
-                                                    </div>
-                                                  </form>
+                                                @livewire('auth-component')
                                               </div>
                                         </div>
                                     {{-- </div> --}}
@@ -72,9 +51,10 @@
             </div>
         </div>
     </div>
-    <!-- END: Content-->
-</body>
-<!-- END: Body-->
 
-</html>
+@endsection
+@section('js')
+<script>
+
+</script>
 @endsection

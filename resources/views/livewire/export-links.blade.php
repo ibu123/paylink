@@ -1,5 +1,5 @@
 
-<form wire:submit.prevent="export" wire:ignore.self class="common__form overflow-auto" id="expt__form">
+<form action="#" wire:ignore.self class="common__form overflow-auto" id="expt__form">
     <div class="modal-body pb-0">
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
@@ -19,13 +19,8 @@
                 <div class="form-group"  wire:ignore>
                     <div class="pos__relative">
                         <select  class="form-control select2-icons" multiple >
-                            <option value="select_all" data-icon="#3cb878">اختر الكل</option>
-                            <option value="id" data-icon="#3cb878">الرقم</option>
-                            <option value="store_display_name" data-icon="#3cb878">الاسم</option>
-                            <option value="phone_no" data-icon="#3cb878">الهاتف</option>
-                            <option value="no_links" data-icon="#3cb878">عدد الروابط</option>
-                            <option value="revenue" data-icon="#3cb878">الإيرادات</option>
-                            <option value="net_profit" data-icon="#3cb878">صافي الأرباح</option>
+                            <option value="id" data-icon="#3cb878">تم الدفع</option>
+                            <option value="store_display_name" data-icon="#fbaf5d">بانتظار الدفع</option>
 
                         </select>
                         <span class="icon-in-control-without-border brando__extra__bold">
@@ -67,6 +62,13 @@
                                                 <label for="pdf" class="radio__checked checkbox__checked my-0  brando-extra-light">فاتورة الرابط بصيغة PDF</label>
                                             </div>
                                         </div>
+                                        <div class="form-row ">
+                                            <div class="form-group m-0">
+                                                <input type="checkbox"  id="pdf" value="3"  class="radio__btn" wire:model="type">
+                                                <label for="pdf" class="radio__checked checkbox__checked my-0  brando-extra-light">
+                                                    فاتورة المنصة بصيغة PDF</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +76,7 @@
     </div>
     <div class="modal-footer border-0 d-flex justify-content-center margin__bottom__modal__footer">
                         <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
-                        ">تصدير بيانات المتاجر</button>
+                        ">فلترة الروابط</button>
 
     </div>
 </form>
