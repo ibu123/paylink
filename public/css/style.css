@@ -976,4 +976,15 @@ button.modal__submit.border__radius__40 {
     font-size: .75rem !important;
 }
 
+.td__orange {
+    background-color: #fbaf5d;
+}
+
+.td__black {
+    background-color: #555555;
+}
+
+.td__gray {
+    background-color: #b2b2b2;
+}
 
