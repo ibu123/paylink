@@ -70,8 +70,12 @@ $.extend(true, DataTable.ext.renderer, {
             if ($.isArray(button)) {
               var inner;
               if (settings.sPaginationType == "custom") {
+                window.pageNumber = parseInt(page + 1);
+                if(window.pagination + 1 > 1) {
+                    pageNumber = window.pagination + 1
+                }
                 inner = $(
-                  "<input type='text' class='custom-pagination' value='" + parseInt(window.pagination + 1) + "'>"
+                  "<input type='text' class='custom-pagination' value='" + pageNumber  + "'>"
                 ).appendTo(container);
               } else {
                 inner = $("<" + (button.DT_el || "div") + "/>").appendTo(
@@ -89,7 +93,7 @@ $.extend(true, DataTable.ext.renderer, {
                   break;
 
                 case "first":
-                  btnDisplay = lang.sFirst + " (" + 1 + "";
+                  btnDisplay = lang.sFirst + " (" + 1 + ")";
                   btnClass =
                     button +
                     (page > 0 ? "" : " " + classes.sPageButtonDisabled);
@@ -110,7 +114,7 @@ $.extend(true, DataTable.ext.renderer, {
                   break;
 
                 case "last":
-                  btnDisplay = lang.sLast + " (" + (pages) + "";
+                  btnDisplay = lang.sLast + " (" + (pages) + ")";
                   btnClass =
                     button +
                     (page < pages - 1 ? "" : " " + classes.sPageButtonDisabled);
@@ -202,7 +206,7 @@ $(document).ready(function() {
                     "id" : window.filtreIDS,
                     "merchant_name" : window.filterMerchantName,
                     "_token" : window._token,
-                    "start" : window.pagination * 10,
+                    "start" : ($(".custom-pagination").val() - 1)* 10,
                 } );
             }
         },

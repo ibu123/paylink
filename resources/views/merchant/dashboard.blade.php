@@ -93,8 +93,8 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>316</td>
-                                                                <td class="bold">117 <span> ريال </span> </td>
+                                                                <td>315</td>
+                                                                <td class="bold">528 <span> ريال </span> </td>
                                                                 <td>
                                                                     <span class="td__badge">تم الدفع</span>
                                                                 </td>
@@ -113,6 +113,303 @@
 
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td>314</td>
+                                                                <td class="bold">3138 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>313</td>
+                                                                <td class="bold">98 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>312</td>
+                                                                <td class="bold">984 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>311</td>
+                                                                <td class="bold">984 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>310</td>
+                                                                <td class="bold">9864 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الاستلام</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>309</td>
+                                                                <td class="bold">8888 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>308</td>
+                                                                <td class="bold">1080 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>307</td>
+                                                                <td class="bold">1050 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>306</td>
+                                                                <td class="bold">52 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الاستلام</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>305</td>
+                                                                <td class="bold">54 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>304</td>
+                                                                <td class="bold">100 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge">تم الاستلام</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>303</td>
+                                                                <td class="bold">42 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>302</td>
+                                                                <td class="bold">1245 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__orange">بانتظار الدفع</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__gray">غير مستلم</span>
+                                                                </td>
+
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>301</td>
+                                                                <td class="bold">9841 <span> ريال </span> </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="td__badge td__black">ملغي</span>
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <div class="d-flex justify-content-center cursor__pointer">
+                                                                        <span class="badge"  data-toggle="modal" data-target="#viewLinkForm">
+                                                                            <img src="{{ asset('images/icon/preview.png')}}" alt="">عرض </span>
+                                                                            <span class="badge">
+                                                                                <img src="{{ asset('images/icon/duplicate.png')}}" alt=""> نسخ</span>
+                                                                                <span class="badge">
+                                                                                    <img src="{{ asset('images/icon/export copy_1x.png')}}" alt=""> تصدير</span>
+                                                                    </div>
+
+                                                                </td>
+                                                            </tr>
+
+
 
                                                         </tbody>
 
@@ -168,6 +465,10 @@
                 )
             }
             $(this).parent().find("input").trigger("change")
+        })
+        $(document).on("change", ".custom-pagination", function(){
+            window.pagination = $(this).val() - 1;
+            $('.zero-configuration-2').DataTable().page(window.pagination).draw()
         })
     </script>
 @endsection
