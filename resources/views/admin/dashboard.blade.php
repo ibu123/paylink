@@ -10,7 +10,7 @@
         <div class="content-overlay"></div>
         <div class="content-wrapper container">
                 <div class="d-flex header-container justify-content-center align-items-center grid__header col-md-12 col-12">
-                            <div class="col-md-3 text-left">
+                            <div class="col-md-3 text-left px-0 px-sm-3">
                                 <img src="{{ asset('images/logo/header-logo.png')}}"  alt="">
                             </div>
                             <div class="col-md-6  text-center brando__bold">

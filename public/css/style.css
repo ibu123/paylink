@@ -397,9 +397,9 @@ button.btn {
 }
 
 .paging_custom .custom-pagination {
-    border:1px solid;
+    border:2px solid;
     text-align: center;
-    width: 5%;
+    width: 32px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -410,7 +410,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .paging_custom .custom-pagination {
     padding: 2px 11px;
-    border-radius: 5px;
+    border-radius: 9px;
     border-color: #bfbfbf;
     font-family: brando-regular;
 }
@@ -736,6 +736,7 @@ button.modal__close:focus {
     border: 1px solid transparent !important;
     border-color : none;
     font-weight: 600;
+    overflow: hidden;
 
 }
 
@@ -952,4 +953,12 @@ box-shadow: initial !important;
 
 button.modal__submit.border__radius__40 {
     border-radius: 40px !important;
+}
+
+.paging_custom .custom-pagination {
+    outline: none !important;
+}
+
+.select2-container--default .select2-selection--multiple:focus {
+    box-shadow: initial !important;
 }
