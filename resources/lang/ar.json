@@ -47,5 +47,6 @@
     "Taxes included" : "شامل الضريبة",
     "Link validity" : "صلاحية الرابط",
     "Notes" : "الملاحظات",
-    "Click the hour field to modify the validity of the link" : "اضغط حقل الساعة لتعديل صلاحية الرابط"
+    "Click the hour field to modify the validity of the link" : "اضغط حقل الساعة لتعديل صلاحية الرابط",
+    "The Same Domain Already Exist" :  "نفس المجال موجود بالفعل"
 }

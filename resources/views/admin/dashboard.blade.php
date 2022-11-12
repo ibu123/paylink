@@ -217,7 +217,6 @@
         $(".bootstrap-dt-range").daterangepicker();
 
         $(document).on("change", ".custom-pagination", function(){
-            alert($(this).val());
             window.pagination = $(this).val() - 1;
             $('.zero-configuration').DataTable().draw()
         })

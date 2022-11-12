@@ -953,3 +953,18 @@ box-shadow: initial !important;
 button.modal__submit.border__radius__40 {
     border-radius: 40px !important;
 }
+.paging_custom {
+    cursor: pointer;
+}
+
+.paging_custom a:not(disabled) {
+    color : #000000
+}
+
+.paging_custom a:nth-child(1),
+.paging_custom a:nth-child(5)
+ {
+    font-size: .75rem !important;
+}
+
+

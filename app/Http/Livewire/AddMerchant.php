@@ -47,7 +47,9 @@ class AddMerchant extends Component
             'cr_number.*' => __('The Commercial No field is required and it must require to have 10 digits'),
             'vat.*' => __('The Vat No field is required and it must require to have 15 digits'),
             'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
-            'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.required' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.regexp' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.unique' => __('The Same Domain Already Exist'),
             'phone_no.*' => __('Invalid Phone No'),
             'store_display_name.required' => __('The Store Display Name field is required and it only contains letters'),
             'store_display_name.regex' => __('The Store Display Name field is required and it only contains letters'),
@@ -66,7 +68,7 @@ class AddMerchant extends Component
             'cr_number' => 'required|integer',
             'vat' => 'required|integer',
             'iban' => 'required|regex:/^[\pL\pN\s]+$/u',
-            'domain' => 'required|regex:/^[a-zA-Z0-9-]+$/',
+            'domain' => 'required|unique:merchants,domain|regex:/^[a-zA-Z0-9-]+$/',
             'phone_no' => ['required', function($attribute, $value, $fail) use ($env_code){
                 if(substr($value,0,1) == '+' &&  (preg_match('/[^0-9]/', substr($value,1)) || strlen((string) $value) != 13)) {
                     $fail(__('Invalid Phone No'));
@@ -175,7 +177,11 @@ class AddMerchant extends Component
         return Datatables::of($merchant)
         ->addIndexColumn()
         ->editColumn('store_display_name', function($row){
-            return "<span class='small__fonts'>".mb_substr($row->store_display_name,0,5,'utf-8').'..</span>';
+            if(mb_strlen($row->store_display_name) > 5) {
+                return "<span class='small__fonts'>".mb_substr($row->store_display_name,0,5,'utf-8').'..</span>';
+            }
+            return "<span class='small__fonts'>".$row->store_display_name.'</span>';
+
         })
         ->editColumn('phone_no', function($row){
             return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
