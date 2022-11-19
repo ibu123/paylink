@@ -101,8 +101,6 @@ class AuthComponent extends Component
 
         $phone_no = env('COUNTRY_CODE').$phone;
         $user = User::where('phone_no', $phone)->firstOrFail();
-        $phone_no = "+919173286350";
-        $phone = "9173286350";
         $this->stores = Merchant::where('user_id', $user->id)->get();
         if($this->stores->isNotEmpty() && $this->stores->count() > 1) {
             \Session::put('has_store' , 1);

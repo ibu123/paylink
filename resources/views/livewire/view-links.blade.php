@@ -17,11 +17,11 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label class="d-flex flex-sm-row flex-column justify-content-md-between">{{ __('Merchant Name') }} <span> {{ __('As mentioned in the commercial register') }}</span></label>
+                                <label class="d-flex flex-sm-row flex-column justify-content-md-between">الرابط </label>
 
                                 <div class="form-group">
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="merchant_name"    class="form-control">
+                                        <input type="text" class="form-control" name="merchant_name"    class="form-control" readonly>
                                         <span class="icon-in-control icon-in-control-with-text-horizontal brando__extra__bold border-0 d-flex align-items-center">
                                             <span class="badge">
                                                 <img src="{{ asset('images/icon/duplicate.png') }}" alt=""> نسخ</span>
@@ -32,7 +32,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label>{{ __('Commercial Registration No') }}</label>
+                                <label>صلاحية الرابط</label>
                                 <div class="form-group pos__relative">
                                     <div class="jdp-input d-flex align-items-center form-control flex-column flex-sm-row h-auto">
                                         <span class="td__badge  text-white td_green_color_status">
@@ -74,8 +74,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-0">
                                 <div class="form-group">
-                                    <label>{{ __('VAT registration number') }}</label>
-                                    <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+                                    <label>الملاحظات</label>
+                                    <textarea class="form-control" name="" id="" cols="30" rows="5" readonly></textarea>
                                 </div>
                             </div>
                         </div>

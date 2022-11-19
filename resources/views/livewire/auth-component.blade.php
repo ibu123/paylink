@@ -13,7 +13,7 @@
                 >
                 <span :class="$wire.inputStatus == true ? 'icon-in-control brando__bold cursor__pointer d-none' : 'icon-in-control brando__bold cursor__pointer'" wire:click="sendOTP">توثيق</span>
                 @error('phoneNo')
-                    <span class="text text-danger">{{ $message }}<span>
+                    <span class="error text-danger">{{ $message }}<span>
                 @enderror
             </div>
         </div>
