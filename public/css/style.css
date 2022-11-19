@@ -979,3 +979,28 @@ button.modal__submit.border__radius__40 {
     background-color: #b2b2b2;
 }
 
+.zero-configuration-2  td:nth-of-type(2) {
+    font-family: brando-bold !important;
+}
+
+.link__copy {
+    padding-left: 91px !important;
+    word-break: break-all;
+    height: auto;
+}
+
+.badge__toaster {
+    position: absolute;
+    top: 0px;
+    left: -5px;
+    display: none;
+    font-size: 12px !important;
+    font-family: brando-text !important;
+}
+
+.badge_toaster_table {
+    top:-35px;
+    left : unset;
+    border: none !important;
+    background: #d6ffd2 !important;
+}

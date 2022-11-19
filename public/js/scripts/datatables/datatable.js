@@ -232,19 +232,57 @@ $(document).ready(function() {
 
         ],
     });
-
+    let urll = $('.zero-configuration-2').data("url");
     window.mainTable = $('.zero-configuration-2').DataTable({
         dom: 'trp',
         pagingType : 'custom',
+        processing: true,
+        serverSide: true,
+        ajax : {
+            url : urll,
+            dataType : "json",
+            type : "POST",
+            data : function ( d ) {
+                return $.extend( {}, d, {
+                    "_token" : window._token,
+                    "id" : window.filtreIDS,
+                    "status" : window.filterStatus,
+                    "amount_from" : window.filterAmountFrom,
+                    "amount_to" : window.filterAmountTo
+                } );
+            }
+        },
         language : {
             "paginate": {
                 "first":      "الأولى",
                 "last":       "الأخيرة",
                 "next":       "التالي",
                 "previous":   "السابق"
-            }
+            },
+            "emptyTable" : "لا توجد بيانات متوفرة في الجدول",
+            "processing" : "يتم المعالجة"
         },
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'amount', name: 'amount'},
+            {data: 'payment_status', name: 'payment_status'},
+            {data: 'send_payment_status', name: 'send_payment_status', searchable : false, sortable : false},
+            {data: 'action', name: 'action', searchable : false, sortable : false},
 
+        ],
+        drawCallback : function(settings) {
+            // alert("Eee");
+            let clipboard2= new ClipboardJS('.copy_text_2',
+            document.getElementsByClassName('custom__copy__container'));
+            clipboard2.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard2.on('error', function(e) {
+                console.log(e);
+            });
+
+            $('[data-toggle="tooltip"]').tooltip()
+        }
 
     });
 

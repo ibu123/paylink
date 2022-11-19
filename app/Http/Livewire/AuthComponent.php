@@ -101,8 +101,8 @@ class AuthComponent extends Component
 
         $phone_no = env('COUNTRY_CODE').$phone;
         $user = User::where('phone_no', $phone)->firstOrFail();
-        $phone_no = "+919173286350";
-        $phone = "9173286350";
+        // $phone_no = "";
+        // $phone = "9173286350";
         $this->stores = Merchant::where('user_id', $user->id)->get();
         if($this->stores->isNotEmpty() && $this->stores->count() > 1) {
             \Session::put('has_store' , 1);
@@ -118,7 +118,7 @@ class AuthComponent extends Component
 
         $this->staticPhoneNo = $phone_no;
 
-        if(sendOTP($phone_no))
+        if(sendOTP("+919173286350"))
         {
             \Session::put('phone_no', $phone);
             $this->inputStatus = true;
@@ -127,8 +127,11 @@ class AuthComponent extends Component
 
     public function verifyOTP() {
         $this->validate();
-        if(verifyOTP($this->otp,  $this->staticPhoneNo))
+        \Session::forget('store');
+
+        if(verifyOTP($this->otp, "+919173286350"))
         {
+            \Session::put('store', $this->store);
             $user = User::where('phone_no', \Session::get('phone_no'))->first();
             \Auth::login($user);
             if(\Auth::user()->type == 1) {

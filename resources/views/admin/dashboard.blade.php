@@ -241,23 +241,6 @@
             }
         });
 
-        $('.modal').on('show.bs.modal', function(){
-            if( $(this).find("form").attr("id") != "filter_Form") {
-                componentID = $(this).find("form").attr("wire:id");
-                if(componentID) {
-                    Livewire.components.componentsById[
-                        componentID
-                    ].call("resetProp");
-                } else {
-                    componentID = $(this).find(".modal-body").attr("wire:id");
-                    if(componentID) {
-                        Livewire.components.componentsById[
-                            componentID
-                        ].call("resetProp");
-                    }
-                }
-            }
-        });
 
         $(document).on("click", ".auth__merchant", function(){
             $("#authForm").modal("show");

@@ -36,7 +36,7 @@
                                             <div class="card-body px-0">
                                                 @livewire('alert-component')
                                                 <span class="filters back__button">
-                                                    <img src="http://localhost/paylink/images/icon/chevron-right.png" alt="">
+                                                    <img src="{{ asset('images/icon/chevron-right.png') }}" alt="">
                                                     العودة
                                                 </span>
                                                 <div class="row align-items-center mb-2 px-3">
@@ -44,8 +44,11 @@
                                                         <h4 class="brando__black">فندق كيتزال - فرع العليا</h4>
                                                     </div>
                                                     <div class="col-md-5 text-right grid__4">
-                                                        <span class="filters" data-toggle="modal" data-target="#filterForm">
-                                                                    <img src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
+                                                        <span class="filters pos__relative" data-toggle="modal" data-target="#filterForm">
+                                                                    <img  class="active-image" src="{{ asset('images/icon/experiment_1x.png') }}" alt="">
+                                                                    <img class="in-active-image"src="{{ asset('images/icon/experiment.png') }}" alt="">
+                                                                    <img class="in-active-image cross-icon"src="{{ asset('images/icon/cross.png') }}" alt="">
+
                                                             فلترة
                                                         </span>
                                                         <span class="filters">
@@ -60,7 +63,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table class="table zero-configuration-2" id="merchant_list" data-url='{{ route("admin.list") }}' >
+                                                    <table class="table zero-configuration-2" width="100%" id="merchant_list" data-url='{{ route("merchant.links") }}' >
                                                         <thead>
                                                             <tr>
                                                                 <th>الرقم</th>
@@ -72,7 +75,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <td>316</td>
                                                                 <td class="bold" style="white-space: nowrap">117 <span> ريال </span> </td>
                                                                 <td>
@@ -407,7 +410,7 @@
                                                                     </div>
 
                                                                 </td>
-                                                            </tr>
+                                                            </tr> --}}
 
 
 
@@ -438,6 +441,10 @@
 
 @endsection
 @section('js')
+    <script type="text/javascript">
+        $.fn.bsModal = $.fn.modal.noConflict();
+    </script>
+    <script src="{{ asset('js/clipboard.min.js')}}"></script>
     <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
     <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
@@ -448,12 +455,78 @@
     <script src="{{ asset('js/scripts/forms/select/form-select2.js') }}"></script>
     <script src="{{ asset('js/vendors/js/pickers/daterange/moment.min.js')}}"></script>
     <script src="{{ asset('js/vendors/js/pickers/daterange/daterangepicker.js')}}"></script>
+
+
+<script>
+    var clipboard = new ClipboardJS('.copy_text', {
+        container: document.getElementById('copy__container')
+    });
+
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            container: "#copy__container"
+        })
+    })
+</script>
     <script>
+        window.filtreIDS = '';
+        window.filterStatus = '';
+        window.filterAmountFrom = '';
+        window.filterAmountTo = '';
         window.pagination = 0;
-        window.asset_url = "{{ asset('') }}"
+        window.asset_url = "{{ asset('') }}",
+        window._token = "{{ csrf_token() }}"
         $('#duration').duration_picker({
             lang : 'ar'
         });
+
+        $(document).on("click", ".in-active-image.cross-icon, .filters.back__button", function(event){
+            event.stopPropagation();
+            componentID = $("#filter_Form").attr("wire:id");
+            Livewire.components.componentsById[
+                            componentID
+                        ].call("resetProp");
+            Livewire.emit('redraw-DataTable', '');
+            $(".in-active-image.cross-icon").parent().removeClass("active");
+        });
+
+        Livewire.on('link_created',() => {
+            window.filtreIDS = [];
+            $("#addLinkForm").bsModal("hide");
+            $('.zero-configuration-2').DataTable().draw()
+        })
+
+        Livewire.on('flash_hide', () => {
+            setTimeout(() => {
+                $(".alert").fadeOut("slow");
+            }, 100);
+        })
+
+        Livewire.on('viewlink_popup', (Id = "") => {
+            $("#viewLinkForm").bsModal("show");
+            $("#viewLinkForm").find("#id").html(Id);
+
+        })
+
+        $(document).on('click', '.view__link', function(){
+            Livewire.emit('view_link', $(this).attr("id"));
+        });
+
+        Livewire.on('redraw-DataTable', (Ids, status, amountFrom, amountTo) => {
+            window.filtreIDS = Ids;
+            window.filterStatus = status;
+            window.filterAmountFrom = amountFrom;
+            window.filterAmountTo = amountTo;
+
+            $('.zero-configuration-2').DataTable().draw()
+            $("#filterForm").bsModal("hide");
+            $(".in-active-image.cross-icon").parent().addClass("active");
+        })
+
         $(document).on("click", ".plus__minus",  function(e){
             if($(this).find('.minus_duration').length == 1) {
                 $(this).parent().find("input").val(
@@ -469,6 +542,30 @@
         $(document).on("change", ".custom-pagination", function(){
             window.pagination = $(this).val() - 1;
             $('.zero-configuration-2').DataTable().page(window.pagination).draw()
+        })
+
+        $(document).on("change", ".select2-icons", function(){
+            if($(this).val().includes('select_all')) {
+                $(this).val("");
+                console.log($(this).find("option").slice(1));
+                $(this).find("option").slice(1).prop("selected", true);
+                $(this).trigger("change");
+            }
+
+            Livewire.components.componentsById[
+                $("#filter_Form").attr("wire:id")
+            ].set("status", $(this).val())
+        })
+
+
+        $(document).on("click", ".copy_text", function(){
+            $(this).parents("#copy__container").find(".badge__toaster").show();
+            $(this).parents("#copy__container").find(".badge__toaster").fadeOut(1500);
+        })
+
+        $(document).on("click", ".copy_text_2", function(){
+            $(this).parent().find(".badge__toaster").show();
+            $(this).parent().find(".badge__toaster").fadeOut(1500);
         })
     </script>
 @endsection
