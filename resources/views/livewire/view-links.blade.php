@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label class="d-flex flex-sm-row flex-column justify-content-md-between">{{ __('Merchant Name') }} <span> {{ __('As mentioned in the commercial register') }}</span></label>
+                                <label class="d-flex flex-sm-row flex-column justify-content-md-between">الرابط </label>
 
                                 <div class="form-group " id="copy__container">
                                     <span class="badge badge__toaster td_green_color_status ">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-50">
-                                <label>{{ __('Commercial Registration No') }}</label>
+                                <label>صلاحية الرابط</label>
                                 <div class="form-group pos__relative">
                                     <div class="jdp-input d-flex align-items-center form-control flex-column flex-sm-row h-auto">
                                         @if($paymentStatus == 1 && !empty($expirationTime))
@@ -121,8 +121,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 mb-0">
                                 <div class="form-group">
-                                    <label>{{ __('VAT registration number') }}</label>
-                                    <textarea class="form-control" name="" id="" cols="30" rows="5">{{ $notes}}</textarea>
+                                    <label>الملاحظات</label>
+                                    <textarea class="form-control" name="" id="" cols="30" rows="5" readonly>{{ $notes}}</textarea>
                                 </div>
                             </div>
                         </div>

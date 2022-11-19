@@ -187,15 +187,15 @@ class AddMerchant extends Component
             return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
         })
         ->editColumn('no_of_links', function($row){
-            return 0;
+            return 1 * $row->id;
         })
         ->editColumn('revenues', function($row){
-            return "0 <span>
+            return 2* $row->id." <span>
             ريال
         </span>";
         })
         ->editColumn('net_profit', function($row){
-            return "0 <span>
+            return 1*$row->id." <span>
             ريال
         </span>";
         })

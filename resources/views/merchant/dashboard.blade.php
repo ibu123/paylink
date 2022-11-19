@@ -36,7 +36,7 @@
                                             <div class="card-body px-0">
                                                 @livewire('alert-component')
                                                 <span class="filters back__button">
-                                                    <img src="{{ asset('images/icon/chevron-right.png') }}" alt="">
+                                                    <img src="{{asset('images/icon/chevron-right.png')}}" alt="">
                                                     العودة
                                                 </span>
                                                 <div class="row align-items-center mb-2 px-3">

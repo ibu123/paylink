@@ -191,7 +191,7 @@ $(document).ready(function() {
     });
     let url = $('.zero-configuration').data("url");
     window.mainTable = $('.zero-configuration').DataTable({
-
+      
 
         dom: 'trp',
         pagingType : 'custom',
@@ -202,6 +202,7 @@ $(document).ready(function() {
             dataType : "json",
             type : "POST",
             data : function ( d ) {
+              console.log( ($(".custom-pagination").val() - 1)* 10);
                 return $.extend( {}, d, {
                     "id" : window.filtreIDS,
                     "merchant_name" : window.filterMerchantName,
