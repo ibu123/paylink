@@ -13,7 +13,7 @@
                                 @elseif($paymentStatus == 1 && !empty($expirationTime))
                                     <span class='td__badge td__orange'>بانتظار الدفع</span>
                                 @elseif($paymentStatus == 1 && empty($expirationTime))
-                                    <span class='td__badge td__black'>منتهي</span>
+                                    <span class='td__badge td__expire'>منتهي الصلاحية</span>
                                 @elseif($paymentStatus == 2)
                                     <span class='td__badge'>تم الدفع</span>
                                 @endif
@@ -23,11 +23,11 @@
                                 @if($receivingStatus == 0)
                                     <span class='td__badge td__black'>ملغي</span>
                                 @elseif($receivingStatus == 1 && !empty($expirationTime))
-                                    <span class='td__badge td__gray'>غير مستلم</span>
+                                    <span class='td__badge td__orange'>غير مستلم</span>
                                 @elseif($receivingStatus == 1 && $paymentStatus == 1 && empty($expirationTime))
-                                    <span class='td__badge td__black'>منتهي</span>
+                                    <span class='td__badge td__expire'>منتهي الصلاحية</span>
                                 @elseif($receivingStatus == 2)
-                                    <span class='td__badge'>تم الاستلام</span>
+                                    <span class='td__badge td__send__success'>تم الاستلام</span>
                                 @endif
                             </div>
                         </div>
@@ -95,20 +95,20 @@
                                                 </div>
                                             </div>
                                         @elseif($paymentStatus == 1 && empty($expirationTime))
-                                            <span class="td__badge  text-white td_green_color_status">
-                                                صالح للدفع
+                                            <span class="td__badge  text-white td_grey_color_status">
+                                                 منتهي الصلاحية
                                             </span>
-                                            انتهت صلاحية الرابط
+                                                انتهت صلاحية الرابط
                                         @elseif($paymentStatus == 0)
-                                            <span class="td__badge  text-white td_green_color_status">
-                                                صالح للدفع
+                                            <span class="td__badge  text-white td_black_color_status">
+                                                ملغي
                                             </span>
-                                            انتهت صلاحية الرابط
+                                                انتهت صلاحية الرابط
                                         @else
-                                            <span class="td__badge  text-white td_green_color_status">
-                                                صالح للدفع
+                                            <span class="td__badge  text-white td_aasmani_color_status">
+                                                تم الدفع والاستلام
                                             </span>
-                                            تم الدفع بنجاح
+                                                تم الدفع بنجاح
                                         @endif
                                     </div>
 
@@ -126,43 +126,43 @@
                                 </div>
                             </div>
                         </div>
-                        @if($paymentStatus == 2)
                             <div class="form-row text-center">
                                 <label class="col-md-12">إجراءات</label>
                                 <div class="form-group mb-0 d-flex col-md-12 justify-content-center paylink_view_pdf">
-                                    <span class="icon__badge d-flex align-items-center text-center" @click="window.open('', '_blank')">
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 2) @click="window.open('{{ route("invoice", $orderId) }}', '_blank')" @endif>
                                         <img src="{{ asset('images/icon/preview.png') }}" alt="">
                                         عرض فاتورة الرابط
                                     </span>
-                                    <span class="icon__badge d-flex align-items-center text-center" @click="window.open('', '_blank')">
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 2) @click="window.location = '{{ route("invoice", ["orderId" => $orderId, "download" => 1]) }}'" @endif>
                                         <img src="{{ asset('images/icon/download.png') }}" alt="">
                                         تحميل فاتورة الرابط بصيغة PDF
                                     </span>
                                 </div>
                             </div>
-                        @endif
-                        @if($receivingStatus == 2)
+                        {{--  --}}
                             <div class="form-row mt-1">
                                 <div class="form-group mb-0 d-flex col-md-12 justify-content-center paylink_view_pdf">
-                                    <span class="icon__badge d-flex align-items-center text-center" @click="window.open('', '_blank')">
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 0) @click="window.open('{{ route("seller.invoice", ["orderId" => $orderId]) }}', '_blank')" @endif>
                                         <img src="{{ asset('images/icon/preview.png') }}" alt="" >
-                                        عرض فاتورة الرابط
+                                        عرض فاتورة المنصة
                                     </span>
-                                    <span class="icon__badge d-flex align-items-center text-center" @click="window.open('', '_blank')">
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 0) @click="window.location = '{{ route("seller.invoice", ["orderId" => $orderId, "download" => 1]) }}'" @endif>
                                         <img src="{{ asset('images/icon/download.png') }}" alt="">
-                                        تحميل فاتورة الرابط بصيغة PDF
+                                        تحميل فاتورة المنصة بصيغة PDF
                                     </span>
                                 </div>
                             </div>
-                        @endif
-                        @if($paymentStatus == 1 && !empty($expirationTime))
+                        {{-- @endif --}}
+
                             <div class="form-row mt-1">
                                 <div class="form-group mb-0 d-flex col-md-12 justify-content-center paylink_view_pdf">
-                                    <span class="icon__badge d-flex align-items-center text-center">
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 1 || empty($expirationTime)) disable__op @endif"
+                                        @if($paymentStatus == 1 && !empty($expirationTime)) wire:click="expireLink" @endif
+                                    >
                                         <img src="{{ asset('images/icon/link-broken.png') }}" alt="" class="mr-1"> عرض فاتورة الرابط</span>
 
                                 </div>
                             </div>
-                        @endif
+
                     </div>
 </form>

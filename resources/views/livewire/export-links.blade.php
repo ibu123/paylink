@@ -1,11 +1,11 @@
 
-<form action="#" wire:ignore.self class="common__form overflow-auto" id="expt__form">
+<form wire:submit.prevent="export" class="common__form overflow-auto" id="expt__form">
     <div class="modal-body pb-0">
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
                 <label class="d-flex flex-sm-row flex-column justify-content-md-around"><span class="bolder">اكتب رقم رابط أو أكثر <strong class="text-danger text-bold">*</strong></span> <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" oninput="javascript: this.value = this.value.replace(/[^0-9,]/g, '');" wire:model="merchantId">
+                    <input type="text" class="form-control" oninput="javascript: this.value = this.value.replace(/[^0-9,]/g, '');" wire:model="payLinkId">
                     @error('merchantId')
                         <span class="error text-danger">{{ $message }} </span>
                     @enderror
@@ -19,9 +19,8 @@
                 <div class="form-group"  wire:ignore>
                     <div class="pos__relative">
                         <select  class="form-control select2-icons" multiple >
-                            <option value="id" data-icon="#3cb878">تم الدفع</option>
-                            <option value="store_display_name" data-icon="#fbaf5d">بانتظار الدفع</option>
-
+                            <option value="2" data-icon="#3cb878" data-font-color="#076b37">تم الدفع</option>
+                            <option value="4" data-icon="#00aeef" data-font-color="#005f83">تم الدفع والاستلام</option>
                         </select>
                         <span class="icon-in-control-without-border brando__extra__bold">
                             <img src="{{ asset('images/icon/drop-down-button.png') }}" alt="">
@@ -58,25 +57,28 @@
                                         </div>
                                         <div class="form-row ">
                                             <div class="form-group m-0">
-                                                <input type="checkbox"  id="pdf" value="2"  class="radio__btn" wire:model="type">
+                                                <input type="checkbox" id="pdf" value="2"  class="radio__btn" wire:model="type">
                                                 <label for="pdf" class="radio__checked checkbox__checked my-0  brando-extra-light">فاتورة الرابط بصيغة PDF</label>
                                             </div>
                                         </div>
                                         <div class="form-row ">
                                             <div class="form-group m-0">
-                                                <input type="checkbox"  id="pdf" value="3"  class="radio__btn" wire:model="type">
-                                                <label for="pdf" class="radio__checked checkbox__checked my-0  brando-extra-light">
+                                                <input type="checkbox"  id="seller-pdf" value="3"  class="radio__btn" wire:model="type">
+                                                <label for="seller-pdf" class="radio__checked checkbox__checked my-0  brando-extra-light">
                                                     فاتورة المنصة بصيغة PDF</label>
                                             </div>
                                         </div>
                                     </div>
+                                    @error('type')
+                                        <span class="error text-danger">{{ $message }} </span>
+                                    @enderror
                                 </div>
                             </div>
         </div>
     </div>
     <div class="modal-footer border-0 d-flex justify-content-center margin__bottom__modal__footer">
                         <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
-                        ">فلترة الروابط</button>
+                        ">تصدير الروابط</button>
 
     </div>
 </form>

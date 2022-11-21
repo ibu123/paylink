@@ -168,12 +168,17 @@ class AddMerchant extends Component
     public function list(Request $request)
     {
 
-        $merchant = Merchant::query()->with('user')
+        $merchant = Merchant::query()
+        ->with('user')
+        ->withCount('links as no_of_links')
+        ->withSum('links as revenues', 'amount')
+        ->withSum('links as net_profit', 'commission')
         ->when(!empty($request->id), function($q) use ($request){
             $q->whereIn('id', explode(",",$request->id));
         })->when(!empty($request->merchant_name), function($q) use ($request){
             $q->where('store_display_name', 'like', '%'.$request->merchant_name.'%');
         });
+
         return Datatables::of($merchant)
         ->addIndexColumn()
         ->editColumn('store_display_name', function($row){
@@ -187,15 +192,15 @@ class AddMerchant extends Component
             return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
         })
         ->editColumn('no_of_links', function($row){
-            return 1 * $row->id;
+            return $row->no_of_links;
         })
         ->editColumn('revenues', function($row){
-            return 2* $row->id." <span>
+            return $row->revenues." <span>
             ريال
         </span>";
         })
         ->editColumn('net_profit', function($row){
-            return 1*$row->id." <span>
+            return $row->net_profit." <span>
             ريال
         </span>";
         })

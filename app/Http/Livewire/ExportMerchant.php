@@ -24,13 +24,15 @@ class ExportMerchant extends Component
     public $type = [];
 
     protected $rules = [
-        'merchantId' => 'nullable|regex:/^[0-9,]+$/'
+        'merchantId' => 'nullable|regex:/^[0-9,]+$/',
+        'type' => 'required'
     ];
 
     public function messages()
     {
         return [
-            'merchantId.*' => __('The merhcant Id field only contains digits and comma(,) with no sapce')
+            'merchantId.*' => __('The merhcant Id field only contains digits and comma(,) with no sapce'),
+            'type.*' => __('Please select at least one option')
         ];
     }
 
@@ -51,7 +53,11 @@ class ExportMerchant extends Component
         $this->validate();
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
-        $data = Merchant::when(!empty($this->merchantId), function($q){
+        $data = Merchant::with('user')
+        ->withCount('links as no_of_links')
+        ->withSum('links as revenues', 'amount')
+        ->withSum('links as net_profit', 'commission')
+        ->when(!empty($this->merchantId), function($q){
             $q->whereIn('id', explode("," , $this->merchantId));
         })->get();
 

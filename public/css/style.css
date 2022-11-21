@@ -67,6 +67,11 @@ body {
 
 }
 
+.px__650 {
+    max-width : 600px !important;
+
+}
+
 .px__480 {
     max-width: 480px !important ;
 }
@@ -124,10 +129,17 @@ html body.blank-page .content-wrapper .header-container h1{
     box-shadow: initial !important;
 }
 
+@media screen and (min-width : 575px) {
+.margin__right__25{
+    margin-right: 25px !important;
+}
+}
 @media screen and (max-width : 450px) {
     .filters.back__button {
         left : 39% !important;
     }
+
+
 }
 @media screen and (max-width : 986px) {
     html body.blank-page .content-wrapper .header-container h1{
@@ -461,7 +473,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .table.dataTable thead .sorting_asc:nth-child(1):before,
 .table.dataTable thead .sorting_asc:nth-child(2):before,
-.admin_tbl.table.dataTable thead .sorting_asc:nth-child(3):before {
+.admin_tbl.table.dataTable thead .sorting_asc:nth-child(3):before ,
+.admin_tbl.table.dataTable thead .sorting_asc:nth-child(4):before ,
+.admin_tbl.table.dataTable thead .sorting_asc:nth-child(5):before,
+.admin_tbl.table.dataTable thead .sorting_asc:nth-child(6):before {
     content: url(../images/icon/chevron-down_up.png);
     position: absolute;
     bottom: -22px;
@@ -475,7 +490,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .table.dataTable thead .sorting_desc:nth-child(1):before,
 .table.dataTable thead .sorting_desc:nth-child(2):before,
-.admin_tbl.table.dataTable thead .sorting_desc:nth-child(3):before  {
+.admin_tbl.table.dataTable thead .sorting_desc:nth-child(3):before ,
+.admin_tbl.table.dataTable thead .sorting_desc:nth-child(4):before ,
+.admin_tbl.table.dataTable thead .sorting_desc:nth-child(5):before,
+.admin_tbl.table.dataTable thead .sorting_desc:nth-child(6):before  {
     content : url('../images/icon/chevron-down.png');
     position: absolute;
     bottom: -27px;
@@ -634,7 +652,7 @@ button.modal__submit {
 
 .td__badge {
     background: #3cb878;
-    color: #fff !important;
+    color: #076b37 !important;
     border-radius: 15px;
     padding: 0.3rem 1rem 0.5rem 1rem;
     font-size: .9rem !important;
@@ -935,6 +953,29 @@ box-shadow: initial !important;
     border-radius: 7px !important;
     margin: 0px 10px !important;
 }
+
+.td_grey_color_status {
+    background-color: #f2f2f2;
+    color : #4c4c4c !important;
+    border-radius: 7px !important;
+    margin: 0px 10px !important;
+
+}
+
+.td_black_color_status {
+    background-color: #4d4d4d;
+    color : #ffffff !important;
+    border-radius: 7px !important;
+    margin: 0px 10px !important;
+
+}
+
+.td_aasmani_color_status {
+    background-color: #00aeefad;
+    color : #005f83 !important;
+    border-radius: 7px !important;
+    margin: 0px 10px !important;
+}
 .jdp-block.margin {
     margin: 0px 10px 0px 0px !important;
 }
@@ -978,11 +1019,25 @@ button.modal__submit.border__radius__40 {
 
 .td__orange {
     background-color: #fbaf5d;
+    color : #c26c10 !important;
+}
+
+.td__expire {
+    background-color: #ededed;
+    color : #8c8c8c  !important;
 }
 
 .td__black {
     background-color: #555555;
+    color : #ffffff !important;
 }
+
+.td__send__success {
+    background-color: #00aeef;
+    color : #005f83 !important;
+}
+
+
 
 .td__gray {
     background-color: #b2b2b2;
@@ -1012,4 +1067,40 @@ button.modal__submit.border__radius__40 {
     left : unset;
     border: none !important;
     background: #d6ffd2 !important;
+}
+
+.bg__success {
+        background-image: -moz-linear-gradient( 0deg, rgb(65,79,242) 0%, rgb(0,174,239) 100%);
+        background-image: -webkit-linear-gradient( 0deg, rgb(65,79,242) 0%, rgb(0,174,239) 100%);
+        background-image: -ms-linear-gradient( 0deg, rgb(65,79,242) 0%, rgb(0,174,239) 100%);
+        height: 100%;
+/*
+        background-image: url('../images/icon/success-background.png');
+        background-size: cover; */
+}
+
+.bg__success .heading{
+        font-size: 40px;
+        line-height: 1.4;
+        background: linear-gradient(0turn, #414ff2, 50%, #00aeef) border-box;
+        font-family: brando-bold;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+.bg__success .sub__line {
+    font-size: 17px;
+    font-family: brando-light;
+}
+
+.bg__success .sub__line span {
+    font-family: brando-semi-bold;
+}
+
+.border__radius__20 {
+    border-radius: 20px !important;
+}
+
+.disable__op {
+    opacity: 0.5 !important;
 }

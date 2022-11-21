@@ -35,8 +35,10 @@
     //   if (!icon.id) { return icon.text; }
 
       var color = $(icon.element).data("icon");
+
+      var fontColor = $(icon.element).data("font-color");
       var $icon = $(
-        '<span class="option__badge pr-12" style="background :'+color+'" >' +icon.text + '</span>'
+        '<span class="option__badge" style="background :'+color+';color:'+fontColor+' !important; padding-right:12px !important" >' +icon.text + '</span>'
 
     );
 
@@ -48,8 +50,10 @@
     //   if (!icon.id) { return icon.text; }
 
       var color = $(icon.element).data("icon");
+      var fontColor = $(icon.element).data("font-color");
+
       var $icon = $(
-        '<span class="option__badge" style="background :'+color+'" >' +icon.text + '</span>'
+        '<span class="option__badge" style="background :'+color+';color:'+fontColor+' !important; " >' +icon.text + '</span>'
 
     );
 

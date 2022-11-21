@@ -4,6 +4,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/forms/select/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/pickers/daterange/daterangepicker.css') }}">
 @endsection
+@section('title')
+ {{ __('Admin Dashboard') }}
+@endsection
 @section('content')
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -217,8 +220,9 @@
         $(".bootstrap-dt-range").daterangepicker();
 
         $(document).on("change", ".custom-pagination", function(){
-            window.pagination = $(this).val() - 1;
-            $('.zero-configuration').DataTable().draw()
+            $('.zero-configuration').DataTable().context[0].oAjaxData.start = (($(this).val() - 1 ) * 10)
+            $('.zero-configuration').DataTable().context[0]._iDisplayStart = (($(this).val() - 1) * 10)
+            $('.zero-configuration').DataTable().draw('page');
         })
         // $(".bootstrap-dt-range").on('apply.daterangepicker', function(ev, picker) {
         //     $("#abcb").html(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );

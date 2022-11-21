@@ -6,7 +6,10 @@ use Livewire\Component;
 
 class AlertComponent extends Component
 {
-    protected $listeners = ['merchant_created' => 'showFlashSession'];
+    protected $listeners = [
+        'merchant_created' => 'showFlashSession',
+        'link_created' => 'showFlashSession'
+    ];
 
 
 

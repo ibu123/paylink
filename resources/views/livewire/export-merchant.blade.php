@@ -68,6 +68,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @error('type')
+                                        <span class="error text-danger">{{ $message }} </span>
+                                    @enderror
                                 </div>
                             </div>
         </div>

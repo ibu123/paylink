@@ -5,6 +5,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/pickers/daterange/daterangepicker.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/vendors/css/duration-picker/jquery-duration-picker.css') }}">
 @endsection
+@section('title')
+ {{ __('Merchant Dashboard') }}
+@endsection
 @section('content')
     <!-- BEGIN: Content-->
     <div class="app-content content">
@@ -52,7 +55,7 @@
                                                             فلترة
                                                         </span>
                                                         <span class="filters">
-                                                        <img src="{{ asset('images/icon/clockwise_1x.png') }}" alt="">
+                                                        <img src="{{ asset('images/icon/clockwise_1x.png') }}" id="refresh" alt="">
                                                         تحديث</span>
                                                         <span class="filters" data-toggle="modal" data-target="#exportForm">
                                                             <img src="{{ asset('images/icon/export copy_1x.png') }}" alt="">
@@ -540,8 +543,10 @@
             $(this).parent().find("input").trigger("change")
         })
         $(document).on("change", ".custom-pagination", function(){
-            window.pagination = $(this).val() - 1;
-            $('.zero-configuration-2').DataTable().page(window.pagination).draw()
+            $('.zero-configuration-2').DataTable().context[0].oAjaxData.start = (($(this).val() - 1 ) * 10)
+            $('.zero-configuration-2').DataTable().context[0]._iDisplayStart = (($(this).val() - 1) * 10)
+            $('.zero-configuration-2').DataTable().draw('page');
+
         })
 
         $(document).on("change", ".select2-icons", function(){
@@ -557,6 +562,10 @@
             ].set("status", $(this).val())
         })
 
+        $("#refresh").click(function(){
+            alert("ee");
+            $('.zero-configuration-2').DataTable().draw()
+        })
 
         $(document).on("click", ".copy_text", function(){
             $(this).parents("#copy__container").find(".badge__toaster").show();

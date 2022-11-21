@@ -77,11 +77,11 @@ class ExcelExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
                 } elseif ($value == 'phone_no') {
                     $columnDef[] = $merchant->user->phone_no;
                 } elseif ($value == 'no_links') {
-                    $columnDef[] = "0";
+                    $columnDef[] = $merchant->no_of_links;
                 } elseif ($value == 'revenue') {
-                    $columnDef[] = "0";
+                    $columnDef[] = $merchant->revenues." ريال ";
                 } elseif ($value == 'net_profit') {
-                    $columnDef[] = "0";
+                    $columnDef[] = $merchant->net_profit." ريال ";
                 }
             }
             return $columnDef;
@@ -90,9 +90,9 @@ class ExcelExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
                 $merchant->id,
                 $merchant->store_display_name,
                 $merchant->user->phone_no,
-                "0",
-                "0",
-                "0"
+                $merchant->no_of_links,
+                $merchant->revenues." ريال ",
+                $merchant->net_profit." ريال "
             ];
         }
 

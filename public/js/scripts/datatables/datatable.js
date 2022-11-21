@@ -70,12 +70,12 @@ $.extend(true, DataTable.ext.renderer, {
             if ($.isArray(button)) {
               var inner;
               if (settings.sPaginationType == "custom") {
-                window.pageNumber = parseInt(page + 1);
-                if(window.pagination + 1 > 1) {
-                    pageNumber = window.pagination + 1
-                }
+                // window.pageNumber = ;
+                // if(window.pagination + 1 > 1) {
+                //     pageNumber = window.pagination + 1
+                // }
                 inner = $(
-                  "<input type='text' class='custom-pagination' value='" + pageNumber  + "'>"
+                  "<input type='text' class='custom-pagination' value='" + parseInt(page + 1)  + "'>"
                 ).appendTo(container);
               } else {
                 inner = $("<" + (button.DT_el || "div") + "/>").appendTo(
@@ -191,7 +191,7 @@ $(document).ready(function() {
     });
     let url = $('.zero-configuration').data("url");
     window.mainTable = $('.zero-configuration').DataTable({
-      
+
 
         dom: 'trp',
         pagingType : 'custom',
@@ -202,12 +202,11 @@ $(document).ready(function() {
             dataType : "json",
             type : "POST",
             data : function ( d ) {
-              console.log( ($(".custom-pagination").val() - 1)* 10);
                 return $.extend( {}, d, {
                     "id" : window.filtreIDS,
                     "merchant_name" : window.filterMerchantName,
                     "_token" : window._token,
-                    "start" : ($(".custom-pagination").val() - 1)* 10,
+                    // "start" : ($(".custom-pagination").val() - 1)* 10,
                 } );
             }
         },
@@ -226,9 +225,9 @@ $(document).ready(function() {
             {data: 'id', name: 'id'},
             {data: 'store_display_name', name: 'store_display_name'},
             {data: 'phone_no', name: 'user.phone_no'},
-            {data: 'no_of_links', name: 'no_of_links', searchable : false, sortable : false},
-            {data: 'revenues', name: 'revenues', searchable : false, sortable : false},
-            {data: 'net_profit', name: 'net_profit', searchable : false, sortable : false},
+            {data: 'no_of_links', name: 'no_of_links', searchable : false },
+            {data: 'revenues', name: 'revenues', searchable : false },
+            {data: 'net_profit', name: 'net_profit', searchable : false},
             {data: 'action', name: 'action', searchable : false, sortable : false},
 
         ],
@@ -244,12 +243,14 @@ $(document).ready(function() {
             dataType : "json",
             type : "POST",
             data : function ( d ) {
+                console.log(d);
                 return $.extend( {}, d, {
                     "_token" : window._token,
                     "id" : window.filtreIDS,
                     "status" : window.filterStatus,
                     "amount_from" : window.filterAmountFrom,
-                    "amount_to" : window.filterAmountTo
+                    "amount_to" : window.filterAmountTo,
+                    // "start" : ($(".custom-pagination").val() - 1)* 10,
                 } );
             }
         },

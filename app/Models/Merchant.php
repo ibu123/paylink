@@ -30,4 +30,16 @@ class Merchant extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function links()
+    {
+        return $this->hasMany(Paylink::class, 'store_id', 'id');
+    }
+
+    public function sumAmount()
+    {
+        return $this->hasMany(Paylink::class, 'store_id', 'id')->addSelect(
+            \DB::raw('SUM(amount), SUM(commission)')
+        )->group_by('store_id');
+    }
 }

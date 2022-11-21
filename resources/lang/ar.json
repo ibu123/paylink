@@ -48,5 +48,11 @@
     "Link validity" : "صلاحية الرابط",
     "Notes" : "الملاحظات",
     "Click the hour field to modify the validity of the link" : "اضغط حقل الساعة لتعديل صلاحية الرابط",
-    "The Same Domain Already Exist" :  "نفس المجال موجود بالفعل"
+    "The Same Domain Already Exist" :  "نفس المجال موجود بالفعل",
+    "The PayLink Id field only contains digits and comma(,) with no sapce": "يحتوي حقل معرف PayLink فقط على أرقام وفواصل (،) بدون أي عنصر",
+    "Please select at least one option" : "الرجاء تحديد خيار واحد على الأقل",
+    "Link Is Expired" : "انتهت صلاحية الرابط",
+    "Success" : "النجاح",
+    "Admin Dashboard" : "لوحة تحكم المسؤول",
+    "Merchant Dashboard" : "لوحة معلومات التاجر"
 }
