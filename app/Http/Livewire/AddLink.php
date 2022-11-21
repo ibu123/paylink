@@ -26,7 +26,11 @@ class AddLink extends Component
     }
 
 
-
+    public function resetProp()
+    {
+        $this->resetValidation();
+        $this->reset();
+    }
 
     public function render()
     {

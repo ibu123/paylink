@@ -177,10 +177,10 @@
                                 <tr>
                                     <td style="width:50%">
                                         الرقم التسلسلي<br>
-                                        INV{{str_pad($paylink->id, 4, '0', STR_PAD_LEFT);}}>
+                                        INV{{str_pad($paylink->id, 4, '0', STR_PAD_LEFT)}}
                                     <td  style="width:50%">
                                         التاريخ<br>
-                                        {{$paylink->created_at}}
+                                       {{ \Carbon\Carbon::parse($paylink->paid_date)->format('Y/m/d')}}
                                     </td>
                                 </tr>
                             </table>
@@ -225,13 +225,9 @@
                                         رقم تسجيل ضريبة القيمة المضافة للبائع<br>
                                         311442732600003
                                     </td>
-                                    <td style="border-left:1px solid ">
-                                        التاريخ<br>
-                                        {{$paylink->created_at}}
-                                    </td >
                                         <td style="text-align:right;border-left:1px solid  ">
                                             اسم البائع<br>
-                                            شركة عدسة منظار للاتصالات وتقنية<br> الاممعلومات
+                                            شركة عدسة منظار للاتصالات وتقنية الاممعلومات
                                         </td>
 
                                 </tr>
@@ -317,16 +313,17 @@
                         </thead>
                         <tbody>
                             <tr style="font-size:1.2rem">
-                                <td class="border-0 text-center" >207</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">27</td>
+                                <td class="border-0 text-center" >{{ $paylink->amount }} </td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount * 15 / 100 }}</td>
 
-                                    <td class="border-0 text-center" style="border-left:1px dotted">15%</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">180</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">3</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">60</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted"> <span>1 </span>منتج </td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted"> 15 % </td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">1</td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted"> <span style="font-size:1rem"> {{ $paylink->store->store_display_name }} &nbsp;</span>رابط دفع </td>
 
                             </tr>
+
                         </tbody>
                     </table>
                 </td>
@@ -344,7 +341,7 @@
                 color : #908F90;
                 font-family:jali-bold;
                 ">
-                        <td  style="vertical-align:top;" >220</td>
+                        <td  style="vertical-align:top;" >{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
 
                         <td class="text-right" style="
                         vertical-align:top;
@@ -364,7 +361,7 @@
                      color : #908F90;
                     font-family:jali-bold;"
                 >
-                        <td  >33</td>
+                        <td  >{{ $paylink->amount * 15 / 100 }}</td>
 
                         <td class="text-right" style="width:70%" ><span>(15%) </span>ضريبة القيمة المضافة </td>
                 </tr>
@@ -382,7 +379,7 @@
                 font-family:jali-bold;
                 color : #908F90
                 ">
-                        <td  style=" vertical-align:top ; " >253   </td>
+                        <td  style=" vertical-align:top ; " >{{ $paylink->amount }}   </td>
 
                         <td class="text-right" style=" vertical-align:top ;  width:70%" ><span>(15%) </span>المجموع مع الضريبة </td>
                 </tr>

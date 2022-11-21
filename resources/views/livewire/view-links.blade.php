@@ -1,4 +1,4 @@
-<form class="common__form overflow-auto" x-data>
+<form class="common__form overflow-auto" x-data id="view__links">
                     <div class="modal-body">
 
                         <div class="d-flex mb-3  align-items-start header__title flex-wrap">
@@ -142,11 +142,11 @@
                         {{--  --}}
                             <div class="form-row mt-1">
                                 <div class="form-group mb-0 d-flex col-md-12 justify-content-center paylink_view_pdf">
-                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 0) @click="window.open('{{ route("seller.invoice", ["orderId" => $orderId]) }}', '_blank')" @endif>
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 2) @click="window.open('{{ route("seller.invoice", ["orderId" => $orderId]) }}', '_blank')" @endif>
                                         <img src="{{ asset('images/icon/preview.png') }}" alt="" >
                                         عرض فاتورة المنصة
                                     </span>
-                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 0) @click="window.location = '{{ route("seller.invoice", ["orderId" => $orderId, "download" => 1]) }}'" @endif>
+                                    <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 2 || ($paymentStatus != 2 && empty($expirationTime))) disable__op @endif" @if($paymentStatus == 2) @click="window.location = '{{ route("seller.invoice", ["orderId" => $orderId, "download" => 1]) }}'" @endif>
                                         <img src="{{ asset('images/icon/download.png') }}" alt="">
                                         تحميل فاتورة المنصة بصيغة PDF
                                     </span>
@@ -157,7 +157,7 @@
                             <div class="form-row mt-1">
                                 <div class="form-group mb-0 d-flex col-md-12 justify-content-center paylink_view_pdf">
                                     <span class="icon__badge d-flex align-items-center text-center cursor__pointer @if($paymentStatus != 1 || empty($expirationTime)) disable__op @endif"
-                                        @if($paymentStatus == 1 && !empty($expirationTime)) wire:click="expireLink" @endif
+                                        wire:click="expireLink"
                                     >
                                         <img src="{{ asset('images/icon/link-broken.png') }}" alt="" class="mr-1"> عرض فاتورة الرابط</span>
 

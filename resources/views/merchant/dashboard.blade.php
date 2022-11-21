@@ -473,6 +473,7 @@
         $('[data-toggle="tooltip"]').tooltip({
             container: "#copy__container"
         })
+        $(".bootstrap-dt-range").daterangepicker();
     })
 </script>
     <script>
@@ -485,6 +486,24 @@
         window._token = "{{ csrf_token() }}"
         $('#duration').duration_picker({
             lang : 'ar'
+        });
+
+        $('.modal').on('show.bs.modal', function(){
+            if( $(this).find("form").attr("id") != "filter_Form" &&  $(this).find("form").attr("id") != 'view__links') {
+                componentID = $(this).find("form").attr("wire:id");
+                if(componentID) {
+                    Livewire.components.componentsById[
+                        componentID
+                    ].call("resetProp");
+                } else {
+                    componentID = $(this).find(".modal-body").attr("wire:id");
+                    if(componentID) {
+                        Livewire.components.componentsById[
+                            componentID
+                        ].call("resetProp");
+                    }
+                }
+            }
         });
 
         $(document).on("click", ".in-active-image.cross-icon, .filters.back__button", function(event){

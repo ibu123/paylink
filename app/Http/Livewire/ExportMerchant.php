@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Carbon\Carbon;
 use ArPHP\I18N\Arabic;
 use Livewire\Component;
 use App\Models\Merchant;
@@ -50,6 +51,11 @@ class ExportMerchant extends Component
 
     public function export()
     {
+        $temp = explode(" - ",$this->date_range);
+        if(!empty($temp)) {
+            $fromDate = $temp[0];
+            $toDate = $temp[1];
+        }
         $this->validate();
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
@@ -59,8 +65,17 @@ class ExportMerchant extends Component
         ->withSum('links as net_profit', 'commission')
         ->when(!empty($this->merchantId), function($q){
             $q->whereIn('id', explode("," , $this->merchantId));
-        })->get();
+        })
+        ->when(!empty($temp), function($q) use ($temp, $fromDate, $toDate){
+            $q->where('created_at', '>=', Carbon::parse($fromDate))
+            ->where('created_at', '<=', Carbon::parse($toDate));
+        })
+        ->get();
 
+        if($data->isEmpty()) {
+            return $this->addError('no-filter-match', __('No Filter Match'));
+
+        }
         if(in_array(1, $this->type)) {
             $excel = Excel::raw(new ExcelExport($this, $data), 'Xlsx');
         }
@@ -101,6 +116,7 @@ class ExportMerchant extends Component
         else
         {
             $zip = new \ZipArchive;
+            \File::delete(public_path('export.zip'));
             if ($zip->open(public_path('export.zip'),  \ZipArchive::CREATE) === TRUE) {
                 if(in_array(1, $this->type)) {
                     $zip->addFromString('export.xlsx',$excel);

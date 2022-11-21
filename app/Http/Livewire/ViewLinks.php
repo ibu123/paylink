@@ -115,23 +115,43 @@ class ViewLinks extends Component
         })
         ->addColumn('action', function ($row) {
             $linkUrl = route('checkout', [ 'store' => $row->store->domain,  'orderId' => $row->order_id]);
+            if($row->payment_status == 2) {
+                return '<div class="d-flex justify-content-center cursor__pointer custom__copy__container pos__relative" >
+                <span class="badge badge__toaster badge_toaster_table td_green_color_status">
+                                            انسخ الرابط
+                                        </span>
+                    <span class="badge view__link" id ="'.$row->id.'">
+                        <img src="'.asset('images/icon/preview.png').'" alt="">عرض
+                    </span>
+                    <span class="badge copy_text_2"  data-clipboard-action="copy"
+
+
+                    data-clipboard-text="'.$linkUrl.'" >
+                        <img src="'.asset('images/icon/duplicate.png').'" alt=""> نسخ
+                    </span>
+                    <span class="badge"  onclick="window.open(\''.route("seller.invoice", ["orderId" => $row->order_id]) .'\', \'_blank\')">
+                        <img src="'.asset('images/icon/export copy_1x.png').'" alt=""> تصدير
+                    </span>
+                </div>';
+            }
+
             return '<div class="d-flex justify-content-center cursor__pointer custom__copy__container pos__relative" >
-            <span class="badge badge__toaster badge_toaster_table td_green_color_status">
-                                        انسخ الرابط
-                                    </span>
-                <span class="badge view__link" id ="'.$row->id.'">
-                    <img src="'.asset('images/icon/preview.png').'" alt="">عرض
-                </span>
-                <span class="badge copy_text_2"  data-clipboard-action="copy"
+                <span class="badge badge__toaster badge_toaster_table td_green_color_status">
+                                            انسخ الرابط
+                                        </span>
+                    <span class="badge view__link" id ="'.$row->id.'">
+                        <img src="'.asset('images/icon/preview.png').'" alt="">عرض
+                    </span>
+                    <span class="badge copy_text_2"  data-clipboard-action="copy"
 
 
-                data-clipboard-text="'.$linkUrl.'" >
-                    <img src="'.asset('images/icon/duplicate.png').'" alt=""> نسخ
-                </span>
-                <span class="badge">
-                    <img src="'.asset('images/icon/export copy_1x.png').'" alt=""> تصدير
-                </span>
-            </div>';
+                    data-clipboard-text="'.$linkUrl.'" >
+                        <img src="'.asset('images/icon/duplicate.png').'" alt=""> نسخ
+                    </span>
+                    <span class="badge disable__op" >
+                        <img src="'.asset('images/icon/export copy_1x.png').'" alt=""> تصدير
+                    </span>
+                </div>';
             // return '
 
 
@@ -227,5 +247,17 @@ class ViewLinks extends Component
         // dd(Carbon::now());
         $paylink = Paylink::with('store')->where('order_id', $orderId)->firstOrFail();
         return view('success', compact('paylink','orderId'));
+    }
+
+    public function expireLink() {
+        if($this->paymentStatus == 1 && !empty($this->expirationTime))
+        {
+            $this->paymentStatus = 0;
+            $this->receivingStatus = 0;
+            Paylink::where('order_id', $this->orderId)->update([
+                'payment_status' => 0,
+                'send_payment_status' => 0
+            ]);
+        }
     }
 }

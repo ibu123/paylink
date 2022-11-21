@@ -17,7 +17,7 @@ class ExportLinks extends Component
 
     public $payLinkId;
     public $payLinkStatus;
-    public $dateRange;
+    public $date_range;
     public $type = [];
 
     protected $rules = [
@@ -41,6 +41,11 @@ class ExportLinks extends Component
     {
 
         $this->validate();
+        $temp = explode(" - ",$this->date_range);
+        if(!empty($temp)) {
+            $fromDate = $temp[0];
+            $toDate = $temp[1];
+        }
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
         $payLinks = Paylink::with('store')
@@ -57,8 +62,17 @@ class ExportLinks extends Component
                     'send_payment_status' => 2
                 ]);
             });
-        })->get();
+        })
+        ->when(!empty($temp), function($q) use ($temp, $fromDate, $toDate){
+            $q->where('paid_date', '>=', Carbon::parse($fromDate))
+            ->where('paid_date', '<=', Carbon::parse($toDate));
+        })
+        ->get();
 
+        if($payLinks->isEmpty()) {
+            return $this->addError('no-filter-match', __('No Filter Match'));
+
+        }
         if(in_array(1, $this->type)) {
             $excel = Excel::raw(new LinkExport($this, $payLinks), 'Xlsx');
         }
@@ -128,7 +142,8 @@ class ExportLinks extends Component
         }
         else {
             $zip = new \ZipArchive;
-            if ($zip->open(public_path('export.zip'),  \ZipArchive::CREATE) === TRUE) {
+            \File::delete(public_path('merchant-export.zip'));
+            if ($zip->open(public_path('merchant-export.zip'),  \ZipArchive::CREATE) === TRUE) {
                 if(in_array(1, $this->type)) {
                     $zip->addFromString('links-excel-sheet.xlsx',$excel);
                 }
@@ -141,7 +156,13 @@ class ExportLinks extends Component
                 $zip->close();
             }
 
-            return response()->download(public_path('export.zip'));
+            return response()->download(public_path('merchant-export.zip'));
         }
+    }
+
+    public function resetProp()
+    {
+        $this->resetValidation();
+        $this->reset();
     }
 }
