@@ -54,5 +54,6 @@
     "Link Is Expired" : "انتهت صلاحية الرابط",
     "Success" : "النجاح",
     "Admin Dashboard" : "لوحة تحكم المسؤول",
-    "Merchant Dashboard" : "لوحة معلومات التاجر"
+    "Merchant Dashboard" : "لوحة معلومات التاجر",
+    "No Filter Match" : "لا يوجد مرشح مطابق"
 }
