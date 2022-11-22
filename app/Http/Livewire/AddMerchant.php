@@ -171,7 +171,11 @@ class AddMerchant extends Component
         $merchant = Merchant::query()
         ->with('user')
         ->withCount('links as no_of_links')
-        ->withSum('links as revenues', 'amount')
+        ->withSum([
+            'links as revenues' => function($q) {
+                $q->where('payment_status', 2);
+            }
+        ],'amount')
         ->withSum('links as net_profit', 'commission')
         ->when(!empty($request->id), function($q) use ($request){
             $q->whereIn('id', explode(",",$request->id));
@@ -195,12 +199,12 @@ class AddMerchant extends Component
             return $row->no_of_links;
         })
         ->editColumn('revenues', function($row){
-            return $row->revenues." <span>
+            return ($row->revenues ? $row->revenues : 0)." <span>
             ريال
         </span>";
         })
         ->editColumn('net_profit', function($row){
-            return $row->net_profit." <span>
+            return ($row->net_profit ? $row->net_profit : 0)." <span>
             ريال
         </span>";
         })

@@ -474,6 +474,18 @@
             container: "#copy__container"
         })
         $(".bootstrap-dt-range").daterangepicker();
+
+      
+
+        $(".bootstrap-dt-range").on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+                componentID = $("#expt__form").attr("wire:id");
+                if(componentID) {
+                Livewire.components.componentsById[
+                            componentID
+                        ].set("date_range", ""); 
+                }
+        });
     })
 </script>
     <script>
@@ -582,7 +594,6 @@
         })
 
         $("#refresh").click(function(){
-            alert("ee");
             $('.zero-configuration-2').DataTable().draw()
         })
 

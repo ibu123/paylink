@@ -52,7 +52,10 @@ class ExportMerchant extends Component
     public function export()
     {
         $temp = explode(" - ",$this->date_range);
-        if(!empty($temp)) {
+        $fromDate = "";
+        $toDate = "";
+
+        if(!empty($this->date_range)) {
             $fromDate = $temp[0];
             $toDate = $temp[1];
         }
@@ -66,7 +69,7 @@ class ExportMerchant extends Component
         ->when(!empty($this->merchantId), function($q){
             $q->whereIn('id', explode("," , $this->merchantId));
         })
-        ->when(!empty($temp), function($q) use ($temp, $fromDate, $toDate){
+        ->when(!empty($this->date_range), function($q) use ($temp, $fromDate, $toDate){
             $q->where('created_at', '>=', Carbon::parse($fromDate))
             ->where('created_at', '<=', Carbon::parse($toDate));
         })

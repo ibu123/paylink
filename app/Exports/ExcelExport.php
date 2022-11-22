@@ -77,11 +77,11 @@ class ExcelExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
                 } elseif ($value == 'phone_no') {
                     $columnDef[] = $merchant->user->phone_no;
                 } elseif ($value == 'no_links') {
-                    $columnDef[] = $merchant->no_of_links;
+                    $columnDef[] =  ($merchant->no_of_links ? $merchant->no_of_links : "0");
                 } elseif ($value == 'revenue') {
-                    $columnDef[] = $merchant->revenues." ريال ";
+                    $columnDef[] = ($merchant->revenues ? $merchant->revenues : "0")." ريال ";
                 } elseif ($value == 'net_profit') {
-                    $columnDef[] = $merchant->net_profit." ريال ";
+                    $columnDef[] = ($merchant->net_profit ? $merchant->net_profit : "0")." ريال ";
                 }
             }
             return $columnDef;
@@ -90,9 +90,9 @@ class ExcelExport implements FromCollection, WithHeadings, ShouldAutoSize, WithS
                 $merchant->id,
                 $merchant->store_display_name,
                 $merchant->user->phone_no,
-                $merchant->no_of_links,
-                $merchant->revenues." ريال ",
-                $merchant->net_profit." ريال "
+                ($merchant->no_of_links ? $merchant->no_of_links : "0") ,
+                ($merchant->revenues ? $merchant->revenues : "0")." ريال ",
+                ($merchant->net_profit ? $merchant->net_profit : "0")." ريال "
             ];
         }
 

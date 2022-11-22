@@ -118,7 +118,7 @@ class AuthComponent extends Component
 
         $this->staticPhoneNo = $phone_no;
 
-        if(sendOTP("+919173286350"))
+        if(sendOTP($this->staticPhoneNo))
         {
             \Session::put('phone_no', $phone);
             $this->inputStatus = true;
@@ -129,7 +129,7 @@ class AuthComponent extends Component
         $this->validate();
         \Session::forget('store');
 
-        if(verifyOTP($this->otp, "+919173286350"))
+        if(verifyOTP($this->otp, $this->staticPhoneNo))
         {
             \Session::put('store', $this->store);
             $user = User::where('phone_no', \Session::get('phone_no'))->first();

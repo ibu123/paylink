@@ -303,13 +303,13 @@
                             <td >{{ $merchant->user->phone_no  }}</td>
                         @endif
                         @if(in_array("no_links", $column))
-                            <td > {{ $merchant->no_of_links }} </td>
+                            <td > {{ ( $merchant->no_of_links ? $merchant->no_of_links : "0" ) }} </td>
                         @endif
                         @if(in_array("revenue", $column))
-                            <td > {{ $merchant->revenues }} ريال</td>
+                            <td > {{ ( $merchant->revenues ? $merchant->revenues : "0") }} ريال</td>
                         @endif
                         @if(in_array("net_profit", $column))
-                        <td > {{ $merchant->net_profit }} ريال</td>
+                        <td > {{ ( $merchant->net_profit ? $merchant->net_profit : "0")  }} ريال</td>
                     @endif
                     @else
                         <td class="pl-0">
@@ -318,14 +318,14 @@
                         <td >{{ $merchant->store_display_name }}</td>
                         <td >{{ $merchant->user->phone_no }}</td>
                         <td >
-                            {{ $merchant->no_of_links }}
+                            {{ ($merchant->no_of_links ? $merchant->no_of_links : "0" )}}
                         </td>
 
                         <td >
-                            {{ $merchant->revenues }} ريال
+                            {{ ($merchant->revenues ? $merchant->revenues : "0")  }} ريال
                         </td>
                         <td >
-                            {{ $merchant->net_profit }} ريال
+                            {{ ($merchant->net_profit ? $merchant->net_profit : "0") }} ريال
                         </td>
                     @endif
                 </tr>

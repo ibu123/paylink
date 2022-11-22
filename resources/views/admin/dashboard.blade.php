@@ -219,6 +219,16 @@
         })
         $(".bootstrap-dt-range").daterangepicker();
 
+        $(".bootstrap-dt-range").on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+                componentID = $("#expt__form").attr("wire:id");
+                if(componentID) {
+                    Livewire.components.componentsById[
+                                componentID
+                            ].set("date_range", "");
+                }
+        });
+
         $(document).on("change", ".custom-pagination", function(){
             $('.zero-configuration').DataTable().context[0].oAjaxData.start = (($(this).val() - 1 ) * 10)
             $('.zero-configuration').DataTable().context[0]._iDisplayStart = (($(this).val() - 1) * 10)

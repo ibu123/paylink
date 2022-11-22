@@ -42,7 +42,10 @@ class ExportLinks extends Component
 
         $this->validate();
         $temp = explode(" - ",$this->date_range);
-        if(!empty($temp)) {
+        $fromDate = "";
+        $toDate = "";
+        // dd($temp);
+        if(!empty($this->date_range)) {
             $fromDate = $temp[0];
             $toDate = $temp[1];
         }
@@ -63,7 +66,7 @@ class ExportLinks extends Component
                 ]);
             });
         })
-        ->when(!empty($temp), function($q) use ($temp, $fromDate, $toDate){
+        ->when(!empty($this->date_range), function($q) use ($temp, $fromDate, $toDate){
             $q->where('paid_date', '>=', Carbon::parse($fromDate))
             ->where('paid_date', '<=', Carbon::parse($toDate));
         })
