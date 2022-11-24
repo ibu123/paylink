@@ -34,7 +34,9 @@ class AdminSettelment extends Component
         })->paginate(30);
 
         return response()->json([
-            "items" => $merchantLists->getCollection()
+            "items" => $merchantLists->getCollection(),
+            "page" => $merchantLists->currentPage(),
+            "total_count" => $merchantLists->lastPage(),
         ]);
     }
 
@@ -42,9 +44,10 @@ class AdminSettelment extends Component
     {
         $merchantLists = Paylink::
         with(['store', 'paylinkInvoice', 'sellerInvoice'])
+        ->where('send_payment_status', 2)
         ->when(!empty($request->q), function($query) use ($request){
             $query->where('id', 'like', '%'.$request->q.'%');
-        })->paginate(8);
+        })->paginate(30);
         // dd($merchantLists);
         return response()->json([
             "items" => $merchantLists->getCollection(),

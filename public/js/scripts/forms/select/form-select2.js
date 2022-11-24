@@ -122,18 +122,45 @@
           };
         },
         transport :  function (params, success, failure) {
-            var __cachekey = params.data.q || '_ALL_';
-            if ('undefined' !== typeof __cache[__cachekey]) {
+          var __cachekey = params.data.q || '_ALL_';
+         
+          if(!params.data.page) {
+              params.data.page = 1;
+          }
+
+          if (__cache[__cachekey]  && (!params.data.page || params.data.page <= __cache[__cachekey]["pages"]) ) {
             //display the cached results
-            success(__cache[__cachekey]);
+
+                let abc = JSON.parse(JSON.stringify(__cache[__cachekey]));
+
+                abc.items = abc.items.slice(
+                    (params.data.page - 1) * 30 , 30 * params.data.page
+                )
+                success(abc);
                 return; /* noop */
             }
             var $request = $.ajax(params);
             $request.then(function(data) {
                 //store data in cache
-                __cache[__cachekey] = data;
+                if(__cache[__cachekey]) {
+                    __cache[__cachekey].items = __cache[__cachekey].items.concat(data.items);
+                } else {
+                  __cache[__cachekey] = data;
+                }
+
+                __cache[__cachekey]["pages"] = data.page;
+                // console.log(__cache__2[__cachekey]);
                 //display the results
-                success(__cache[__cachekey]);
+                // let temp = [];
+                // temp[__cachekey] = data;
+                // temp[__cachekey]["pages"] = data.page;
+
+                let abc = JSON.parse(JSON.stringify(__cache[__cachekey]));
+
+                abc.items = abc.items.slice(
+                    (data.page - 1) * 30 , abc.items.length
+                )
+                success( abc);
             });
             $request.fail(failure);
             return $request;
@@ -158,13 +185,17 @@
       escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
       minimumInputLength: 0,
       templateResult: (data) => {
-        return data.store_display_name;
+        if(data.store_display_name ) {
+          return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.store_display_name +" - " + data.id}</div>`;
+        }
       },
       templateSelection: (data) => {
-        return data.store_display_name;
+        if(data.store_display_name) {
+          return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.store_display_name  +" - " + data.id}</div>`;
+        }
       }
 
-  })
+  }).data('select2').$container.addClass('select2__ajax__list');
 
   var __cache__2 = [];
   $(".select2-ajax-paylink").select2({
@@ -199,7 +230,7 @@
                 let abc = JSON.parse(JSON.stringify(__cache__2[__cachekey]));
 
                 abc.items = abc.items.slice(
-                    (params.data.page - 1) * 8 , 8 * params.data.page
+                    (params.data.page - 1) * 30 , 30 * params.data.page
                 )
                 success(abc);
                 return; /* noop */
@@ -223,7 +254,7 @@
                 let abc = JSON.parse(JSON.stringify(__cache__2[__cachekey]));
 
                 abc.items = abc.items.slice(
-                    (data.page - 1) * 8 , abc.items.length
+                    (data.page - 1) * 30 , abc.items.length
                 )
                 success( abc);
             });
@@ -249,10 +280,14 @@
       escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
       minimumInputLength: 0,
       templateResult: (data) => {
-        return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + data?.paylink_invoice?.id}</div>`;
+        if(data.id) {
+          return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + ("0000"+data.paylink_invoice.id).slice(-4)}</div>`;
+        }
       },
       templateSelection: (data) => {
-        return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + data?.paylink_invoice?.id}</div>`;
+        if(data.id) {
+          return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + ("0000"+data.paylink_invoice.id).slice(-4)}</div>`;
+        }
       }
 
   }).data('select2').$container.addClass('select2__ajax__list');
