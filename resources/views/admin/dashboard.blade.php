@@ -61,7 +61,7 @@
                                                         تصدير</span>
                                                         <span class="filters" data-toggle="modal" data-target="#adminSettelment">
                                                             <img src="{{ asset('images/icon/card_1x.png') }}" alt="">
-                                                         مخالصة</span>
+                                                        مخالصة</span>
                                                     </div>
                                                     <div class="col-md-3 text-md-right add__button">
                                                         <button type="button"  data-toggle="modal" data-target="#addMerchantForm" class="btn btn-primary  position-relative "><img src="{{ asset('images/icon/plus.png') }}" alt=""> إضافة متجر جديد </button>
@@ -281,17 +281,50 @@
             ].set("column", $(this).val())
         })
 
+        $(document).on("change", ".select2-ajax", function(){
+            let instance = $(this);
+            if($(this).val().includes("-1") && $(this).val()[$(this).val().length - 1] == -1) {
+                $(this).val();
+                $results = $(this).data("select2").$dropdown.find('.select2-results__option');
+                $results.each(function() {
+                    let childInstance = $(this);
+                    $.fn.select2.amd.require(
+                        ["select2/utils"], function(Utils) {
+                            if (Utils.__cache[childInstance.data().select2Id].data.id != -1) {
+                                instance.data("select2").trigger("select", {
+                                    data : Utils.__cache[childInstance.data().select2Id].data
+                                });
+                            }
+                    })
+                });
+
+            }
+            Livewire.components.componentsById[
+                $("#settelment__form").attr("wire:id")
+            ].set("merchantId", $(this).val())
+        })
+
         $(document).on("change", ".select2-ajax-paylink", function(){
-            alert($(this).val());
-            // if($(this).val().includes('select_all')) {
-            //     $(this).val("");
-            //     console.log($(this).find("option").slice(1));
-            //     $(this).find("option").slice(1).prop("selected", true);
-            //     $(this).trigger("change");
-            // }
-            // Livewire.components.componentsById[
-            //     $("#settelment__form").attr("wire:id")
-            // ].set("column", $(this).val())
+            let instance = $(this);
+            if($(this).val().includes("-1") && $(this).val()[$(this).val().length - 1] == -1) {
+                $(this).val();
+                $results = $(this).data("select2").$dropdown.find('.select2-results__option');
+                $results.each(function() {
+                    let childInstance = $(this);
+                    $.fn.select2.amd.require(
+                        ["select2/utils"], function(Utils) {
+                            if (Utils.__cache[childInstance.data().select2Id].data.id != -1) {
+                                instance.data("select2").trigger("select", {
+                                    data : Utils.__cache[childInstance.data().select2Id].data
+                                });
+                            }
+                    })
+                });
+
+            }
+            Livewire.components.componentsById[
+                $("#settelment__form").attr("wire:id")
+            ].set("paylinkId", $(this).val())
         })
 
 
