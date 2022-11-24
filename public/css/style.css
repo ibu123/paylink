@@ -1104,3 +1104,10 @@ button.modal__submit.border__radius__40 {
 .disable__op {
     opacity: 0.5 !important;
 }
+
+.select2__ajax__list.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
+    position: absolute;
+    right: 1px;
+    color: #000000 !important;
+    font-family: brando-regular;
+}

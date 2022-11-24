@@ -5,6 +5,7 @@ use App\Http\Livewire\ViewLinks;
 use App\Http\Livewire\AddMerchant;
 use App\Http\Livewire\ExportMerchant;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\AdminSettelment;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\NoonPaymentController;
@@ -47,6 +48,8 @@ Route::post('capture-order', [NoonPaymentControlle::class, 'captureOrder'])->nam
         })->name('dashboard');
         Route::post('merchant-list', [AddMerchant::class, 'list'])->name('list');
         Route::any('export', [ExportMerchant::class, 'export'])->name('export');
+        Route::get('merchant-list', [ AdminSettelment::class, 'merchantList'])->name('merchant.list');
+        Route::get('paylinks-list', [ AdminSettelment::class, 'payLinkList'])->name('paylinks.list');
      });
 
     Route::prefix('merchant')

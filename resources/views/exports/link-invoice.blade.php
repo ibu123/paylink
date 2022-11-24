@@ -167,7 +167,7 @@
                 ">
                         <td  style=" vertical-align:top ; text-align:right " >
                             <span style="vertical-align:middle ;font-size:1.35rem;font-family:jali-regular">
-                                INV{{str_pad($paylink->id, 4, '0', STR_PAD_LEFT);}}
+                                INV{{str_pad($paylink->paylinkInvoice->id, 4, '0', STR_PAD_LEFT);}}
                             </span> رقم الفاتورة :   </td>
 
                  </tr>

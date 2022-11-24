@@ -59,7 +59,7 @@
                                                         <span class="filters" data-toggle="modal" data-target="#exportForm">
                                                             <img src="{{ asset('images/icon/export copy_1x.png') }}" alt="">
                                                         تصدير</span>
-                                                        <span class="filters">
+                                                        <span class="filters" data-toggle="modal" data-target="#adminSettelment">
                                                             <img src="{{ asset('images/icon/card_1x.png') }}" alt="">
                                                          مخالصة</span>
                                                     </div>
@@ -149,6 +149,7 @@
 @include('admin.dashboard.export_modal')
 @include('admin.dashboard.filter_merchant')
 @include('admin.dashboard.auth')
+@include('admin.admin_settelment')
 @livewire('view-merchant')
 @endsection
 @section('js')
@@ -156,6 +157,8 @@
       window.pagination = 0;
       window.filtreIDS = [];
       window.filterMerchantName = '';
+      window.merchantListURL = "{{ route('admin.merchant.list') }}"
+      window.paylinkListURL = "{{ route('admin.paylinks.list') }}"
       window._token = "{{ csrf_token() }}"
 </script>
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
@@ -276,6 +279,19 @@
             Livewire.components.componentsById[
                 $("#expt__form").attr("wire:id")
             ].set("column", $(this).val())
+        })
+
+        $(document).on("change", ".select2-ajax-paylink", function(){
+            alert($(this).val());
+            // if($(this).val().includes('select_all')) {
+            //     $(this).val("");
+            //     console.log($(this).find("option").slice(1));
+            //     $(this).find("option").slice(1).prop("selected", true);
+            //     $(this).trigger("change");
+            // }
+            // Livewire.components.componentsById[
+            //     $("#settelment__form").attr("wire:id")
+            // ].set("column", $(this).val())
         })
 
 

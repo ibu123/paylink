@@ -105,6 +105,157 @@
     data: data
   });
 
+  var __cache = [];
+  $(".select2-ajax").select2({
+
+    dropdownAutoWidth: true,
+    width:'100%',
+    ajax: {
+        url: window.merchantListURL,
+        dataType: 'json',
+        delay: 250,
+        width: '100%',
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        transport :  function (params, success, failure) {
+            var __cachekey = params.data.q || '_ALL_';
+            if ('undefined' !== typeof __cache[__cachekey]) {
+            //display the cached results
+            success(__cache[__cachekey]);
+                return; /* noop */
+            }
+            var $request = $.ajax(params);
+            $request.then(function(data) {
+                //store data in cache
+                __cache[__cachekey] = data;
+                //display the results
+                success(__cache[__cachekey]);
+            });
+            $request.fail(failure);
+            return $request;
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+
+          return {
+            results: data.items,
+            pagination: {
+              more: (params.page * 30) < data.total_count
+            }
+          };
+        },
+        cache: true
+      },
+      placeholder: 'Search for a repository',
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 0,
+      templateResult: (data) => {
+        return data.store_display_name;
+      },
+      templateSelection: (data) => {
+        return data.store_display_name;
+      }
+
+  })
+
+  var __cache__2 = [];
+  $(".select2-ajax-paylink").select2({
+
+    dropdownAutoWidth: true,
+    width:'100%',
+    ajax: {
+        url: window.paylinkListURL,
+        dataType: 'json',
+        delay: 250,
+        width: '100%',
+        data: function (params) {
+          return {
+            q: params.term, // search term
+            page: params.page
+          };
+        },
+        transport :  function (params, success, failure) {
+
+            var __cachekey = params.data.q || '_ALL_';
+            // console.log(params.data.page);
+            // if(__cache__2[__cachekey] && __cache__2[__cachekey]["pages"]) {
+            //   console.log(__cache__2[__cachekey]["pages"])
+
+            // }
+            if(!params.data.page) {
+                params.data.page = 1;
+            }
+            if (__cache__2[__cachekey]  && (!params.data.page || params.data.page <= __cache__2[__cachekey]["pages"]) ) {
+            //display the cached results
+
+                let abc = JSON.parse(JSON.stringify(__cache__2[__cachekey]));
+
+                abc.items = abc.items.slice(
+                    (params.data.page - 1) * 8 , 8 * params.data.page
+                )
+                success(abc);
+                return; /* noop */
+            }
+            var $request = $.ajax(params);
+            $request.then(function(data) {
+                //store data in cache
+                if(__cache__2[__cachekey]) {
+                    __cache__2[__cachekey].items = __cache__2[__cachekey].items.concat(data.items);
+                } else {
+                  __cache__2[__cachekey] = data;
+                }
+
+                __cache__2[__cachekey]["pages"] = data.page;
+                // console.log(__cache__2[__cachekey]);
+                //display the results
+                // let temp = [];
+                // temp[__cachekey] = data;
+                // temp[__cachekey]["pages"] = data.page;
+
+                let abc = JSON.parse(JSON.stringify(__cache__2[__cachekey]));
+
+                abc.items = abc.items.slice(
+                    (data.page - 1) * 8 , abc.items.length
+                )
+                success( abc);
+            });
+            $request.fail(failure);
+            return $request;
+        },
+        processResults: function (data, params) {
+          // parse the results into the format expected by Select2
+          // since we are using custom formatting functions we do not need to
+          // alter the remote JSON data, except to indicate that infinite
+          // scrolling can be used
+          params.page = params.page || 1;
+        // alert(data.total_count);
+          return {
+            results: data.items,
+            pagination: {
+              more: params.page < data.total_count
+            }
+          };
+        },
+      },
+      placeholder: 'Search for a repository',
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      minimumInputLength: 0,
+      templateResult: (data) => {
+        return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + data?.paylink_invoice?.id}</div>`;
+      },
+      templateSelection: (data) => {
+        return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + data?.paylink_invoice?.id}</div>`;
+      }
+
+  }).data('select2').$container.addClass('select2__ajax__list');
   // Loading remote data
   $(".select2-data-ajax").select2({
       dropdownAutoWidth: true,

@@ -177,7 +177,7 @@
                                 <tr>
                                     <td style="width:50%">
                                         الرقم التسلسلي<br>
-                                        INV{{str_pad($paylink->id, 4, '0', STR_PAD_LEFT)}}
+                                        INV{{str_pad($paylink->sellerInvoice->id, 4, '0', STR_PAD_LEFT)}}
                                     <td  style="width:50%">
                                         التاريخ<br>
                                        {{ \Carbon\Carbon::parse($paylink->paid_date)->format('Y/m/d')}}
