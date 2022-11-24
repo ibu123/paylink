@@ -51,7 +51,8 @@ class ExportLinks extends Component
         }
         // $temporaryDirectory = (new TemporaryDirectory())->create();
         // $rows = $this->rows;
-        $payLinks = Paylink::with('store')
+        $payLinks = Paylink::with([
+            'store', 'paylinkInvoice', 'sellerInvoice'])
         ->select('*')
         ->addSelect(\DB::raw('TIMESTAMPDIFF(SECOND, UNIX_TIMESTAMP() , expiration_date ) AS expired'))
         ->when(!empty($this->payLinkId), function($q){

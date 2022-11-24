@@ -14,7 +14,8 @@ class InvoiceController extends Controller
 {
     public function generateLinkInvoice(Request $request, $orderId)
     {
-        $paylink = Paylink::with('store')->where('order_id', $orderId)->firstOrFail();
+        $paylink = Paylink::with([
+            'store', 'paylinkInvoice', 'sellerInvoice'])->where('order_id', $orderId)->firstOrFail();
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate(\Request::url()));
         $html     = View::make('exports.link-invoice', compact('qrcode','paylink'))->render();
 
@@ -39,7 +40,8 @@ class InvoiceController extends Controller
 
     public function generateSellerInvoice(Request $request,$orderId)
     {
-        $paylink = Paylink::with('store')->where('order_id', $orderId)->firstOrFail();
+        $paylink = Paylink::with([
+            'store', 'paylinkInvoice', 'sellerInvoice'])->where('order_id', $orderId)->firstOrFail();
         $qrcode = base64_encode(QrCode::format('svg')->size(200)->generate(\Request::url()));
         $html     = View::make('exports.merchant-invoice', compact('qrcode', 'paylink'))->render();
         try {

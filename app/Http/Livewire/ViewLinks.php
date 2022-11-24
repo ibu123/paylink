@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Paylink;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use App\Models\SellerInvoice;
+use App\Models\PaylinkInvoice;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Http;
 
@@ -222,7 +224,8 @@ class ViewLinks extends Component
         if (isset($response->result->transactions[0]) && $response->result->transactions[0]->status == 'SUCCESS') {
             $commissionPercentage = ($response->result->paymentDetails->brand == 'VISA' || $response->result->paymentDetails->brand == 'MASTERCARD') ? 2.7 : 3.5;
 
-            Paylink::where('order_id', $orderId)->update([
+            $paylink = Paylink::where('order_id', $orderId)->first();
+            $paylink->update([
                 'payment_status' => 2,
                 'send_payment_status' => 2,
                 'paid_date' => Carbon::now(),
@@ -231,6 +234,24 @@ class ViewLinks extends Component
                 'commission_percentage' => $commissionPercentage,
                 'commission' => $response->result->order->amount * $commissionPercentage / 100
             ]);
+
+            PaylinkInvoice::updateOrCreate(
+                [
+                    'paylink_id' => $paylink->id
+                ],
+                [
+                    'paylink_id' => $paylink->id
+                ]
+            );
+
+            SellerInvoice::updateOrCreate(
+                [
+                    'paylink_id' => $paylink->id
+                ],
+                [
+                    'paylink_id' => $paylink->id
+                ]
+            );
 
             return redirect()->to(route('success', ['orderId' => $orderId]));
         }

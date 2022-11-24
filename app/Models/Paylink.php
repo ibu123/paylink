@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\SellerInvoice;
+use App\Models\PaylinkInvoice;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Paylink extends Model
@@ -37,5 +39,16 @@ class Paylink extends Model
     public function store()
     {
         return $this->hasOne(Merchant::class, 'id', 'store_id');
+    }
+
+    public function paylinkInvoice()
+    {
+        return $this->belongsTo(PaylinkInvoice::class, 'id', 'paylink_id');
+    }
+
+
+    public function sellerInvoice()
+    {
+        return $this->belongsTo(SellerInvoice::class, 'id', 'paylink_id');
     }
 }
