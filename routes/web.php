@@ -37,10 +37,10 @@ Route::post('verify-top', [ AuthController::class, 'verifyOTP'])->name('verify-o
 
 Route::get('create-order', [ NoonPaymentController::class, 'createOrder'])->name('noon.createOrder');
 Route::post('capture-order', [NoonPaymentControlle::class, 'captureOrder'])->name('noon.captureOrder');
-// Route::group(['middleware' => 'auth'] , function(){
+Route::group(['middleware' => 'auth'] , function(){
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::prefix('admin')
-    // ->middleware('admin')
+    ->middleware('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('dashboard', function () {
@@ -53,7 +53,7 @@ Route::post('capture-order', [NoonPaymentControlle::class, 'captureOrder'])->nam
      });
 
     Route::prefix('merchant')
-    // ->middleware('merchant')
+    ->middleware('merchant')
     ->name('merchant.')
     ->group(function () {
         Route::get('dashboard', function () {
@@ -62,7 +62,7 @@ Route::post('capture-order', [NoonPaymentControlle::class, 'captureOrder'])->nam
         Route::post('links-list', [ViewLinks::class, 'links'])->name('links');
     });
 
-// });
+});
 Route::get('invoice/{orderId}', [ InvoiceController::class, 'generateLinkInvoice'])->name('invoice');
 Route::get('seller/invoice/{orderId?}', [ InvoiceController::class, 'generateSellerInvoice'])->name('seller.invoice');
 Route::get('success/{orderId?}', [ ViewLinks::class, 'success'])->name('success');

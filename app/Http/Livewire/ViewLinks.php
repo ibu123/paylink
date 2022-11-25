@@ -227,7 +227,7 @@ class ViewLinks extends Component
             $paylink = Paylink::where('order_id', $orderId)->first();
             $paylink->update([
                 'payment_status' => 2,
-                'send_payment_status' => 2,
+                // 'send_payment_status' => 2,
                 'paid_date' => Carbon::now(),
                 'send_paid_date' => Carbon::now(),
                 'card' => $response->result->paymentDetails->brand,

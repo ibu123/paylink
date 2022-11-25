@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label>حدد نطاق تاريخ إنشاء الروابط التي تريد تصديرها <span>(اختياري)</span></label>
                     <div class="pos__relative">
-                        <input type="text" class="form-control bootstrap-dt-range" wire:model="date_range" onchange="this.dispatchEvent(new InputEvent('input'))">
+                        <input type="text" class="form-control bootstrap-dt-range dropup" wire:model="date_range" onchange="this.dispatchEvent(new InputEvent('input'))">
                         <span class="icon-in-control-without-border brando__extra__bold">
                             <img src="{{ asset('images/icon/calendar.png') }}" alt="">
                         </span>

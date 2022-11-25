@@ -205,6 +205,7 @@
   }
 
   var __cache__2 = [];
+  var previousParams;
   if($(".select2-ajax-paylink").length == 1 ) {
     $(".select2-ajax-paylink").select2({
         dropdownAutoWidth: true,
@@ -217,12 +218,14 @@
             data: function (params) {
             return {
                 q: params.term, // search term
-                page: params.page
+                page: params.page,
+                merchantId:$(".select2-ajax").val()
             };
             },
             transport :  function (params, success, failure) {
-
-                var __cachekey = params.data.q || '_ALL_';
+                let parm = params.data.q ? params.data.q : '__ALL__';
+                let merchant = params.data.merchantId ? params.data.merchantId.join("_") : '';
+                var __cachekey =  parm + merchant;
                 // console.log(params.data.page);
                 // if(__cache__2[__cachekey] && __cache__2[__cachekey]["pages"]) {
                 //   console.log(__cache__2[__cachekey]["pages"])
@@ -231,9 +234,17 @@
                 if(!params.data.page) {
                     params.data.page = 1;
                 }
-                if (__cache__2[__cachekey]  && (!params.data.page || params.data.page <= __cache__2[__cachekey]["pages"]) ) {
-                //display the cached results
 
+                if(params.data.merchantId.length == 0) {
+                  return success({
+                    items : []
+                  });
+                }
+
+                if (__cache__2[__cachekey]  && (!params.data.page || params.data.page <= __cache__2[__cachekey]["pages"]) && (!params.data.merchantId || previousParams.join() == params.data.merchantId.join())) {
+                //display the cached results
+                
+               
                     let abc = JSON.parse(JSON.stringify(__cache__2[__cachekey]));
 
                     abc.items = abc.items.slice(
@@ -242,15 +253,29 @@
                     success(abc);
                     return; /* noop */
                 }
+                // console.log(params.data);
+             
                 var $request = $.ajax(params);
                 $request.then(function(data) {
+                   
                     //store data in cache
                     if(__cache__2[__cachekey]) {
-                        __cache__2[__cachekey].items = __cache__2[__cachekey].items.concat(data.items);
+                        if(JSON.stringify(__cache__2[__cachekey].items) != JSON.stringify(data.items)) {
+                          const seen = new Set();
+                          __cache__2[__cachekey].items = __cache__2[__cachekey].items.concat(data.items);
+                          const filteredArr = __cache__2[__cachekey].items.filter(el => {
+                            const duplicate = seen.has(el.id);
+                            seen.add(el.id);
+                            return !duplicate;
+                          });
+
+                          __cache__2[__cachekey].items = filteredArr;
+                          
+                        }
                     } else {
                     __cache__2[__cachekey] = data;
                     }
-
+                    previousParams = params.data.merchantId;
                     __cache__2[__cachekey]["pages"] = data.page;
                     // console.log(__cache__2[__cachekey]);
                     //display the results

@@ -55,5 +55,8 @@
     "Success" : "النجاح",
     "Admin Dashboard" : "لوحة تحكم المسؤول",
     "Merchant Dashboard" : "لوحة معلومات التاجر",
-    "No Filter Match" : "لا يوجد مرشح مطابق"
+    "No Filter Match" : "لا يوجد مرشح مطابق",
+    "Please Select At Least One merchant for settlement" : "يرجى تحديد تاجر واحد على الأقل للتسوية",
+    "Please Select Either Paylink Id OR select data range" : "يرجى تحديد إما معرف Paylink أو تحديد نطاق البيانات"
+
 }

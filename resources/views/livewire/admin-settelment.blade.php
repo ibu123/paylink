@@ -3,8 +3,8 @@
     <div class="modal-body pb-0">
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
-                <label class="d-flex flex-sm-row flex-column justify-content-between"><span class="bolder">تحديد التاجر<strong class="text-danger text-bold">*</strong></span> <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
-                <div class="form-group"  wire:ignore>
+                <label class="d-flex flex-sm-row flex-column justify-content-between"><span class="bolder">تحديد التاجر<strong class="text-danger text-bold">*</strong></span> </label>
+                <div class="form-group mb-0"  wire:ignore>
                     <div class="pos__relative">
                         <select  class="form-control  select2-ajax" multiple>
 
@@ -14,13 +14,16 @@
                         </span>
                     </div>
                 </div>
+                @error('merchantId')
+                    <span class="error text-danger">{{ $message }}</span> 
+                @enderror
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
                 <label >المخالصة بأرقام الفواتير</label>
-                <div class="form-group"  wire:ignore>
+                <div class="form-group mb-0"  wire:ignore>
                     <div class="pos__relative">
                         <select  class="form-control  select2-ajax-paylink" multiple>
 
@@ -30,19 +33,31 @@
                         </span>
                     </div>
                 </div>
+                
+                @error('paylinkId')
+                    <span class="error text-danger">{{ $message }}</span> 
+                @enderror
             </div>
         </div>
-
+        <div class="form-row">
+            
+        <div class="col-12 text-center mb-50 or__class">
+            — أو —
+        </div>
+        </div>
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
                 <div class="form-group">
-                    <label>حدد نطاق تاريخ إنشاء الروابط التي تريد تصديرها <span>(اختياري)</span></label>
+                    <label>المخالصة بالفترة الزمنية</label>
                     <div class="pos__relative">
-                        <input type="text" class="form-control bootstrap-dt-range" onchange="this.dispatchEvent(new InputEvent('input'))">
+                        <input type="text" class="form-control bootstrap-dt-range dropup" wire:model="date_range" onchange="this.dispatchEvent(new InputEvent('input'))">
                         <span class="icon-in-control-without-border brando__extra__bold">
                             <img src="{{ asset('images/icon/calendar.png') }}" alt="">
                         </span>
                     </div>
+                    @error('date_range')
+                        <span class="error text-danger">{{ $message }}</span> 
+                    @enderror
                 </div>
             </div>
         </div>
@@ -52,7 +67,7 @@
             <span class="error text-danger my-2">{{ $message }} </span>
         @enderror
                         <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
-                        ">تصدير بيانات المتاجر</button>
+                        ">حفظ المخالصة</button>
 
     </div>
 </form>

@@ -175,6 +175,12 @@
         $('.zero-configuration').DataTable().draw()
     })
 
+    Livewire.on('settelment_done',() => {
+        window.filtreIDS = [];
+        $("#adminSettelment").modal("hide");
+        $('.zero-configuration').DataTable().draw()
+    })
+
     Livewire.on('flash_hide', () => {
         setTimeout(() => {
             $(".alert").fadeOut("slow");
@@ -220,11 +226,20 @@
             window.filtreIDS = [];
             $('.zero-configuration').DataTable().draw()
         })
-        $(".bootstrap-dt-range").daterangepicker();
+        $(".bootstrap-dt-range").daterangepicker({
+            orientation: 'bottom left'
+        });
 
         $(".bootstrap-dt-range").on('cancel.daterangepicker', function(ev, picker) {
                 $(this).val('');
                 componentID = $("#expt__form").attr("wire:id");
+                if(componentID) {
+                    Livewire.components.componentsById[
+                                componentID
+                            ].set("date_range", "");
+                }
+
+                componentID = $("#settelment__form").attr("wire:id");
                 if(componentID) {
                     Livewire.components.componentsById[
                                 componentID
@@ -241,6 +256,13 @@
         //     $("#abcb").html(picker.endDate.format('YYYY-MMM-DD') + ' - ' + picker.startDate.format('YYYY-MMM-DD')  );
         // });
         $('.modal').on('show.bs.modal', function(){
+            $(".select2-ajax").val("");
+            $(".select2-ajax").trigger("change");
+            $(".select2-ajax-paylink").val("");
+            $(".select2-ajax-paylink").trigger("change");
+            $(".select2-icons").val("");
+            $(".select2-icons").trigger("change");
+            
             if( $(this).find("form").attr("id") != "filter_Form") {
                 componentID = $(this).find("form").attr("wire:id");
                 if(componentID) {

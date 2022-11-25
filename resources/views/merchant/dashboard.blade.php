@@ -501,6 +501,7 @@
         });
 
         $('.modal').on('show.bs.modal', function(){
+       
             if( $(this).find("form").attr("id") != "filter_Form" &&  $(this).find("form").attr("id") != 'view__links') {
                 componentID = $(this).find("form").attr("wire:id");
                 if(componentID) {
@@ -508,6 +509,9 @@
                         componentID
                     ].call("resetProp");
                 } else {
+                        
+                    $(".select2-icons").val("");
+                    $(".select2-icons").trigger("change");
                     componentID = $(this).find(".modal-body").attr("wire:id");
                     if(componentID) {
                         Livewire.components.componentsById[
@@ -520,6 +524,9 @@
 
         $(document).on("click", ".in-active-image.cross-icon, .filters.back__button", function(event){
             event.stopPropagation();
+                
+            $(".select2-icons").val("");
+            $(".select2-icons").trigger("change");
             componentID = $("#filter_Form").attr("wire:id");
             Livewire.components.componentsById[
                             componentID

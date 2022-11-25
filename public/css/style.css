@@ -1111,3 +1111,9 @@ button.modal__submit.border__radius__40 {
     color: #000000 !important;
     font-family: brando-regular;
 }
+.or__class {
+    font-size: 23px;
+    color: #8c8c8c !important;
+    font-family: 'brando-extra-light';
+    margin-bottom: 21px !important;
+}
