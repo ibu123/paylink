@@ -320,7 +320,7 @@
                                     <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
                                     <td class="border-0 text-center" style="border-left:1px dotted">1</td>
                                     <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted"> <span style="font-size:1rem"> {{ $paylink->store->store_display_name }} &nbsp;</span>رابط دفع </td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted"> <span style="font-size:1rem;"> {{ $paylink->store->store_display_name }}  </span>رابط دفع </td>
 
                             </tr>
 

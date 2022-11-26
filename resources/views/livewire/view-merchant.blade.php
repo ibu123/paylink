@@ -16,7 +16,7 @@
                             <div class="form-group col-md-12 mb-50">
                                 <label class="d-flex flex-sm-row flex-column justify-content-md-between">{{ __('Merchant Name') }} <span> {{ __('As mentioned in the commercial register') }}</span></label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="merchant_name"  wire:model="merchant_name"  class="form-control">
+                                    <input type="text" class="form-control" name="merchant_name"  wire:model="merchant_name"  class="form-control" readonly>
 
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                             <div class="form-group col-md-12 mb-50">
                                 <label>{{ __('Commercial Registration No') }}</label>
                                 <div class="form-group">
-                                    <input type="text" name="cr_number" wire:model="cr_number" class="form-control">
+                                    <input type="text" name="cr_number" wire:model="cr_number" class="form-control" readonly>
                                  </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                 <div class="form-group">
                                     <label>{{ __('VAT registration number') }}</label>
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="vat" wire:model="vat" >
+                                        <input type="text" class="form-control" name="vat" wire:model="vat" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label>{{ __('IBAN Bank Account Number') }}</label>
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="iban" wire:model="iban">
+                                        <input type="text" class="form-control" name="iban" wire:model="iban" readonly>
                                      </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label>{{ __('Write english domain') }}</label>
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="domain" wire:model="domain">
+                                        <input type="text" class="form-control" name="domain" wire:model="domain" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <label>{{ __('Phone number to log in') }}</label>
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="phone_no" wire:model="phone_no">
+                                        <input type="text" class="form-control" name="phone_no" wire:model="phone_no" readonly>
                                    </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label>{{ __('Store display name') }}</label>
                                     <div class="pos__relative">
-                                        <input type="text" class="form-control" name="store_display_name" wire:model="store_display_name">
+                                        <input type="text" class="form-control" name="store_display_name" wire:model="store_display_name" readonly>
                                     </div>
                                 </div>
                             </div>
