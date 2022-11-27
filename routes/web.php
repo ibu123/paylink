@@ -28,6 +28,10 @@ Route::group(['middleware' => 'guest'], function() {
         return view('admin.login');
     })->name('home');
 
+    Route::get('/admin/login', function () {
+        return view('admin.admin-login');
+    })->name('admin.login');
+
 });
 
 Route::get('login', [AuthController::class, 'login'])->name('login');

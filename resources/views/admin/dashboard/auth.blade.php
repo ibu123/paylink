@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @livewire('auth-component')
+                    @livewire('auth-merchant-component')
                 </div>
             </div>
         </div>

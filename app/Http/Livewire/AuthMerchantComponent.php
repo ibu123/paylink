@@ -7,14 +7,16 @@ use Livewire\Component;
 use App\Models\Merchant;
 use Illuminate\Validation\Rule;
 
-class AuthComponent extends Component
+class AuthMerchantComponent extends Component
 {
+
     public $store;
     public $phoneNo;
     public $stores = [];
     public $otp = null;
     public $inputStatus = false;
     public $staticPhoneNo = '';
+    public $readOnly = false;
 
     public function __construct($items)
     {
@@ -75,9 +77,10 @@ class AuthComponent extends Component
        $this->inputStatus = false;
     }
 
+
     public function render()
     {
-        return view('livewire.auth-component');
+        return view('livewire.auth-merchant-component');
     }
 
     public function sendOTP()
@@ -101,7 +104,7 @@ class AuthComponent extends Component
 
         $phone_no = env('COUNTRY_CODE').$phone;
         $user = User::where('phone_no', $phone)
-        ->where('type', 0)
+        ->where('type', 1)
         ->first();
 
         if(!$user) {
@@ -162,6 +165,4 @@ class AuthComponent extends Component
             \Session::put('phone_no', \Session::get('phone_no'));
         }
     }
-
-
 }

@@ -31,7 +31,7 @@
                                         <div class="card-content">
                                             <div class="card-body">
                                                 @livewire('alert-component')
-                                                @livewire('auth-merchant-component')
+                                                @livewire('auth-component')
                                               </div>
                                         </div>
                                     {{-- </div> --}}
