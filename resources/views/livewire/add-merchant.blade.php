@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label>{{ __('IBAN Bank Account Number') }}</label>
                     <div class="pos__relative">
-                        <input type="text" class="form-control" name="iban"  oninput="javascript: this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '');" wire:model="iban">
+                        <input type="text" class="form-control iban_input"  wire:model="iban">
                         @error('iban') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>

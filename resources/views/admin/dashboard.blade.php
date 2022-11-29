@@ -37,10 +37,10 @@
                                         <div class="card-content">
                                             <div class="card-body px-0">
                                                 @livewire('alert-component')
-                                                <span class="filters back__button" >
+                                                {{-- <span class="filters back__button" >
                                                     <img src="{{ asset('images/icon/chevron-right.png') }}" alt="">
                                                     العودة
-                                                </span>
+                                                </span> --}}
                                                 <div class="row align-items-center mb-2 px-3">
                                                     <div class="col-md-2 ">
                                                         <h4 class="brando__black">قائمة التجار</h4>
@@ -262,7 +262,7 @@
             $(".select2-ajax-paylink").trigger("change");
             $(".select2-icons").val("");
             $(".select2-icons").trigger("change");
-            
+
             if( $(this).find("form").attr("id") != "filter_Form") {
                 componentID = $(this).find("form").attr("wire:id");
                 if(componentID) {
@@ -284,7 +284,7 @@
         $(document).on("click", ".auth__merchant", function(){
             $("#authForm").modal("show");
             componentID = $(".register-form").attr("wire:id");
-            if(componentID) {
+             if(componentID) {
                 Livewire.components.componentsById[
                             componentID
                         ].set("phoneNo", $(this).data("phone"));
@@ -294,13 +294,23 @@
         $(document).on("change", ".select2-icons", function(){
             if($(this).val().includes('select_all')) {
                 $(this).val("");
-                console.log($(this).find("option").slice(1));
+                // console.log($(this).find("option").slice(1));
                 $(this).find("option").slice(1).prop("selected", true);
                 $(this).trigger("change");
             }
             Livewire.components.componentsById[
                 $("#expt__form").attr("wire:id")
             ].set("column", $(this).val())
+        })
+
+        $(document).on("input", ".iban_input", function(event){
+            $(this).val($(this).val().replace(/[^a-zA-Z0-9\s]/g, ''));
+            if($(this).val().length % 5 == 0) {
+                if($(this).val().charAt($(this).val().length-1) != '') {
+                    let char = $(this).val().charAt($(this).val().length-1);
+                    $(this).val($(this).val().substring(0, $(this).val().length-1) + ' ' + char);
+                }
+            }
         })
 
         $(document).on("change", ".select2-ajax", function(){

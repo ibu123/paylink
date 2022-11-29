@@ -20,7 +20,7 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-12 mb-50">
-            <p>ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
+            <p class="text-center">ستصلك رسالة SMS، الرجاء إدخال رمز التوثيق أدناه</p>
 
             <label class="brando__semi__bold"> رمز التوثيق</label>
             <div :class="$wire.inputStatus == true ? 'pos__relative' : 'pos__relative disable'">
