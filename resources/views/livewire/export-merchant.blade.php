@@ -3,7 +3,7 @@
     <div class="modal-body pb-0">
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
-                <label class="d-flex flex-sm-row flex-column justify-content-md-around"><span class="bolder">اكتب رقم رابط أو أكثر <strong class="text-danger text-bold">*</strong></span> <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
+                <label class="d-flex flex-sm-row flex-column justify-content-md-around"><span class="bolder">اكتب رقم متجر أو أكثر<strong class="text-danger text-bold">*</strong></span> <span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                 <div class="form-group">
                     <input type="text" class="form-control" oninput="javascript: this.value = this.value.replace(/[^0-9,]/g, '');" wire:model="merchantId">
                     @error('merchantId')
@@ -39,7 +39,7 @@
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
                 <div class="form-group">
-                    <label>حدد نطاق تاريخ إنشاء الروابط التي تريد تصديرها <span>(اختياري)</span></label>
+                    <label>حدد نطاق تاريخ البيانات التي تريد تصديرها<span>(اختياري)</span></label>
                     <div class="pos__relative">
                         <input type="text" class="form-control bootstrap-dt-range dropup" wire:model="date_range" onchange="this.dispatchEvent(new InputEvent('input'))">
                         <span class="icon-in-control-without-border brando__extra__bold">
