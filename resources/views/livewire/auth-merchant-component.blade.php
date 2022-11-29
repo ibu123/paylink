@@ -10,7 +10,7 @@
                     id="phone_no" maxlength="14"
                     oninput="javascript: if(this.value.charAt(0) == '+') {  this.value = '+' + this.value.substr(1).replace(/[^0-9]/g, '')} else { this.value = this.value.replace(/[^0-9]/g, '')}; if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                     wire:model="phoneNo"
-                    readonly="readOnly ? true : false"
+                    {{$readOnly ? readonly : ''}}
                 >
                 <span :class="$wire.inputStatus == true ? 'icon-in-control brando__bold cursor__pointer d-none' : 'icon-in-control brando__bold cursor__pointer'" wire:click="sendOTP">توثيق</span>
                 @error('phoneNo')

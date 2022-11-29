@@ -28,7 +28,7 @@ Route::group(['middleware' => 'guest'], function() {
         return view('admin.login');
     })->name('home');
 
-    Route::get('/admin/login', function () {
+    Route::get('/admin', function () {
         return view('admin.admin-login');
     })->name('admin.login');
 

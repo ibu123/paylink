@@ -1,4 +1,7 @@
 @extends('layouts.horizontal')
+@section('title')
+تسجيل الدخول 
+@endsection
 @section('content')
     <!-- BEGIN: Content-->
     <div class="app-content content">

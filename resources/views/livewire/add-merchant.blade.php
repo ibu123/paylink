@@ -121,7 +121,7 @@
 
 
         <div class="modal-footer border-0 d-flex justify-content-center w-100 margin__bottom__modal__footer">
-            <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
+            <button type="submit" wire:loading.attr="disabled" class="modal__submit btn btn-primary  position-relative px-3 py-2"
             ">رفع البيانات</button>
         </div>
     </form>
