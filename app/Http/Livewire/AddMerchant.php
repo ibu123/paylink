@@ -178,9 +178,45 @@ class AddMerchant extends Component
         ],'amount')
         ->withSum('links as net_profit', 'commission')
         ->when(!empty($request->id), function($q) use ($request){
-            $q->whereIn('id', explode(",",$request->id));
+            $commaCount = \Str::substrCount($request->id, ",");
+            $arabicCommaCount = \Str::substrCount($request->id, "،");
+            $spaceCount = \Str::substrCount($request->id, "-");
+            if($commaCount > $arabicCommaCount) {
+                if($commaCount >= $spaceCount) {
+                    $filterIds = explode(",", trim($request->id, " "));
+                } else {
+                    $filterIds = explode("-",trim($request->id," "));
+                }
+            } else {
+                if($arabicCommaCount >= $spaceCount) {
+                    $filterIds =  explode("،", trim($request->id," "));
+                } else {
+                    $filterIds =  explode("- ",trim($request->id," "));
+                }
+            }
+            $filterIds = array_map('trim', $filterIds);
+            $q->whereIn('id', $filterIds );
         })->when(!empty($request->merchant_name), function($q) use ($request){
-            $q->where('store_display_name', 'like', '%'.$request->merchant_name.'%');
+
+            $commaCount = \Str::substrCount($request->merchant_name, ",");
+            $arabicCommaCount = \Str::substrCount($request->merchant_name, "،");
+            $spaceCount = \Str::substrCount($request->merchant_name, "-");
+
+            if($commaCount > $arabicCommaCount) {
+                if($commaCount >= $spaceCount) {
+                    $merchant_name = explode(",", trim($request->merchant_name, " "));
+                } else {
+                    $merchant_name =  explode("-",trim($request->merchant_name," "));
+                }
+            } else {
+                if($arabicCommaCount >= $spaceCount) {
+                    $merchant_name =  explode("،", trim($request->merchant_name," "));
+                } else {
+                    $merchant_name =  explode("- ",trim($request->merchant_name," "));
+                }
+            }
+            $merchant_name = array_map('trim', $merchant_name);
+            $q->whereIn('store_display_name', $merchant_name );
         });
 
         return Datatables::of($merchant)

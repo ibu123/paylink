@@ -11,7 +11,7 @@ class FiltersMerchant extends Component
     public $merchantName = '';
 
     protected $rules = [
-        'merchantId' => 'nullable|regex:/^[0-9,]+$/',
+        'merchantId' => 'nullable|regex:/^[0-9,،\s]+$/',
         'merchantName' => 'nullable'
     ];
 

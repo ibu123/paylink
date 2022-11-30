@@ -39,7 +39,24 @@ class ViewLinks extends Component
         ->select('*')
         ->addSelect(\DB::raw('TIMESTAMPDIFF(SECOND, FROM_UNIXTIME(UNIX_TIMESTAMP()) , expiration_date ) AS expired'))
         ->when(!empty($request->id), function($q) use ($request){
-            $q->whereIn('id', explode(",",$request->id));
+            $commaCount = \Str::substrCount($request->id, ",");
+            $arabicCommaCount = \Str::substrCount($request->id, "،");
+            $spaceCount = \Str::substrCount($request->id, "-");
+            if($commaCount > $arabicCommaCount) {
+                if($commaCount >= $spaceCount) {
+                    $filterIds = explode(",", trim($request->id, " "));
+                } else {
+                    $filterIds = explode("-",trim($request->id," "));
+                }
+            } else {
+                if($arabicCommaCount >= $spaceCount) {
+                    $filterIds =  explode("،", trim($request->id," "));
+                } else {
+                    $filterIds =  explode("- ",trim($request->id," "));
+                }
+            }
+            $filterIds = array_map('trim', $filterIds);
+            $q->whereIn('id', $filterIds );
         })->when(!empty($request->status), function($q) use ($request){
             $q->whereIn('payment_status', $request->status);
         })->when(!empty($request->status) && in_array(3, $request->status), function($q){

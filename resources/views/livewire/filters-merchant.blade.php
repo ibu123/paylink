@@ -5,7 +5,7 @@
             <div class="form-group col-md-12 mb-50">
                 <label class="d-flex flex-sm-row flex-column justify-content-md-around">ابحث برقم تاجر أو أكثر<span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="dt_merhcant_id" oninput="javascript: this.value = this.value.replace(/[^0-9,]/g, '');" wire:model="merchantId">
+                    <input type="text" class="form-control" id="dt_merhcant_id" oninput="javascript: this.value = this.value.replace(/[^0-9,،\s]/g, '');" wire:model="merchantId">
                     @error('merchantId')
                         <span class="error text-danger">{{ $message }} </span>
                     @enderror
