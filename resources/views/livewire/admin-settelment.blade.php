@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 @error('merchantId')
-                    <span class="error text-danger">{{ $message }}</span> 
+                    <span class="error text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
@@ -33,14 +33,14 @@
                         </span>
                     </div>
                 </div>
-                
+
                 @error('paylinkId')
-                    <span class="error text-danger">{{ $message }}</span> 
+                    <span class="error text-danger">{{ $message }}</span>
                 @enderror
             </div>
         </div>
         <div class="form-row">
-            
+
         <div class="col-12 text-center mb-50 or__class">
             — أو —
         </div>
@@ -56,7 +56,7 @@
                         </span>
                     </div>
                     @error('date_range')
-                        <span class="error text-danger">{{ $message }}</span> 
+                        <span class="error text-danger">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -66,7 +66,11 @@
         @error('no-filter-match')
             <span class="error text-danger my-2">{{ $message }} </span>
         @enderror
-                        <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
+        <button wire:click="exportSettelment()" type="button" class="modal__submit btn btn-primary mr-0 position-relative px-3 py-2 mb-3"
+                        ">تصدير التقرير</button>
+
+
+                        <button type="submit" class="modal__submit btn btn-primary mr-0 position-relative px-3 py-2"
                         ">حفظ المخالصة</button>
 
     </div>

@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Paylink;
+use ArPHP\I18N\Arabic;
 use Livewire\Component;
 use App\Models\Merchant;
+use Illuminate\Support\Facades\View;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use App\Models\Paylink;
 use Illuminate\Validation\Rule;
 
 class AdminSettelment extends Component
@@ -71,7 +74,7 @@ class AdminSettelment extends Component
         {
             $finalData = $merchantLists->getCollection()->prepend($merchant);
         }
-        
+
 
         return response()->json([
             "items" => $finalData,
@@ -118,7 +121,7 @@ class AdminSettelment extends Component
             $q->when(!empty($this->paylinkId) && !in_array(-1, $this->paylinkId), function($q){
                 $q->whereIn('id', $this->paylinkId);
             })->when(!empty($this->date_range), function($q){
-                
+
                     $temp = explode(" - ", $this->date_range);
                     $fromDate = $temp[0];
                     $toDate = $temp[1];
@@ -131,5 +134,68 @@ class AdminSettelment extends Component
 
         $this->emit("settelment_done", __("All Merchant Settelment Done"));
         //https://dev.to/marinamosti/removing-duplicates-in-an-array-of-objects-in-js-with-sets-3fep
+    }
+
+    public function exportSettelment()
+    {
+        $this->validate();
+        $result = Merchant::
+        with('user')
+        ->withSum(['links as due_amount'=> function($q){
+
+                $q->when(!empty($this->paylinkId) && !in_array(-1, $this->paylinkId), function($q){
+                    $q->whereIn('id', $this->paylinkId);
+                })->when(!empty($this->date_range), function($q){
+
+                        $temp = explode(" - ", $this->date_range);
+                        $fromDate = $temp[0];
+                        $toDate = $temp[1];
+                        $q->where('paid_date','>=', \Carbon\Carbon::parse($fromDate))
+                        ->where('paid_date','<=', \Carbon\Carbon::parse($toDate));
+                })
+                ->where('payment_status', 2)
+                ->where('send_payment_status', '!=', 2);
+            }
+        ], 'amount')
+        ->withSum(['links as commission_amount'=> function($q){
+
+                $q->when(!empty($this->paylinkId) && !in_array(-1, $this->paylinkId), function($q){
+                    $q->whereIn('id', $this->paylinkId);
+                })->when(!empty($this->date_range), function($q){
+
+                        $temp = explode(" - ", $this->date_range);
+                        $fromDate = $temp[0];
+                        $toDate = $temp[1];
+                        $q->where('paid_date','>=', \Carbon\Carbon::parse($fromDate))
+                        ->where('paid_date','<=', \Carbon\Carbon::parse($toDate));
+                })
+                ->where('payment_status', 2)
+                ->where('send_payment_status', '!=', 2);
+            }
+        ], 'commission')
+        ->when(!in_array(-1, $this->merchantId), function($q){
+            $q->whereIn('id', $this->merchantId);
+        })->get();
+        if($result->isEmpty()) {
+            return $this->addError('no-filter-match', __('No Filter Match'));
+
+        }
+
+        $html = View::make('exports.settelment', ['settelments' => $result ])->render();
+
+        $arabic = new Arabic();
+        $p = $arabic->arIdentify($html);
+        for ($i = count($p)-1; $i >= 0; $i-=2) {
+            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i-1], $p[$i] - $p[$i-1]));
+            $html = substr_replace($html, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
+        }
+        $pdf = Pdf::setOption([
+            'enable_php' => true,
+        ])->setPaper('a4', 'landscape')->loadHtml($html);
+        $output = $pdf->output();
+
+        return response()->streamDownload(function () use ($output){
+            echo $output;
+        }, 'export.pdf');
     }
 }
