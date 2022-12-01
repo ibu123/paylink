@@ -25,6 +25,14 @@ class AddLink extends Component
         ];
     }
 
+    public function messages()
+    {
+        return [
+            "amount.*" => __("المبلغ المطلوب is required must be a number"),
+            "link_validity.*" => __("صلاحية الرابط is required must be a number")
+        ];
+    }
+
 
     public function resetProp()
     {
@@ -78,12 +86,16 @@ class AddLink extends Component
         ])->post('https://api-stg.noonpayments.com/payment/v1/order', $postJson);
 
         $response = $response->object();
-        // dd($response);
+         
         if ($response->resultCode == 0) {
+            \DB::enableQueryLog(); // Enable query log
 
+// Your Eloquent query executed by using get()
+
+// dd(); // Show results of log
             $paylink = Paylink::create([
                 'store_id' =>  isset($store) ? $store->id : 1,
-                'order_id' => $response->result->order->id,
+                'order_id' => \DB::raw($response->result->order->id),
                 'amount' => $this->amount,
                 'checkout_url' =>  $response->result->checkoutData->postUrl,
                 'expiration_date' => Carbon::now()->addSeconds($this->link_validity)->toDateTimeString(),
@@ -91,7 +103,7 @@ class AddLink extends Component
                 'payment_status' => 1,
                 'send_payment_status' => 1
             ]);
-
+            // dump(\DB::getQueryLog(), $response->result->order->id, $paylink);
             if($paylink)
             {
                 return $this->emit("link_created", __("Link Created Successfully"));

@@ -52,7 +52,7 @@ class ViewLinks extends Component
                 if($arabicCommaCount >= $spaceCount) {
                     $filterIds =  explode("،", trim($request->id," "));
                 } else {
-                    $filterIds =  explode("- ",trim($request->id," "));
+                    $filterIds =  explode("-",trim($request->id," "));
                 }
             }
             $filterIds = array_map('trim', $filterIds);
@@ -241,7 +241,7 @@ class ViewLinks extends Component
         if (isset($response->result->transactions[0]) && $response->result->transactions[0]->status == 'SUCCESS') {
             $commissionPercentage = ($response->result->paymentDetails->brand == 'VISA' || $response->result->paymentDetails->brand == 'MASTERCARD') ? 2.7 : 3.5;
 
-            $paylink = Paylink::where('order_id', $orderId)->first();
+            $paylink = Paylink::where('order_id', $orderId)->firstOrFail();
             $paylink->update([
                 'payment_status' => 2,
                 // 'send_payment_status' => 2,
@@ -296,6 +296,8 @@ class ViewLinks extends Component
                 'payment_status' => 0,
                 'send_payment_status' => 0
             ]);
+
+            return $this->emit("link_expired", __("Link Expired Successfully"));
         }
     }
 }

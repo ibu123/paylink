@@ -9,7 +9,8 @@ class AlertComponent extends Component
     protected $listeners = [
         'merchant_created' => 'showFlashSession',
         'link_created' => 'showFlashSession',
-        'settelment_done' => 'showFlashSession'
+        'settelment_done' => 'showFlashSession',
+        'link_expired' => 'showFlashSession'
     ];
 
 

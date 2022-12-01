@@ -141,6 +141,10 @@ class AdminSettelment extends Component
         $this->validate();
         $result = Merchant::
         with('user')
+        ->whereHas('links', function($q){
+            $q->where('payment_status', 2)
+            ->where('send_payment_status', '!=', 2);
+        })
         ->withSum(['links as due_amount'=> function($q){
 
                 $q->when(!empty($this->paylinkId) && !in_array(-1, $this->paylinkId), function($q){
@@ -176,6 +180,7 @@ class AdminSettelment extends Component
         ->when(!in_array(-1, $this->merchantId), function($q){
             $q->whereIn('id', $this->merchantId);
         })->get();
+        // dd($result);
         if($result->isEmpty()) {
             return $this->addError('no-filter-match', __('No Filter Match'));
 

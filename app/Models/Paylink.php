@@ -23,7 +23,9 @@ class Paylink extends Model
         'send_payment_status',
         'card',
         'commission_percentage',
-        'commission'
+        'commission',
+        'paid_date',
+        'send_paid_date'
     ];
 
     protected static function boot()

@@ -537,7 +537,18 @@
 
         Livewire.on('link_created',() => {
             window.filtreIDS = [];
+            $("#jdp-days").html("0");
+            $("#jdp-hours").html("0");
+            $("#jdp-minutes").html("0");
+            $("#jdp-seconds").html("0");
+            
             $("#addLinkForm").bsModal("hide");
+            $('.zero-configuration-2').DataTable().draw()
+        })
+
+        Livewire.on('link_expired',() => {
+            window.filtreIDS = [];
+            $("#viewLinkForm").bsModal("hide");
             $('.zero-configuration-2').DataTable().draw()
         })
 

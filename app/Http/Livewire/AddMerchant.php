@@ -44,8 +44,8 @@ class AddMerchant extends Component
 
         return [
             'merchant_name.*' => __('The Merchant Name field is required and it only contains letters'),
-            'cr_number.*' => __('The Commercial No field is required and it must require to have 10 digits'),
-            'vat.*' => __('The Vat No field is required and it must require to have 15 digits'),
+            'cr_number.*' => __('The Commercial No field is required and must be digits'),
+            'vat.*' => __('The Vat No field is required and must be digits'),
             'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
             'domain.required' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
             'domain.regexp' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
@@ -191,7 +191,7 @@ class AddMerchant extends Component
                 if($arabicCommaCount >= $spaceCount) {
                     $filterIds =  explode("،", trim($request->id," "));
                 } else {
-                    $filterIds =  explode("- ",trim($request->id," "));
+                    $filterIds =  explode("-",trim($request->id," "));
                 }
             }
             $filterIds = array_map('trim', $filterIds);
@@ -212,7 +212,7 @@ class AddMerchant extends Component
                 if($arabicCommaCount >= $spaceCount) {
                     $merchant_name =  explode("،", trim($request->merchant_name," "));
                 } else {
-                    $merchant_name =  explode("- ",trim($request->merchant_name," "));
+                    $merchant_name =  explode("-",trim($request->merchant_name," "));
                 }
             }
             $merchant_name = array_map('trim', $merchant_name);
