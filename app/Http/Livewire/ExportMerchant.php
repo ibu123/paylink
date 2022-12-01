@@ -25,7 +25,7 @@ class ExportMerchant extends Component
     public $type = [];
 
     protected $rules = [
-        'merchantId' => 'nullable|regex:/^[0-9,]+$/',
+        'merchantId' => 'nullable|regex:/^[0-9,،-]+$/',
         'type' => 'required'
     ];
 
@@ -67,7 +67,24 @@ class ExportMerchant extends Component
         ->withSum('links as revenues', 'amount')
         ->withSum('links as net_profit', 'commission')
         ->when(!empty($this->merchantId), function($q){
-            $q->whereIn('id', explode("," , $this->merchantId));
+            $commaCount = \Str::substrCount($this->merchantId, ",");
+            $arabicCommaCount = \Str::substrCount($this->merchantId, "،");
+            $spaceCount = \Str::substrCount($this->merchantId, "-");
+            if($commaCount > $arabicCommaCount) {
+                if($commaCount >= $spaceCount) {
+                    $filterIds = explode(",", trim($this->merchantId, " "));
+                } else {
+                    $filterIds = explode("-",trim($this->merchantId," "));
+                }
+            } else {
+                if($arabicCommaCount >= $spaceCount) {
+                    $filterIds =  explode("،", trim($this->merchantId," "));
+                } else {
+                    $filterIds =  explode("-",trim($this->merchantId," "));
+                }
+            }
+            $filterIds = array_map('trim', $filterIds);
+            $q->whereIn('id', $filterIds );
         })
         ->when(!empty($this->date_range), function($q) use ($temp, $fromDate, $toDate){
             $q->where('created_at', '>=', Carbon::parse($fromDate))
