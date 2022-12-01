@@ -229,7 +229,15 @@ class AddMerchant extends Component
 
         })
         ->editColumn('phone_no', function($row){
-            return "<span class='small__fonts'>".mb_substr($row->user->phone_no,0,5,'utf-8').'..</span>';
+            return "
+                <div class='d-flex cursor__pointer custom__copy__container pos__relative'>
+                    <span class='badge badge__toaster badge_toaster_table td_green_color_status' style='left:-7px !important'>
+                        انسخ الرابط
+                    </span>
+                    <span class='small__fonts cursor__pointer copy_text_2'  data-clipboard-action='copy' data-clipboard-text='".$row->user->phone_no."' data-toggle='tooltip' title='".$row->user->phone_no."'>".
+                        mb_substr($row->user->phone_no,0,5,'utf-8').'..
+                    </span>
+                </div>';
         })
         ->editColumn('no_of_links', function($row){
             return $row->no_of_links;

@@ -1117,3 +1117,10 @@ button.modal__submit.border__radius__40 {
     font-family: 'brando-extra-light';
     margin-bottom: 21px !important;
 }
+
+.tooltip-inner {
+    background: #ededed;
+    color: #8c8c8c !important;
+    font-family: 'brando-regular';
+    box-shadow: none !important;
+}
