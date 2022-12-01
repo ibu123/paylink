@@ -231,6 +231,22 @@ $(document).ready(function() {
             {data: 'action', name: 'action', searchable : false, sortable : false},
 
         ],
+        drawCallback : function(settings) {
+            let clipboard2= new ClipboardJS('.copy_text_2',
+            document.getElementsByClassName('custom__copy__container'));
+            clipboard2.on('success', function(e) {
+                console.log(e);
+            });
+            clipboard2.on('error', function(e) {
+                console.log(e);
+            });
+
+            $('[data-toggle="tooltip"]').tooltip({
+                template : `<div class="tooltip" role="tooltip">
+                    <div class="tooltip-inner"></div>
+                </div>'`
+            });
+        }
     });
     let urll = $('.zero-configuration-2').data("url");
     window.mainTable = $('.zero-configuration-2').DataTable({

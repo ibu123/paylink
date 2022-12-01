@@ -161,6 +161,7 @@
       window.paylinkListURL = "{{ route('admin.paylinks.list') }}"
       window._token = "{{ csrf_token() }}"
 </script>
+<script src="{{ asset('js/clipboard.min.js')}}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
@@ -359,6 +360,11 @@
             ].set("paylinkId", $(this).val())
         })
 
+        $(document).on("click", ".copy_text_2", function(){
+            $(this).tooltip("hide");
+            $(this).parent().find(".badge__toaster").show();
+            $(this).parent().find(".badge__toaster").fadeOut(1500);
+        })
 
     })
 </script>
