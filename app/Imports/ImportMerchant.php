@@ -34,6 +34,7 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
 
             Merchant::create([
                 'merchant_name' => $rows['merchant_name'],
+                'type' => 1,
                 'cr_number' =>  $rows['cr_number'],
                 'user_id' => $user->id,
                 'vat' => $rows['vat'],
@@ -71,7 +72,7 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'vat' => ['required','integer'],
             'iban' => ['required','regex:/^[\pL\pN\s]+$/u'],
             'domain' => ['required','regex:/^[a-zA-Z0-9-]+$/'],
-            'phone_no' => ['required',function($attribute, $value, $fail) use ($env_code){
+            'phone_no' => ['required', function($attribute, $value, $fail) use ($env_code){
                 if(substr($value,0,1) == '+' &&  (preg_match('/[^0-9]/', substr($value,1)) || strlen((string) $value) != 13)) {
                     $fail(__('Invalid Phone No'));
                 } elseif (substr($value,0,5) == '00'.$env_code && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 14)) {

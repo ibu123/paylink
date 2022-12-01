@@ -164,7 +164,7 @@
 <script src="{{ asset('js/clipboard.min.js')}}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 <script src="{{asset('js/vendors/js/tables/datatable/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('js/scripts/datatables/datatable.js') }}"></script>
+<script src="{{asset('js/scripts/datatables/datatable.js?v=1') }}"></script>
 <script src="{{ asset('js/vendors/js/forms/select/select2.full.min.js') }}"></script>
 <script src="{{ asset('js/scripts/forms/select/form-select2.js') }}"></script>
 <script src="{{ asset('js/vendors/js/pickers/daterange/moment.min.js')}}"></script>

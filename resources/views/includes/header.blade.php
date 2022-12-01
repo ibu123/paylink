@@ -18,6 +18,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/core/menu/menu-types/horizontal-menu.min.css')}}">
 
 
-<link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/style.css?v=1')}}">
 @yield('css')
 @livewireStyles

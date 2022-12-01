@@ -3,7 +3,7 @@
     <div class="modal-body pb-0">
         <div class="form-row">
             <div class="form-group col-md-12 mb-50">
-                <label class="d-flex flex-sm-row flex-column justify-content-md-around">ابحث برقم رابط أو أكثر<span>افصل بين الأرقام بفاصلة أو مسافة أو سطر</span></label>
+                <label class="d-flex flex-sm-row flex-column justify-content-md-between">ابحث برقم رابط أو أكثر<span>افصل بين الأرقام بفاصلة أو شرطة</span></label>
                 <div class="form-group">
                     <input type="text" class="form-control" id="dt_merhcant_id" oninput="javascript: this.value = this.value.replace(/[^0-9,،-]/g, '');" wire:model="linkId">
                     @error('merchantId')

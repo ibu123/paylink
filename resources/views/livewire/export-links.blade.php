@@ -82,7 +82,7 @@
         @error('no-filter-match')
             <span class="error text-danger my-2">{{ $message }} </span>
         @enderror
-                        <button type="submit" class="modal__submit btn btn-primary  position-relative px-3 py-2"
+                        <button type="submit"  class="modal__submit btn btn-primary  position-relative px-3 py-2"
                         ">تصدير الروابط</button>
 
     </div>
