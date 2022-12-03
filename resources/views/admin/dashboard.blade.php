@@ -150,7 +150,7 @@
 @include('admin.dashboard.filter_merchant')
 @include('admin.dashboard.auth')
 @include('admin.admin_settelment')
-@livewire('view-merchant')
+@include('admin.view_merchant')
 @endsection
 @section('js')
 <script>
@@ -208,7 +208,6 @@
 
         window.filtreIDS = Ids;
         window.filterMerchantName = merchantName;
-        console.log(window.filterMerchantName);
         $('.zero-configuration').DataTable().draw()
         $("#filterForm").modal("hide");
         $(".in-active-image.cross-icon").parent().addClass("active");
@@ -264,7 +263,7 @@
             $(".select2-icons").val("");
             $(".select2-icons").trigger("change");
 
-            if( $(this).find("form").attr("id") != "filter_Form") {
+            if( $(this).find("form").attr("id") != "filter_Form" && $(this).find("form").attr("id") != "view_link_Form" ) {
                 componentID = $(this).find("form").attr("wire:id");
                 if(componentID) {
                     Livewire.components.componentsById[
