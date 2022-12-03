@@ -67,14 +67,18 @@ class ExportLinks extends Component
                 ]);
             });
         })
+        ->when(empty($this->payLinkStatus), function($q){
+            $q->where([
+                    'payment_status' => 2,
+            ]);
+        })
         ->when(!empty($this->date_range), function($q) use ($temp, $fromDate, $toDate){
             $q->where('paid_date', '>=', Carbon::parse($fromDate))
             ->where('paid_date', '<=', Carbon::parse($toDate));
         })
         ->get();
-
         if($payLinks->isEmpty()) {
-            return $this->addError('no-filter-match', __('No Filter Match'));
+            return $this->addError('no-filter-match', __('No Filter Match OR No Links Paid By User'));
 
         }
         if(in_array(1, $this->type)) {
@@ -116,7 +120,7 @@ class ExportLinks extends Component
 
             if(!empty($merchantHtml)) {
                 $merchantArabic = new Arabic();
-                $p = $merchantArabic->arIdentify($merchantHtml, true);
+                $p = $merchantArabic->arIdentify($merchantHtml);
                 for ($i = count($p)-1; $i >= 0; $i-=2) {
                     $utf8ar = $merchantArabic->utf8Glyphs(substr($merchantHtml, $p[$i-1], $p[$i] - $p[$i-1]));
                     $merchantHtml = substr_replace($merchantHtml, $utf8ar, $p[$i-1], $p[$i] - $p[$i-1]);
@@ -124,8 +128,8 @@ class ExportLinks extends Component
 
                 $merchantPDF = Pdf::setOption([
                     'enable_php' => true,
-                ])->setPaper('a4')->loadHtml($html);
-                $merchantOutput = $pdf->output();
+                ])->setPaper('a4')->loadHtml($merchantHtml);
+                $merchantOutput = $merchantPDF->output();
             }
         }
 

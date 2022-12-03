@@ -19,5 +19,6 @@
 
 
 <link rel="stylesheet" type="text/css" href="{{asset('css/style.css?v=1')}}">
+<link rel="icon" type="image/x-icon" href="{{asset('images/icon/favicon.svg')}}">
 @yield('css')
 @livewireStyles

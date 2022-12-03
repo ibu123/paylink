@@ -53,8 +53,8 @@
     "Please select at least one option" : "الرجاء تحديد خيار واحد على الأقل",
     "Link Is Expired" : "انتهت صلاحية الرابط",
     "Success" : "النجاح",
-    "Admin Dashboard" : "لوحة تحكم المسؤول",
-    "Merchant Dashboard" : "لوحة معلومات التاجر",
+    "Admin Dashboard" : "المارينفورد | دفع - Dafae",
+    "Merchant Dashboard" : "دفع | Dafae",
     "No Filter Match" : "لا يوجد مرشح مطابق",
     "Please Select At Least One merchant for settlement" : "يرجى تحديد تاجر واحد على الأقل للتسوية",
     "Please Select Either Paylink Id OR select data range" : "يرجى تحديد إما معرف Paylink أو تحديد نطاق البيانات",
@@ -65,5 +65,6 @@
     "صلاحية الرابط is required must be a number" : "صلاحية الرابط مطلوبة يجب أن تكون رقمًا",
     "The Commercial No field is required and must be digits" : "الحقل التجاري No مطلوب ويجب أن يتكون من أرقام",
     "The Vat No field is required and must be digits" : "حقل رقم ضريبة القيمة المضافة مطلوب ويجب أن يتكون من أرقام",
-    "All Merchant Settelment Done" : "تم تنفيذ جميع تسوية التجار"
+    "All Merchant Settelment Done" : "تم تنفيذ جميع تسوية التجار",
+    "No Filter Match OR No Links Paid By User" : "لا يوجد تصفية مطابقة أو لا روابط مدفوعة من قبل المستخدم"
 }

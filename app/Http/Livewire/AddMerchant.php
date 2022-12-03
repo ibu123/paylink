@@ -149,10 +149,10 @@ class AddMerchant extends Component
 
         Merchant::create([
             'merchant_name' => $this->merchant_name,
-            'cr_number' =>  $this->cr_number,
+            'cr_number' =>  \DB::raw($this->cr_number),
             'user_id' => $user->id,
-            'vat' => $this->vat,
-            'iban' => $this->iban,
+            'vat' => \DB::raw($this->vat),
+            'iban' => \DB::raw($this->iban),
             'domain' => $this->domain,
             'store_display_name' => $this->store_display_name
         ]);

@@ -313,7 +313,7 @@
         minimumInputLength: 0,
         templateResult: (data) => {
             if(data.id == -1) {
-                return `<div class="text-dark" data-id="-1" style="padding-right:10px;font-family:brando-light">مسح جميع الفواتير</div>`;
+                return `<div class="text-dark" data-id="-1" style="padding-right:10px;font-family:brando-light">تحديد جميع الفواتير</div>`;
 
             }
             if(data.id) {
@@ -322,7 +322,7 @@
         },
         templateSelection: (data) => {
             if(data.id == -1) {
-                return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">مسح جميع الفواتير</div>`;
+                return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">تحديد جميع الفواتير</div>`;
             }
             if(data.id) {
                 return `<div class="text-dark" style="padding-right:10px;font-family:brando-light">${data.id + " - " + ("0000"+data?.paylink_invoice?.id).slice(-4)}</div>`;

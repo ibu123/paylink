@@ -1,6 +1,6 @@
 @extends('layouts.horizontal')
 @section('title')
-تسجيل الدخول 
+{{__('Admin Dashboard')}}
 @endsection
 @section('content')
     <!-- BEGIN: Content-->

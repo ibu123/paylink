@@ -30,7 +30,7 @@
                                                     <div class="form-group col-md-12 mb-50 ">
                                                             <p class="text-center heading">  تم الدفع بنجاح! </p>
                                                             <p class="text-center sub__line mt-3">
-                                                                لقد دفعت بنجاح مبلغ <span>{{$paylink->amount}}</span> ريال <span>{{$paylink->store->store_display_name}} </span> .
+                                                                لقد دفعت بنجاح مبلغ <span>{{$paylink->amount}}</span>  ريال لـ<span>{{$paylink->store->store_display_name}} </span> .
                                                             </p>
                                                             <p class="text-center sub__line mt-2">
                                                                 رقم فاتورتك هو #{{str_pad($paylink->id, 4, '0', STR_PAD_LEFT);}}
@@ -73,7 +73,7 @@
                                 دفع، 2022 صنع بفخر في
                                 </div>
                                 <div class="col-md-4 col col mb-2 mb-sm-0">
-                                    <img  src="{{ asset('images/icon/minthal-info.png')}}"  alt="">
+                                    <img  class="cursor__pointer" src="{{ asset('images/icon/minthal-info.png')}}"  alt="" onclick="window.location.href='https://twitter.com/MintharInfo?s=20&t=sXQVRmnbKUqWvtENJE4Cog'">
                                 </div>
                                 <div class="col-md-4 col col mb-2 mb-sm-0 text-white brando-extra-light">
 

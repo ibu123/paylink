@@ -35,10 +35,10 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             Merchant::create([
                 'merchant_name' => $rows['merchant_name'],
                 'type' => 1,
-                'cr_number' =>  $rows['cr_number'],
+                'cr_number' => \DB::raw($rows['cr_number']),
                 'user_id' => $user->id,
-                'vat' => $rows['vat'],
-                'iban' => $rows['iban'],
+                'vat' => \DB::raw($rows['vat']),
+                'iban' => \DB::raw($rows['iban']),
                 'domain' => $rows['domain'],
                 'store_display_name' => $rows['store_display_name']
             ]);
@@ -71,7 +71,7 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'cr_number' => ['required', 'integer'],
             'vat' => ['required','integer'],
             'iban' => ['required','regex:/^[\pL\pN\s]+$/u'],
-            'domain' => ['required','regex:/^[a-zA-Z0-9-]+$/'],
+            'domain' => ['required','regex:/^[a-zA-Z0-9-]+$/', 'unique:merchants,domain'],
             'phone_no' => ['required', function($attribute, $value, $fail) use ($env_code){
                 if(substr($value,0,1) == '+' &&  (preg_match('/[^0-9]/', substr($value,1)) || strlen((string) $value) != 13)) {
                     $fail(__('Invalid Phone No'));
@@ -103,7 +103,9 @@ class ImportMerchant implements ToModel, WithHeadingRow, WithValidation, SkipsOn
             'cr_number.*' => __('The Commercial No field is required and must be digits'),
             'vat.*' => __('The Vat No field is required and must be digits'),
             'iban.*' => __('The IBan field is required and it must require to have letters and digits'),
-            'domain.*' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.required' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.regexp' => __('The Domain field is required and it only contains letters, numbers and dashes(-)'),
+            'domain.unique' => __('The Same Domain Already Exist'),
             'phone_no.required' => __('The Phone No field is required and it must require to have 10 digits'),
             'phone_no.digits' => __('The Phone No field is required and it must require to have 10 digits'),
             'store_display_name.required' => __('The Store Display Name field is required and it only contains letters'),

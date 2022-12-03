@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        
         <title>Platform Invoice</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -313,13 +314,13 @@
                         </thead>
                         <tbody>
                             <tr style="font-size:1.2rem">
-                                <td class="border-0 text-center" >{{ $paylink->amount }} </td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount * 15 / 100 }}</td>
+                                <td class="border-0 text-center" >{{ $paylink->commission }} </td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->commission * 15 / 100 }}</td>
 
                                     <td class="border-0 text-center" style="border-left:1px dotted"> 15 % </td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->commission - ($paylink->commission * 15 / 100)}}</td>
                                     <td class="border-0 text-center" style="border-left:1px dotted">1</td>
-                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
+                                    <td class="border-0 text-center" style="border-left:1px dotted">{{ $paylink->commission - ($paylink->commission * 15 / 100)}}</td>
                                     <td class="border-0 text-center" style="border-left:1px dotted"> <span style="font-size:1rem;"> {{ $paylink->store->store_display_name }}  </span>رابط دفع </td>
 
                             </tr>
@@ -341,7 +342,7 @@
                 color : #908F90;
                 font-family:jali-bold;
                 ">
-                        <td  style="vertical-align:top;" >{{ $paylink->amount - ($paylink->amount * 15 / 100)}}</td>
+                        <td  style="vertical-align:top;" >{{ $paylink->commission - ($paylink->commission * 15 / 100)}}</td>
 
                         <td class="text-right" style="
                         vertical-align:top;
@@ -361,7 +362,7 @@
                      color : #908F90;
                     font-family:jali-bold;"
                 >
-                        <td  >{{ $paylink->amount * 15 / 100 }}</td>
+                        <td  >{{ $paylink->commission * 15 / 100 }}</td>
 
                         <td class="text-right" style="width:70%" ><span>(15%) </span>ضريبة القيمة المضافة </td>
                 </tr>
@@ -379,7 +380,7 @@
                 font-family:jali-bold;
                 color : #908F90
                 ">
-                        <td  style=" vertical-align:top ; " >{{ $paylink->amount }}   </td>
+                        <td  style=" vertical-align:top ; " >{{ $paylink->commission }}   </td>
 
                         <td class="text-right" style=" vertical-align:top ;  width:70%" ><span>(15%) </span>المجموع مع الضريبة </td>
                 </tr>
