@@ -118,7 +118,7 @@ class AuthMerchantComponent extends Component
             \Session::put('has_store' , 1);
         } else {
             \Session::put('has_store' , 0);
-            $stores = collect([]);
+            $this->stores = collect([]);
         }
         $this->inputStatus = true;
 
