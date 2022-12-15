@@ -117,6 +117,7 @@ class AuthMerchantComponent extends Component
         if($this->stores->isNotEmpty() && $this->stores->count() > 1) {
             \Session::put('has_store' , 1);
         } else {
+            $this->store = $this->stores[0]->id;
             \Session::put('has_store' , 0);
             $this->stores = collect([]);
         }
@@ -138,7 +139,6 @@ class AuthMerchantComponent extends Component
     public function verifyOTP() {
         $this->validate();
         \Session::forget('store');
-
         if(verifyOTP($this->otp, $this->staticPhoneNo))
         {
             \Session::put('store', $this->store);
