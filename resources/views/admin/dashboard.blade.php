@@ -188,6 +188,10 @@
         }, 100);
     })
 
+    Livewire.on('merchant_updated', () => {
+        $('.zero-configuration').DataTable().draw('page');
+    });
+
     Livewire.on('merchant_popup', () => {
 
         // Livewire.emit('refershComponent');

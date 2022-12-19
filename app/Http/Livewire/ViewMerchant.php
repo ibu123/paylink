@@ -31,6 +31,9 @@ class ViewMerchant extends Component
     public $store_display_name;
     public $store_display_name_edit = 0;
 
+    public $phone_no;
+    public $phone_no_edit = 0;
+
     public $mId = 0;
 
 
@@ -70,15 +73,16 @@ class ViewMerchant extends Component
                     $fail(__('Invalid Phone No'));
                 } elseif (substr($value,0,1) == '0' && substr($value,0,1) != '0' && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 11)) {
                     $fail(__('Invalid Phone No'));
+
                 }  elseif (substr($value,0,3) == $env_code && (preg_match('/[^0-9]/', $value) || strlen((string) $value) != 12)) {
                     $fail(__('Invalid Phone No'));
                 } elseif (substr($value,0,1) != '+' && substr($value,0,2) != '00' && substr($value,0,1) != '0' && substr($value,0,3) != '966') {
                     $fail(__('Invalid Phone No'));
                 }
             }, function($attribute, $value, $fail){
-                if($value == \Auth::user()->phone_no) {
-                    $fail(__('Admin is not able to create store for himself'));
-                }
+                // if($value == \Auth::user()->phone_no) {
+                //     $fail(__('Admin is not able to create store for himself'));
+                // }
             }],
             'store_display_name' => 'required|unique:merchants,store_display_name'
         ];
@@ -98,21 +102,46 @@ class ViewMerchant extends Component
         }
     }
 
+
+
     public function update($field)
     {
 
         $this->validateOnly($field);
-
-        Merchant::findOrFail($this->mId)->update([
-            $field => $this->{$field}
-        ]);
-
+        if($field == 'phone_no') {
+            $env_code = str_replace('+', '', env('COUNTRY_CODE'));
+            $value =  $this->{$field};
+            if(substr($value,0,1) == '+' && !preg_match('/[^0-9]/', substr($value,1)) && strlen((string) $value) == 13) {
+                $phone = "0".substr($value,4);
+            } elseif (substr($value,0,5) == '00'.$env_code && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 14) {
+                $phone = "0".substr($value,5);
+            } elseif (substr($value,0,1) == '0' && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 10) {
+                $phone = $value;
+            }  elseif (substr($value,0,3) == $env_code && !preg_match('/[^0-9]/', $value) && strlen((string) $value) == 12) {
+                $phone = "0".substr($value,3);
+            } else {
+                $this->addError('phone_no', __('Invalid Phone No'));
+                return;
+            }
+            Merchant::findOrFail($this->mId)->user->update([
+                $field => $this->{$field}
+            ]);
+        }
+        else {
+            Merchant::findOrFail($this->mId)->update([
+                $field => $this->{$field}
+            ]);
+        }
+        $this->emit('merchant_updated');
         $this->{$field."_edit"} = 0;
+
 
     }
 
     public function viewMerchant($id)
     {
+        $this->resetValidation();
+        $this->reset();
         $merhchant = Merchant::find($id);
         $this->mId = $id;
         $this->merchant_name = $merhchant->merchant_name;
